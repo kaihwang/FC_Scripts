@@ -1,0 +1,10 @@
+# call to process anatomical data. Use Michael's preprocess script.
+
+# Need to run freesurfer first.
+
+# Need to make sure everything is in .nii.gz, remove .nii
+
+# Call preprocessMprage
+/home/despo/kaihwang/bin/fmri_processing_scripts/preprocessMprage -r MNI_3mm -b "-R -f 0.2 -g -0.2" -o 128_MNI_final.nii.gz -n 128_SurfVol.nii.gz
+
+
