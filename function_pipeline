@@ -2,7 +2,7 @@
 
 # first use Michael's preproc
 
-preprocessFunctional -4d 128-EPI-001.nii \
+preprocessFunctional -4d 128-EPI-001.nii.gz \
 -tr 2 \
 -mprage_bet /home/despo/kaihwang/Subjects/128/SUMA/128_SurfVol_bet.nii.gz \
 -threshold 98_2 \
@@ -11,8 +11,7 @@ preprocessFunctional -4d 128-EPI-001.nii \
 -func_struc_dof bbr \
 -warp_interpolation spline \
 -constrain_to_template y \
--4d_slice_motion \
--motion_censor fd=0.5/refrms/relrms=0.5 \
+-motion_censor fd=0.9,dvars=20 \
 -wavelet_despike \
 -cleanup \
 -deoblique_all \
@@ -22,8 +21,39 @@ preprocessFunctional -4d 128-EPI-001.nii \
 -no_smooth \
 -slice_acquisition interleaved \
 -warpcoef /home/despo/kaihwang/Subjects/128/SUMA/128_SurfVol_warpcoef.nii.gz \
--wavelet_despike 
+-startover
 
 
-# then use afni_restproc for regression (ANATICOR) 
+## The output of preprocessFunctionl is wdkmt_128-EPI-001.nii.gz
+#The major steps in the processing pipeline are, in order:
+#  1)   Intensity despiking (optional) - d
+#  2)   Field map unwarping (optional) - u
+#  3)   Slice timing correction - t
+#  4)   Motion correction - m
+#  5)   Skull stripping and intensity thresholding - k
+#  6)   Co-registration and warping to standard space - w
+#  7)   Smoothing - s
+#  8)   High-pass filtering - f
+#  9)   Intensity normalization - n
+#  10)  Nuisance regression (optional) - r
+#  11)  Bandpass filtering (optional) - b
 
+# need to align segmentation file
+fslreorient2std aseg.nii aseg.nii
+applywarp -i aseg.nii.gz -r template_brain.nii -o aseg_mni5.nii.gz --warp=128_SurfVol_warpcoef.nii.gz
+
+# then use afni_restproc for regression (ANATICOR), 
+# This program hates .nii. so need to convert everything into afni format....
+
+afni_restproc.py \
+-despike off \
+-aseg ~/Subjects/128/SUMA/aseg_mni+tlrc \
+-anat ~/Subjects/128/SUMA/128_MNI+tlrc \
+-epi ~/Rest/Lesion/128/Rest/input+tlrc \
+-dest ~/Rest/Lesion/128/Rest/Preproc \
+-prefix 128-preproc-run1 \
+-align off -episize 3 \
+-dreg -regressor motion.1D -bandpass -bpassregs -polort A \
+-wmsize 20 -tsnr -smooth off -script test
+
+# do censoring. 
