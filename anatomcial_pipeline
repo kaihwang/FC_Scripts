@@ -1,6 +1,11 @@
 #description of preprocessing of anatomical data
 
 # Need to run freesurfer first.
+recon-all -i -subjid 168
+
+# convert surface file into nifiti
+# Go to subject FS dir, then
+@SUMA_Make_Spec_FS -sid 168
 
 # Need to make sure everything is in .nii.gz, remove .nii
 
