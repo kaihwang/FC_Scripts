@@ -1,4 +1,4 @@
-# call to process anatomical data. Use Michael's preprocess script.
+#description of preprocessing of anatomical data
 
 # Need to run freesurfer first.
 
@@ -7,4 +7,10 @@
 # Call preprocessMprage
 /home/despo/kaihwang/bin/fmri_processing_scripts/preprocessMprage -r MNI_3mm -b "-R -f 0.2 -g -0.2" -o 128_MNI_final.nii.gz -n 128_SurfVol.nii.gz
 
+# need to align aseg segmentation file
+fslreorient2std aseg.nii aseg.nii
+applywarp -i aseg.nii.gz -r template_brain.nii -o aseg_mni.nii.gz \ --warp=128_SurfVol_warpcoef.nii.gz
+
+#afni_preproc hates nii so convert to nifti
+3dcopy aseg_mni.nii.gz aseg_mni+tlrc
 

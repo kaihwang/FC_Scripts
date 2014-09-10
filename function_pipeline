@@ -1,7 +1,8 @@
-#functional pipeline
+#description of preprocessing resting-state functional data
 
 # first use Michael's preproc
 
+#need to create separate input to avoid confusion
 preprocessFunctional -4d 128-EPI-001.nii.gz \
 -tr 2 \
 -mprage_bet /home/despo/kaihwang/Subjects/128/SUMA/128_SurfVol_bet.nii.gz \
@@ -46,6 +47,7 @@ applywarp -i aseg.nii.gz -r template_brain.nii -o aseg_mni5.nii.gz --warp=128_Su
 # This program hates .nii. so need to convert everything into afni format....
 
 afni_restproc.py \
+-trcut 0 \
 -despike off \
 -aseg ~/Subjects/128/SUMA/aseg_mni+tlrc \
 -anat ~/Subjects/128/SUMA/128_MNI+tlrc \
@@ -53,7 +55,15 @@ afni_restproc.py \
 -dest ~/Rest/Lesion/128/Rest/Preproc \
 -prefix 128-preproc-run1 \
 -align off -episize 3 \
--dreg -regressor motion.1D -bandpass -bpassregs -polort A \
+-dreg -regressor motion.1D -bandpass -bpassregs -polort 2 \
 -wmsize 20 -tsnr -smooth off -script test
 
+#remove intermediate files
+rm -rf Preproc/tmp/
+
 # do censoring. 
+
+afni_restproc.py -apply_censor \
+128-preproc-run1.cleanEPI+tlrc \
+../motion_info/censor_intersection.1D \
+128-preproc-run1-censored
