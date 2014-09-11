@@ -22,7 +22,8 @@ for s in 128 162 163 168; do
 	echo "3dcopy ${s}_SurfVol+orig ${s}_SurfVol.nii.gz" >> a_$s.sh
 	
 	echo "preprocessMprage -r MNI_2mm \\
-	-b \"-R -f 0.2 -g -0.2\" \\
+	-b \"-R -S -B -f 0.05 -g -0.3\" \\
+	-no_bias \\
 	-o ${s}_MNI_final.nii.gz -n ${s}_SurfVol.nii.gz" >> a_$s.sh
 	
 	#align aseg, then turn it into afni format

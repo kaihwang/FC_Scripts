@@ -2,7 +2,7 @@
 
 # Need to run freesurfer first.
 recon-all -i -subjid 168
-
+	
 # convert surface file into nifiti
 # Go to subject FS dir, then
 @SUMA_Make_Spec_FS -sid 168
@@ -19,3 +19,5 @@ applywarp -i aseg.nii.gz -r template_brain.nii -o aseg_mni.nii.gz \ --warp=128_S
 #afni_preproc hates nii so convert to nifti
 3dcopy aseg_mni.nii.gz aseg_mni+tlrc
 
+#left overs
+	-b \"-R -f 0.2 -g -0.2\" \\

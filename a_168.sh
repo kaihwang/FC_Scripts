@@ -5,7 +5,8 @@ cd $SUBJECTS_DIR/168
 cd $SUBJECTS_DIR/168/SUMA
 3dcopy 168_SurfVol+orig 168_SurfVol.nii.gz
 preprocessMprage -r MNI_2mm \
-	-b "-R -f 0.2 -g -0.2" \
+	-b "-R -S -B -f 0.05 -g -0.3" \
+	-no_bias \
 	-o 168_MNI_final.nii.gz -n 168_SurfVol.nii.gz
 fslreorient2std aseg.nii aseg_r.nii.gz
 rm aseg.nii
