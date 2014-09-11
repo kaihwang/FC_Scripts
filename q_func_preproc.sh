@@ -76,6 +76,6 @@ for s in 128 162 163 168; do
 		/home/despo/kaihwang/Rest/Lesion/${s}/Rest/run${r}/motion_info/censor_intersection.1D \\
 		${s}-preproc-run${r}-censored" >> f_${s}_${r}.sh
 	
-		#qsub f_${s}_${r}.sh
+		qsub f_${s}_${r}.sh
 	done
 done
