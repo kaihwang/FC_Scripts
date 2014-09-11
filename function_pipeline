@@ -67,3 +67,7 @@ afni_restproc.py -apply_censor \
 128-preproc-run1.cleanEPI+tlrc \
 ../motion_info/censor_intersection.1D \
 128-preproc-run1-censored
+
+# left overs
+
+		-dest /home/despo/kaihwang/Rest/Lesion/${s}/Rest/run${r}/ \\
