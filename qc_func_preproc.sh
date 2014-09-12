@@ -2,7 +2,7 @@
 # script to submit jobs to cluster for preprocessing functional data.
 
 #for control subjects
-for s in 114; do
+for s in 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220; do
 	for r in 1 2 3 4 5 6; do
 		
 		echo ". /etc/bashrc" >> f_${s}_${r}.sh
@@ -79,7 +79,7 @@ for s in 114; do
 		echo "rm -rf /home/despo/kaihwang/Rest/Control/${s}/Rest/reg_run${r}/tmp" >> f_${s}_${r}.sh
 		echo "rm /home/despo/kaihwang/Rest/Control/${s}/Rest/run${r}/*t_*run*" >> f_${s}_${r}.sh
 		
-		qsub -M kaihwang -m e -e ~/tmp -o ~/tmp f_${s}_${r}.sh
+		qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}_${r}.sh
 	
 	
 	done

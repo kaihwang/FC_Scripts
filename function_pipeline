@@ -68,6 +68,22 @@ afni_restproc.py -apply_censor \
 ../motion_info/censor_intersection.1D \
 128-preproc-run1-censored
 
+#cleanup and concate
+echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> cc_${s}.sh
+echo "" >> cc_${s}.sh
+
+echo "3dTcat -prefix ${s}-rest-preproc-cen.nii.gz -rlt \\
+reg_run1/${s}-preproc-run1-censored+tlrc \\
+reg_run2/${s}-preproc-run2-censored+tlrc \\
+reg_run3/${s}-preproc-run3-censored+tlrc \\
+reg_run4/${s}-preproc-run4-censored+tlrc \\
+reg_run5/${s}-preproc-run5-censored+tlrc \\
+reg_run6/${s}-preproc-run6-censored+tlrc" >> cc_${s}.sh
+echo "" >> cc_${s}.sh
+
+echo 'mv reg*/*tsnr* .' >> cc_${s}.sh
+
+echo 'rm -rf reg_run*' >> cc_${s}.sh
 # left overs
 
 		-dest /home/despo/kaihwang/Rest/Lesion/${s}/Rest/run${r}/ \\
