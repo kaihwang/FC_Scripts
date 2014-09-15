@@ -3,6 +3,10 @@
 
 for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 212 213 214 215 216 217 218 219 220; do
 	
+	echo ". /etc/bashrc" >> cc_${s}.sh
+	echo ". ~/.bashrc" >> cc_${s}.sh
+	echo "" >> cc_${s}.sh
+	
 	echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> cc_${s}.sh
 	echo "" >> cc_${s}.sh
 	
@@ -19,6 +23,6 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 212 213 214 215
 	
 	echo 'rm -rf reg_run*' >> cc_${s}.sh
 
-	#qsub -M kaihwang -m e -e ~/tmp -o ~/tmp cc_${s}.sh
+	qsub -M kaihwang -m e -e ~/tmp -o ~/tmp cc_${s}.sh
 
 done
