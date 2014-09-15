@@ -3,7 +3,7 @@
 # 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220
 
 #for control subjects
-for s in 116; do
+for s in 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220; do
 	
 		
 		echo ". /etc/bashrc" >> f_${s}.sh
@@ -85,6 +85,8 @@ for s in 116; do
 		echo "rm /home/despo/kaihwang/Rest/Control/${s}/Rest/run\${r}/*t_*run*" >> f_${s}.sh
 		
 		echo "done" >> f_${s}.sh
+		echo "" >> f_${s}.sh
+		echo "" >> f_${s}.sh
 		
 		echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> f_${s}.sh
 		echo "" >> f_${s}.sh
@@ -102,7 +104,7 @@ for s in 116; do
 		echo 'mv reg*/*tsnr* .' >> f_${s}.sh
 		echo 'rm -rf reg_run*' >> f_${s}.sh
 		
-		#qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}.sh
+		qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}.sh
 	
 	
 done
