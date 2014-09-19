@@ -16,8 +16,8 @@ for s in 128 162 163 168; do
 	#@ROI_Corr_Mat -ts ${s}-rest-preproc-cen.nii.gz -roi /home/despo/kaihwang/Rest/Lesion/bb264_s_left.nii.gz -mat FULL -prefix ${s}_left_corrmat -verb
 
 	
-	#tail -n 128 ${s}_left_corrmat.corr.1D > /home/despo/kaihwang/Rest/Lesion/${s}_left_cormat
-	#tail -n 143 ${s}_right_corrmat.corr.1D > /home/despo/kaihwang/Rest/Lesion/${s}_right_cormat
-	#tail -n 254 ${s}_Full_corrmat.corr.1D > /home/despo/kaihwang/Rest/Lesion/${s}_full_cormat
+	tail -n 128 ${s}_Left_corrmat.corr.1D > /home/despo/kaihwang/Rest/Lesion/${s}_left_corrmat
+	tail -n 143 ${s}_Right_corrmat.corr.1D > /home/despo/kaihwang/Rest/Lesion/${s}_right_corrmat
+	tail -n 254 ${s}_Full_corrmat_000.netcc > /home/despo/kaihwang/Rest/Lesion/${s}_full_corrmat
 
 done
