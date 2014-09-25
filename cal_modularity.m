@@ -62,7 +62,7 @@ DATASET{2}='Data_500.mat';
 DATASET{3}='Data_100.mat';
 
 %threshold
-T = 0.02:0.005:0.1;
+T = 0.05:0.005:0.15;
 
 
 for c = 1:3
