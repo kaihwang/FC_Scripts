@@ -23,15 +23,15 @@ for c = 1:3
         i=1;
         for th = T
             M = squeeze(M_th(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_tha(c,n,i) = E;
             
             M = squeeze(M_th_R(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_tha_R(c,n,i) = E;
             
             M = squeeze(M_th_L(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_tha_L(c,n,i) = E;
 
             i=i+1;
@@ -44,15 +44,15 @@ for c = 1:3
         i=1;
         for th = T
             M = squeeze(M_BG(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_BG(c,n,i) = E;
             
             M = squeeze(M_BG_R(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_BG_R(c,n,i) = E;
             
             M = squeeze(M_BG_L(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_bin(threshold_proportional(M,th));
             Efficiency_BG_L(c,n,i) = E;
 
             i=i+1;
@@ -66,15 +66,15 @@ for c = 1:3
         for th = T
             
             M = squeeze(M_c(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_wei(threshold_proportional(M,th));
             Efficiency_Control(c,n,i) = E;
             
             M = squeeze(M_c_R(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_wei(threshold_proportional(M,th));
             Efficiency_Control_R(c,n,i) = E;
             
             M = squeeze(M_c_L(:,:,n));
-            [E] = efficiency_bin(weight_conversion(threshold_proportional(M,th),'binarize'));
+            [E] = efficiency_wei(threshold_proportional(M,th));
             Efficiency_Control_L(c,n,i) = E;
 
             i=i+1;
@@ -85,7 +85,7 @@ for c = 1:3
 end
 
 clear c n i th s E M
-save efficiency.mat
+save efficiency_wei.mat
 
 
 
