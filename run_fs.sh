@@ -2,13 +2,13 @@
 
 # script to submit freesurfer jobs to cluster. Then process anatomical data.
 
-for s in b116 b117 b120 b121 b122 b138 b143 b144 b153; do
+for s in 176; do
 	
 	echo ". /etc/bashrc" >> fs_$s.sh
 	echo ". ~/.bashrc" >> fs_$s.sh
 	echo "" >> fs_$s.sh
 	
-	echo "recon-all -i /home/despo/kaihwang/Rest/BG/$s/Rest/$s-T1.nii.gz -all -subjid $s" >> fs_$s.sh
+	echo "recon-all -i /home/despo/kaihwang/Rest/Lesion/$s/Rest/$s-T1.nii.gz -all -subjid $s" >> fs_$s.sh
 	echo "" >> fs_$s.sh
 	
 	#then do SUMA transformation

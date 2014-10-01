@@ -4,9 +4,10 @@
 cd /home/despo/kaihwang/Rest/Lesion/162/Rest
 gzip 162-EPI-001.nii
 3dcopy 162-EPI-001.nii.gz 162_rest_run1.nii.gz
-mkdir /home/despo/kaihwang/Rest/Lesion/162/Rest/Nrun1/
-mv 162_rest_run1.nii.gz /home/despo/kaihwang/Rest/Lesion/162/Rest/Nrun1/
-cd /home/despo/kaihwang/Rest/Lesion/162/Rest/Nrun1/
+rm -rf /home/despo/kaihwang/Rest/Lesion/162/Rest/run1/
+mkdir /home/despo/kaihwang/Rest/Lesion/162/Rest/run1/
+mv 162_rest_run1.nii.gz /home/despo/kaihwang/Rest/Lesion/162/Rest/run1/
+cd /home/despo/kaihwang/Rest/Lesion/162/Rest/run1/
 
 preprocessFunctional -4d 162_rest_run1.nii.gz \
 		-tr 2 \
@@ -18,15 +19,14 @@ preprocessFunctional -4d 162_rest_run1.nii.gz \
 		-warp_interpolation spline \
 		-constrain_to_template y \
 		-motion_censor fd=0.9,dvars=20 \
-		-nuisance_regression 6motion,csf,wm,dcsf,dwm \
+		-nuisance_regression 6motion,csf,wm,d6motion  \
 		-bandpass_filter 0.009 .08 \
-		-wavelet_despike \
+		-despike \
 		-cleanup \
 		-deoblique_all \
-		-log proctest \
-		-motion_sinc y \
+		-log proc_script \
 		-no_hp \
-		-no_smooth \
+		-smoothing_kernel 6 \
 		-slice_acquisition interleaved \
 		-warpcoef /home/despo/kaihwang/Subjects/162/SUMA/162_SurfVol_warpcoef.nii.gz \
 		-startover

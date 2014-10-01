@@ -2,9 +2,9 @@
 
 %% Setup
 
-Modularity_tha=[]; 
-Modularity_BG=[];
-Modularity_Control=[];
+%Modularity_tha=[]; 
+%Modularity_BG=[];
+%Modularity_Control=[];
 %ROI_num = 708;
 
 Th_Sub = [128, 162, 163, 168];

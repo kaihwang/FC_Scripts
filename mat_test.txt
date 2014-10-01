@@ -1,0 +1,2 @@
+
+matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/t114.m

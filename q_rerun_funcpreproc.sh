@@ -2,7 +2,7 @@
 # script to submit jobs to cluster for preprocessing functional data.
 
 #for lesion patients
-for s in 128 162 163 168; do
+for s in 176; do
 	for r in 1 2; do
 		
 		echo ". /etc/bashrc" >> f_${s}_${r}.sh
@@ -14,9 +14,10 @@ for s in 128 162 163 168; do
 		#create separate input to avoid confusion
 		echo "gzip ${s}-EPI-00${r}.nii" >> f_${s}_${r}.sh
 		echo "3dcopy ${s}-EPI-00${r}.nii.gz ${s}_rest_run${r}.nii.gz" >> f_${s}_${r}.sh
-		echo "mkdir /home/despo/kaihwang/Rest/Lesion/${s}/Rest/Nrun${r}/" >> f_${s}_${r}.sh
-		echo "mv ${s}_rest_run${r}.nii.gz /home/despo/kaihwang/Rest/Lesion/${s}/Rest/Nrun${r}/" >> f_${s}_${r}.sh
-		echo "cd /home/despo/kaihwang/Rest/Lesion/${s}/Rest/Nrun${r}/" >> f_${s}_${r}.sh
+		echo "rm -rf /home/despo/kaihwang/Rest/Lesion/${s}/Rest/NNrun${r}/" >> f_${s}_${r}.sh
+		echo "mkdir /home/despo/kaihwang/Rest/Lesion/${s}/Rest/NNrun${r}/" >> f_${s}_${r}.sh
+		echo "mv ${s}_rest_run${r}.nii.gz /home/despo/kaihwang/Rest/Lesion/${s}/Rest/NNrun${r}/" >> f_${s}_${r}.sh
+		echo "cd /home/despo/kaihwang/Rest/Lesion/${s}/Rest/NNrun${r}/" >> f_${s}_${r}.sh
 		echo "" >> f_${s}_${r}.sh
 		#run Michael's preprocessing script
 		
@@ -30,15 +31,14 @@ for s in 128 162 163 168; do
 		-warp_interpolation spline \\
 		-constrain_to_template y \\
 		-motion_censor fd=0.9,dvars=20 \\
-		-nuisance_regression 6motion,csf,wm,dcsf,dwm \\
+		-nuisance_regression 6motion,csf,wm,d6motion  \\
 		-bandpass_filter 0.009 .08 \\
-		-wavelet_despike \\
+		-despike \\
 		-cleanup \\
 		-deoblique_all \\
-		-log proctest \\
-		-motion_sinc y \\
+		-log proc_script \\
 		-no_hp \\
-		-no_smooth \\
+		-smoothing_kernel 6 \\
 		-slice_acquisition interleaved \\
 		-warpcoef /home/despo/kaihwang/Subjects/${s}/SUMA/${s}_SurfVol_warpcoef.nii.gz \\
 		-startover" >> f_${s}_${r}.sh
@@ -81,8 +81,8 @@ for s in 128 162 163 168; do
 		#echo "rm -rf /home/despo/kaihwang/Rest/Lesion/${s}/Rest/reg_run${r}/tmp" >> f_${s}_${r}.sh
 		#echo "rm /home/despo/kaihwang/Rest/Lesion/${s}/Rest/run${r}/*t_*run*" >> f_${s}_${r}.sh
 		
-		#qsub f_${s}_${r}.sh
-	
+		qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}_${r}.sh
+		#sleep 34.56m
 	
 	done
 done

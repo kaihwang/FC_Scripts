@@ -1,0 +1,6 @@
+addpath(genpath('/home/despo/kaihwang/bin/'));
+addpath(genpath('/home/despo/kaihwang/matlab/'));
+[Adj, Graph] = cal_graph('114');
+
+save g_114.mat;
+exit;

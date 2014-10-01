@@ -30,10 +30,10 @@ for s in 128 162 163 168; do
 		-warp_interpolation spline \\
 		-constrain_to_template y \\
 		-motion_censor fd=0.9,dvars=20 \\
-		-wavelet_despike \\
+		-despike \\
 		-cleanup \\
 		-deoblique_all \\
-		-log proctest \\
+		-log proc_script \\
 		-motion_sinc y \\
 		-no_hp \\
 		-no_smooth \\
