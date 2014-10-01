@@ -22,7 +22,7 @@ for s in 176; do
 	echo "rm m*.nii.gz; rm s*.nii.gz" >> cc_${s}.sh
  
 	#qsub -M kaihwang -m e -e ~/tmp -o ~/tmp cc_${s}.sh
-
+	
 done
 
 
@@ -50,7 +50,7 @@ done
 
 #done
 
-for s in 219 217 216 214 118; do
+for s in 216; do
 	
 	echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> cc_${s}.sh
 	echo "" >> cc_${s}.sh

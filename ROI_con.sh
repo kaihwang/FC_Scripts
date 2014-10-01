@@ -83,27 +83,27 @@ done
 
 
 # Control
-for s in 219 217 214 118; do
+for s in 214; do
 	
 	echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> fc_${s}.sh
 	echo "" >> fc_${s}.sh
 	
-	echo "rm ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
-	echo "3dcalc -a ${s}_tsnr_mean.nii.gz -expr 'step(a-5)' -prefix ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh 
-	echo "" >> fc_${s}.sh
+	#echo "rm ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
+	#echo "3dcalc -a ${s}_tsnr_mean.nii.gz -expr 'step(a-5)' -prefix ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh 
+	#echo "" >> fc_${s}.sh
 	
 	# connectivity
-	echo "rm *corrmat*" >> fc_${s}.sh
-	echo "" >> fc_${s}.sh
+	#echo "rm *corrmat*" >> fc_${s}.sh
+	#echo "" >> fc_${s}.sh
 	
-	echo "3dNetCorr -prefix ${s}_Full_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
-	echo "3dNetCorr -prefix ${s}_Right_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_right_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
-	echo "3dNetCorr -prefix ${s}_Left_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_left_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
+	#echo "3dNetCorr -prefix ${s}_Full_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
+	#echo "3dNetCorr -prefix ${s}_Right_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_right_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
+	#echo "3dNetCorr -prefix ${s}_Left_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_left_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
 	echo "" >> fc_${s}.sh
 	
 	echo 'for p in $(seq 21 42); do' >> fc_${s}.sh
 		echo "num=\$(expr \$(wc -l ${s}_Full_corrmat_0\${p}.netcc | awk '{print \$1}') - 4)" >> fc_${s}.sh
-		echo "tail -n \$num ${s}_Full_corrmat_0\${p}.netcc > /home/despo/kaihwang/Rest/AdjMatricest/${s}_full_corrmat_\${p}" >> fc_${s}.sh
+		echo "tail -n \$num ${s}_Full_corrmat_0\${p}.netcc > /home/despo/kaihwang/Rest/AdjMatrices/t${s}_full_corrmat_\${p}" >> fc_${s}.sh
 		echo "" >> fc_${s}.sh
 		
 		echo "num=\$(expr \$(wc -l ${s}_Right_corrmat_0\${p}.netcc | awk '{print \$1}') - 4)" >> fc_${s}.sh
@@ -116,9 +116,9 @@ for s in 219 217 214 118; do
 		
 	echo "done" >> fc_${s}.sh
 	
-	#. fc_${s}.sh
+	. fc_${s}.sh
 	#. fc_${s}.sh > ~/tmp/fc_${s}_NetCorr.log 2>&1 &
-	qsub -V -e ~/tmp -o ~/tmp fc_${s}.sh
+	# qsub -V -e ~/tmp -o ~/tmp fc_${s}.sh
 
 done
 
