@@ -2,7 +2,7 @@
 # script to run ALL functional processing......
 # for th patients
 
-for s in 162 163 168 176; do
+for s in 163; do
 	
 		
 		echo ". /etc/bashrc" >> ft_${s}.sh
@@ -74,7 +74,7 @@ for s in 162 163 168 176; do
 		echo "3dcalc -a m1.nii.gz -b m2.nii.gz -c s1.nii.gz -d s2.nii.gz -expr '((a/c)+(b/d))/2' -prefix ${s}_tsnr_mean.nii.gz" >> ft_${s}.sh
 
 		echo "rm m*.nii.gz; rm s*.nii.gz" >> ft_${s}.sh
-		echo "rm NNrun*/*t_*" >> ft_${s}.sh
+		#echo "rm NNrun*/*t_*" >> ft_${s}.sh
 		echo "" >> ft_${s}.sh
 
 		echo "rm ${s}_tsnr_mask.nii.gz" >> ft_${s}.sh
@@ -113,7 +113,7 @@ for s in 162 163 168 176; do
 
 		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> ft_${s}.sh
 		
-		qsub -V -M kaihwang -l mem_free=9G -m e -e ~/tmp -o ~/tmp ft_${s}.sh
-		sleep 23.45m
+		qsub -V -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp ft_${s}.sh
+		#sleep 23.45m
 
 done		

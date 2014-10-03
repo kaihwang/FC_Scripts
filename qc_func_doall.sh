@@ -48,9 +48,9 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 		-startover" >> fc_${s}.sh
 		echo "" >> fc_${s}.sh
 		
-		echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest/NNrun\${r}/" >> ft_${s}.sh
-		echo "3dWarp -deoblique -prefix dbrnswdkmt_${s}_rest_run\${r}_6.nii.gz -quintic brnswdkmt_${s}_rest_run\${r}_6.nii.gz" >> ft_${s}.sh
-		echo "" >> ft_${s}.sh
+		echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest/NNrun\${r}/" >> fc_${s}.sh
+		echo "3dWarp -deoblique -prefix dbrnswdkmt_${s}_rest_run\${r}_6.nii.gz -quintic brnswdkmt_${s}_rest_run\${r}_6.nii.gz" >> fc_${s}.sh
+		echo "" >> fc_${s}.sh
 		
 		echo "done" >> fc_${s}.sh
 		echo "" >> fc_${s}.sh
@@ -70,6 +70,7 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 		echo "" >> fc_${s}.sh
 
 		echo "3dTstat -mean -prefix m1.nii.gz NNrun1/wdkmt_${s}_rest_run1.nii.gz" >> fc_${s}.sh
+		echo "3dTstat -mean -prefix m2.nii.gz NNrun2/wdkmt_${s}_rest_run2.nii.gz" >> fc_${s}.sh
 		echo "3dTstat -mean -prefix m3.nii.gz NNrun3/wdkmt_${s}_rest_run3.nii.gz" >> fc_${s}.sh
 		echo "3dTstat -mean -prefix m4.nii.gz NNrun4/wdkmt_${s}_rest_run4.nii.gz" >> fc_${s}.sh
 		echo "3dTstat -mean -prefix m5.nii.gz NNrun5/wdkmt_${s}_rest_run5.nii.gz" >> fc_${s}.sh
@@ -85,7 +86,7 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 		echo "3dcalc -a m1.nii.gz -b s1.nii.gz -c m2.nii.gz -d s2.nii.gz -e m3.nii.gz -f s3.nii.gz -g m4.nii.gz -h s4.nii.gz -i m5.nii.gz -j s5.nii.gz -k m6.nii.gz -l s6.nii.gz -expr '((a/b)+(c/d)+(e/f)+(g/h)+(i/j)+(k/l))/6' -prefix ${s}_tsnr_mean.nii.gz" >> fc_${s}.sh
 
 		echo "rm m*.nii.gz; rm s*.nii.gz" >> fc_${s}.sh
-		echo "rm NNrun*/*t_*" >> fc_${s}.sh
+		#echo "rm NNrun*/*t_*" >> fc_${s}.sh
 		echo "" >> fc_${s}.sh
 
 		echo "rm ${s}_tsnr_mask.nii.gz" >> fc_${s}.sh
@@ -124,7 +125,7 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 
 		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> fc_${s}.sh
 		
-		qsub -V -M kaihwang -l mem_free=9G -m e -e ~/tmp -o ~/tmp fc_${s}.sh
-		sleep 12.34m
+		qsub -V -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp fc_${s}.sh
+		sleep 5.67m
 
 done		

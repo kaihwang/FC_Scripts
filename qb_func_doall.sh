@@ -2,7 +2,7 @@
 # script to run ALL functional processing......
 # for bg patients
 
-for s in b116 b117 b120 b121 b122 b138 b143 b152; do
+for s in b153; do
 	
 		
 		echo ". /etc/bashrc" >> fb_${s}.sh
@@ -114,6 +114,6 @@ for s in b116 b117 b120 b121 b122 b138 b143 b152; do
 		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> fb_${s}.sh
 		
 		qsub -V -M kaihwang -l mem_free=9G -m e -e ~/tmp -o ~/tmp fb_${s}.sh
-		sleep 19.54m
+		#sleep 19.54m
 
 done		

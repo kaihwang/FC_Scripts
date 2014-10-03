@@ -34,6 +34,9 @@ preprocessFunctional -4d 114_rest_run${r}.nii.gz \
 		-warpcoef /home/despo/kaihwang/Subjects/114/SUMA/114_SurfVol_warpcoef.nii.gz \
 		-startover
 
+cd /home/despo/kaihwang/Rest/Control/114/Rest/NNrun${r}/
+3dWarp -deoblique -prefix dbrnswdkmt_114_rest_run${r}_6.nii.gz -quintic brnswdkmt_114_rest_run${r}_6.nii.gz
+
 done
 
 
@@ -48,6 +51,7 @@ cd /home/despo/kaihwang/Rest/Control/114/Rest
 		NNrun6/dbrnswdkmt_114_rest_run6_6.nii.gz 
 
 3dTstat -mean -prefix m1.nii.gz NNrun1/wdkmt_114_rest_run1.nii.gz
+3dTstat -mean -prefix m2.nii.gz NNrun2/wdkmt_114_rest_run2.nii.gz
 3dTstat -mean -prefix m3.nii.gz NNrun3/wdkmt_114_rest_run3.nii.gz
 3dTstat -mean -prefix m4.nii.gz NNrun4/wdkmt_114_rest_run4.nii.gz
 3dTstat -mean -prefix m5.nii.gz NNrun5/wdkmt_114_rest_run5.nii.gz
@@ -60,7 +64,6 @@ cd /home/despo/kaihwang/Rest/Control/114/Rest
 3dTstat -stdev -prefix s6.nii.gz NNrun6/wdkmt_114_rest_run6.nii.gz
 3dcalc -a m1.nii.gz -b s1.nii.gz -c m2.nii.gz -d s2.nii.gz -e m3.nii.gz -f s3.nii.gz -g m4.nii.gz -h s4.nii.gz -i m5.nii.gz -j s5.nii.gz -k m6.nii.gz -l s6.nii.gz -expr '((a/b)+(c/d)+(e/f)+(g/h)+(i/j)+(k/l))/6' -prefix 114_tsnr_mean.nii.gz
 rm m*.nii.gz; rm s*.nii.gz
-rm NNrun*/*t_*
 
 rm 114_tsnr_mask.nii.gz
 3dcalc -a 114_tsnr_mean.nii.gz -expr 'step(a-5)' -prefix 114_tsnr_mask.nii.gz
