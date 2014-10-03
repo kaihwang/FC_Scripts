@@ -33,7 +33,7 @@ for sub = Tha_Subj
         Modularity_tha(p,s,:) = Graph.Full_Q{p};
         Modularity_tha_R(p,s,:) = Graph.Right_Q{p};
         Modularity_tha_L(p,s,:) = Graph.Left_Q{p};
-        
+        1224
         Efficiency_tha(p,s,:) = Graph.Full_E{p};
         Efficiency_tha_R(p,s,:) = Graph.Right_E{p};
         Efficiency_tha_L(p,s,:) = Graph.Left_E{p};

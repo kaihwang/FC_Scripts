@@ -2,7 +2,7 @@
 # script to submit jobs to cluster for preprocessing functional data.
 
 #for lesion patients
-for s in 176; do
+for s in 128 162 163 168 176; do
 	for r in 1 2; do
 		
 		echo ". /etc/bashrc" >> f_${s}_${r}.sh
@@ -33,8 +33,10 @@ for s in 176; do
 		-motion_censor fd=0.9,dvars=20 \\
 		-nuisance_regression 6motion,csf,wm,d6motion  \\
 		-bandpass_filter 0.009 .08 \\
-		-despike \\
+		-wavelet_despike \\
+		-wavelet_m1000 \\
 		-cleanup \\
+		-st_first \\
 		-deoblique_all \\
 		-log proc_script \\
 		-no_hp \\
@@ -81,7 +83,7 @@ for s in 176; do
 		#echo "rm -rf /home/despo/kaihwang/Rest/Lesion/${s}/Rest/reg_run${r}/tmp" >> f_${s}_${r}.sh
 		#echo "rm /home/despo/kaihwang/Rest/Lesion/${s}/Rest/run${r}/*t_*run*" >> f_${s}_${r}.sh
 		
-		qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}_${r}.sh
+		#qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp f_${s}_${r}.sh
 		#sleep 34.56m
 	
 	done

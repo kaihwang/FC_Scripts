@@ -19,10 +19,10 @@ for s in b122 b138 b143 b153; do
 		#create separate input to avoid confusion
 		echo "gzip ${s}-EPI-00\${r}.nii" >> fb_${s}.sh
 		echo "3dcopy ${s}-EPI-00\${r}.nii.gz ${s}_rest_run\${r}.nii.gz" >> fb_${s}.sh
-		echo "rm -rf /home/despo/kaihwang/Rest/BG/${s}/Rest/run\${r}/" >> fb_${s}.sh
-		echo "mkdir /home/despo/kaihwang/Rest/BG/${s}/Rest/run\${r}/" >> fb_${s}.sh
-		echo "mv ${s}_rest_run\${r}.nii.gz /home/despo/kaihwang/Rest/BG/${s}/Rest/run\${r}/" >> fb_${s}.sh
-		echo "cd /home/despo/kaihwang/Rest/BG/${s}/Rest/run\${r}/" >> fb_${s}.sh
+		echo "rm -rf /home/despo/kaihwang/Rest/BG/${s}/Rest/NNrun\${r}/" >> fb_${s}.sh
+		echo "mkdir /home/despo/kaihwang/Rest/BG/${s}/Rest/NNrun\${r}/" >> fb_${s}.sh
+		echo "mv ${s}_rest_run\${r}.nii.gz /home/despo/kaihwang/Rest/BG/${s}/Rest/NNrun\${r}/" >> fb_${s}.sh
+		echo "cd /home/despo/kaihwang/Rest/BG/${s}/Rest/NNrun\${r}/" >> fb_${s}.sh
 		echo "" >> fb_${s}.sh
 		#run Michael's preprocessing script
 		
@@ -41,7 +41,7 @@ for s in b122 b138 b143 b153; do
 		-despike \\
 		-cleanup \\
 		-deoblique_all \\
-		-log proctest \\
+		-log preproc \\
 		-no_hp \\
 		-smoothing_kernel 6 \\
 		-slice_acquisition interleaved \\
@@ -103,6 +103,6 @@ for s in b122 b138 b143 b153; do
 		#echo 'rm -rf reg_run*' >> fb_${s}.sh
 		
 		qsub -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp fb_${s}.sh
-		sleep 12.34m
+		#sleep 12.34m
 	
 done
