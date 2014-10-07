@@ -3,7 +3,7 @@
 #script to submit matlab jobs for calculating graphs
 #114 116 117 119 128 162 163 168 176 201 203 204 205 206 207 208 209 210 211 212 213 215 218 220
 
-for s in 118 214 217 219; do
+for s in 163; do
 
 	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> g${s}.m
 
