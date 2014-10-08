@@ -34,6 +34,7 @@ for s in b153; do
 		-warp_interpolation spline \\
 		-constrain_to_template y \\
 		-motion_censor fd=0.9,dvars=20 \\
+		-motion_sinc \\
 		-nuisance_regression 6motion,csf,wm,d6motion \\
 		-bandpass_filter 0.009 .08 \\
 		-wavelet_despike \\
@@ -85,12 +86,12 @@ for s in b153; do
 		echo "rm *corrmat*" >> fb_${s}.sh
 		echo "" >> fb_${s}.sh
 
-		echo "3dNetCorr -prefix ${s}_Full_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
-		echo "3dNetCorr -prefix ${s}_Right_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_right_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
-		echo "3dNetCorr -prefix ${s}_Left_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_left_masked.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
+		echo "3dNetCorr -prefix ${s}_Full_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
+		echo "3dNetCorr -prefix ${s}_Right_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set_R.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
+		echo "3dNetCorr -prefix ${s}_Left_corrmat -inset ${s}-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set_L.nii.gz -mask ${s}_tsnr_mask.nii.gz" >> fb_${s}.sh
 		echo "" >> fb_${s}.sh
 
-		echo 'for p in $(seq 21 42); do' >> fb_${s}.sh
+		echo 'for p in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22; do' >> fb_${s}.sh
 			echo "num=\$(expr \$(wc -l ${s}_Full_corrmat_0\${p}.netcc | awk '{print \$1}') - 4)" >> fb_${s}.sh
 			echo "tail -n \$num ${s}_Full_corrmat_0\${p}.netcc > /home/despo/kaihwang/Rest/AdjMatrices/t${s}_full_corrmat_\${p}" >> fb_${s}.sh
 			echo "" >> fb_${s}.sh
