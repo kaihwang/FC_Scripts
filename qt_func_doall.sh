@@ -2,7 +2,7 @@
 # script to run ALL functional processing......
 # for th patients
 
-for s in 162 163 168 176; do
+for s in 128 162 163 168 176; do
 	
 		
 		echo ". /etc/bashrc" >> ft_${s}.sh
@@ -34,7 +34,7 @@ for s in 162 163 168 176; do
 		-warp_interpolation spline \\
 		-constrain_to_template y \\
 		-motion_censor fd=0.9,dvars=20 \\
-		-motion_sinc \\
+		-motion_sinc y \\
 		-nuisance_regression 6motion,csf,wm,d6motion \\
 		-bandpass_filter 0.009 .08 \\
 		-wavelet_despike \\
@@ -112,9 +112,9 @@ for s in 162 163 168 176; do
 		echo "[Adj, Graph] = cal_graph('${s}');" >> g${s}.m
 		echo "save /home/despo/kaihwang/Rest/Graph/g_${s}.mat; exit;" >> g${s}.m
 
-		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> ft_${s}.sh
+		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> graph_${s}.sh
 		
 		qsub -V -M kaihwang -l mem_free=10G -m e -e ~/tmp -o ~/tmp ft_${s}.sh
-		#sleep 23.45m
+		#sleep 2.45s
 
 done		

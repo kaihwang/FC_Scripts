@@ -34,7 +34,7 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 		-warp_interpolation spline \\
 		-constrain_to_template y \\
 		-motion_censor fd=0.9,dvars=20 \\
-		-motion_sinc \\
+		-motion_sinc y \\
 		-nuisance_regression 6motion,csf,wm,d6motion \\
 		-bandpass_filter 0.009 .08 \\
 		-wavelet_despike \\
@@ -125,9 +125,9 @@ for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214
 		echo "[Adj, Graph] = cal_graph('${s}');" >> g${s}.m
 		echo "save /home/despo/kaihwang/Rest/Graph/g_${s}.mat; exit;" >> g${s}.m
 
-		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> fc_${s}.sh
+		echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g${s}.m" >> graph_${s}.sh
 		
-		qsub -V -M kaihwang -l mem_free=5G -m e -e ~/tmp -o ~/tmp fc_${s}.sh
-		#sleep 2.34m
+		qsub -V -M kaihwang -l mem_free=10G -m e -e ~/tmp -o ~/tmp fc_${s}.sh
+		#sleep 3.34s
 
 done		
