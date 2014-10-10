@@ -21,6 +21,7 @@ preprocessFunctional -4d 118_rest_run${r}.nii.gz \
 		-warp_interpolation spline \
 		-constrain_to_template y \
 		-motion_censor fd=0.9,dvars=20 \
+		-motion_sinc y \
 		-nuisance_regression 6motion,csf,wm,d6motion \
 		-bandpass_filter 0.009 .08 \
 		-wavelet_despike \
@@ -42,6 +43,7 @@ done
 
 cd /home/despo/kaihwang/Rest/Control/118/Rest
 
+rm 118-rest-preproc-cen.nii.gz
 3dTcat -prefix 118-rest-preproc-cen.nii.gz -rlt++ \
 		NNrun1/dbrnswdkmt_118_rest_run1_6.nii.gz \
 		NNrun2/dbrnswdkmt_118_rest_run2_6.nii.gz \
@@ -70,11 +72,11 @@ rm 118_tsnr_mask.nii.gz
 
 rm *corrmat*
 
-3dNetCorr -prefix 118_Full_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_masked.nii.gz -mask 118_tsnr_mask.nii.gz
-3dNetCorr -prefix 118_Right_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_right_masked.nii.gz -mask 118_tsnr_mask.nii.gz
-3dNetCorr -prefix 118_Left_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/craddock_resample_left_masked.nii.gz -mask 118_tsnr_mask.nii.gz
+3dNetCorr -prefix 118_Full_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set.nii.gz -mask 118_tsnr_mask.nii.gz
+3dNetCorr -prefix 118_Right_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set_R.nii.gz -mask 118_tsnr_mask.nii.gz
+3dNetCorr -prefix 118_Left_corrmat -inset 118-rest-preproc-cen.nii.gz -in_rois /home/despo/kaihwang/Rest/ROIs/ROIs_Set_L.nii.gz -mask 118_tsnr_mask.nii.gz
 
-for p in $(seq 21 42); do
+for p in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22; do
 num=$(expr $(wc -l 118_Full_corrmat_0${p}.netcc | awk '{print $1}') - 4)
 tail -n $num 118_Full_corrmat_0${p}.netcc > /home/despo/kaihwang/Rest/AdjMatrices/t118_full_corrmat_${p}
 
@@ -85,4 +87,3 @@ num=$(expr $(wc -l 118_Left_corrmat_0${p}.netcc | awk '{print $1}') - 4)
 tail -n $num 118_Left_corrmat_0${p}.netcc > /home/despo/kaihwang/Rest/AdjMatrices/t118_Left_corrmat_${p}
 
 done
-matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/g118.m

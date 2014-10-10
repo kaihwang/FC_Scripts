@@ -5,7 +5,7 @@
 # tha patients
 for s in 128 162 163 168 176; do
 	
-	echo "cd /home/despo/kaihwang/Rest/Lesion/${s}/Rest" >> ROIROIfc_${s}.sh
+	echo "cd /home/despo/kaihwang/Rest/Lesion/${s}/Rest" >> ROIfc_${s}.sh
 	echo "" >> ROIfc_${s}.sh
 	
 	echo "rm ${s}_tsnr_mask.nii.gz" >> ROIfc_${s}.sh
@@ -47,7 +47,7 @@ for s in 128 162 163 168 176; do
 
 	echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/ROIg${s}.m" >> ROIfc_${s}.sh
 	
-	qsub -V -M kaihwang -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	#qsub -V -M kaihwang -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 	
 done
 
@@ -86,7 +86,7 @@ for s in b116 b117 b120 b121 b122 b138 b143 b153; do
 		
 	echo "done" >> ROIfc_${s}.sh
 	
-	qsub -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	#qsub -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 
 done
 
@@ -135,7 +135,7 @@ for s in 214; do
 	
 #	. ROIfc_${s}.sh
 	#. ROIfc_${s}.sh > ~/tmp/fc_${s}_NetCorr.log 2>&1 &
-	 qsub -M kaihwang -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	#qsub -M kaihwang -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 
 done
 
