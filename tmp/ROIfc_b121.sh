@@ -20,3 +20,4 @@ num=$(expr $(wc -l b121_Left_corrmat_0${p}.netcc | awk '{print $1}') - 4)
 tail -n $num b121_Left_corrmat_0${p}.netcc > /home/despo/kaihwang/Rest/AdjMatrices/tb121_Left_corrmat_${p}
 
 done
+matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/ROIgb121.m

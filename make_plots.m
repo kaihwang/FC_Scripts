@@ -5,12 +5,12 @@ Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 
 Tha_Subj = [128 162 163 168 176];
 
 %Partitins
-Partitions = [12, 20];
+Partitions = [1:23];
 
 %load previously obtaiend modularity parition
 load /home/despo/kaihwang/Rest/Graph/Control_Communities.mat;
 
-%threshold 
+%threshold
 T=0.05:0.005:0.15;
 
 
@@ -31,40 +31,27 @@ for sub = Control_Subj
         %Adj_Control{p}(s,:,:) = Adj.Matrix_Full{p};
         %Adj_Control_R{p}(s,:,:) = Adj.Matrix_Right{p};
         %Adj_Control_L{p}(s,:,:) = Adj.Matrix_Left{p};
-       
-        % calculate within and Out module connectivity
-        i=1;
-        for t = T
-           Output = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Full{p},t), Ci{p});
-           Output_L = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Left{p},t), Ci_L{p});
-           Output_R = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Right{p},t), Ci_R{p});
-           
-           Within_Module_Degree_Control(p,s,i) = nanmean(Output.Within_Degree);
-           Out_Module_Degree_Control(p,s,i) = nanmean(Output.Out_Degree);
-           Within_Module_Weight_Control(p,s,i) = nanmean(Output.Within_Weight);
-           Out_Module_Weight_Control(p,s,i) = nanmean(Output.Out_Weight);
-           
-           Within_Module_Degree_Control_L(p,s,i) = nanmean(Output_L.Within_Degree);
-           Out_Module_Degree_Control_L(p,s,i) = nanmean(Output_L.Out_Degree);
-           Within_Module_Weight_Control_L(p,s,i) = nanmean(Output_L.Within_Weight);
-           Out_Module_Weight_Control_L(p,s,i) = nanmean(Output_L.Out_Weight);
-           
-           Within_Module_Degree_Control_R(p,s,i) = nanmean(Output_R.Within_Degree);
-           Out_Module_Degree_Control_R(p,s,i) = nanmean(Output_R.Out_Degree);
-           Within_Module_Weight_Control_R(p,s,i) = nanmean(Output_R.Within_Weight);
-           Out_Module_Weight_Control_R(p,s,i) = nanmean(Output_R.Out_Weight);
-           i=i+1;
-           
-        end
+          
+        Within_Module_Degree_Control(p,s,:) = nanmean(Graph.Within_Module_Degree{p},2);
+        Out_Module_Degree_Control(p,s,:) = nanmean(Graph.Out_Module_Degree{p},2);
+        Within_Module_Weight_Control(p,s,:) = nanmean(Graph.Within_Module_Weight{p},2);
+        Out_Module_Weight_Control(p,s,:) = nanmean(Graph.Out_Module_Weight{p},2);
         
-        %calculate clustering coefficient
-        i=1;
-        for t = T
-            CC_Control(p,s,i) =nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Full{p},t),'binarize')));
-            CC_Control_L(p,s,i) = nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Left{p},t),'binarize')));
-            CC_Control_R(p,s,i) = nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Right{p},t),'binarize')));
-            i=i+1;
-        end
+        Within_Module_Degree_Control_L(p,s,:) = nanmean(Graph.Left_Within_Module_Degree{p},2);
+        Out_Module_Degree_Control_L(p,s,:) = nanmean(Graph.Left_Out_Module_Degree{p},2);
+        Within_Module_Weight_Control_L(p,s,:) = nanmean(Graph.Left_Within_Module_Weight{p},2);
+        Out_Module_Weight_Control_L(p,s,:) = nanmean(Graph.Left_Out_Module_Weight{p},2);
+        
+        Within_Module_Degree_Control_R(p,s,:) = nanmean(Graph.Right_Within_Module_Degree{p},2);
+        Out_Module_Degree_Control_R(p,s,:) = nanmean(Graph.Right_Out_Module_Degree{p},2);
+        Within_Module_Weight_Control_R(p,s,:) = nanmean(Graph.Right_Within_Module_Weight{p},2);
+        Out_Module_Weight_Control_R(p,s,:) = nanmean(Graph.Right_Out_Module_Weight{p},2);
+ 
+
+        CC_Control(p,s,:) =nanmean(Graph.Full_CC{p},2);
+        CC_Control_L(p,s,:) = nanmean(Graph.Left_CC{p},2);
+        CC_Control_R(p,s,:) = nanmean(Graph.Right_CC{p},2);
+        
     end
     
     s=s+1;
@@ -89,37 +76,25 @@ for sub = Tha_Subj
         %Adj_Tha_R{p}(s,:,:) = Adj.Matrix_Right{p};
         %Adj_Tha_L{p}(s,:,:) = Adj.Matrix_Left{p};
         
-        % calculate within and Out module connectivity
-        i=1;
-        for t = T
-           Output = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Full{p},t), Ci{p});
-           Output_L = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Left{p},t), Ci_L{p});
-           Output_R = cal_modularity_connectivity(threshold_proportional(Adj.Matrix_Right{p},t), Ci_R{p});
-           
-           Within_Module_Degree_tha(p,s,i) = nanmean(Output.Within_Degree);
-           Out_Module_Degree_tha(p,s,i) = nanmean(Output.Out_Degree);
-           Within_Module_Weight_tha(p,s,i) = nanmean(Output.Within_Weight);
-           Out_Module_Weight_tha(p,s,i) = nanmean(Output.Out_Weight);
-           
-           Within_Module_Degree_tha_L(p,s,i) = nanmean(Output_L.Within_Degree);
-           Out_Module_Degree_tha_L(p,s,i) = nanmean(Output_L.Out_Degree);
-           Within_Module_Weight_tha_L(p,s,i) = nanmean(Output_L.Within_Weight);
-           Out_Module_Weight_tha_L(p,s,i) = nanmean(Output_L.Out_Weight);
-           
-           Within_Module_Degree_tha_R(p,s,i) = nanmean(Output_R.Within_Degree);
-           Out_Module_Degree_tha_R(p,s,i) = nanmean(Output_R.Out_Degree);
-           Within_Module_Weight_tha_R(p,s,i) = nanmean(Output_R.Within_Weight);
-           Out_Module_Weight_tha_R(p,s,i) = nanmean(Output_R.Out_Weight);
-           i = i+1;
-        end
+        Within_Module_Degree_tha(p,s,:) = nanmean(Graph.Within_Module_Degree{p},2);
+        Out_Module_Degree_tha(p,s,:) = nanmean(Graph.Out_Module_Degree{p},2);
+        Within_Module_Weight_tha(p,s,:) = nanmean(Graph.Within_Module_Weight{p},2);
+        Out_Module_Weight_tha(p,s,:) = nanmean(Graph.Out_Module_Weight{p},2);
         
-        i =1;
-        for t = T
-            CC_tha(p,s,i) =nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Full{p},t),'binarize')));
-            CC_tha_L(p,s,i) = nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Left{p},t),'binarize')));
-            CC_tha_R(p,s,i) = nanmean(clustering_coef_bu(weight_conversion(threshold_proportional(Adj.Matrix_Right{p},t),'binarize')));
-            i = i+1;
-        end
+        Within_Module_Degree_tha_L(p,s,:) = nanmean(Graph.Left_Within_Module_Degree{p},2);
+        Out_Module_Degree_tha_L(p,s,:) = nanmean(Graph.Left_Out_Module_Degree{p},2);
+        Within_Module_Weight_tha_L(p,s,:) = nanmean(Graph.Left_Within_Module_Weight{p},2);
+        Out_Module_Weight_tha_L(p,s,:) = nanmean(Graph.Left_Out_Module_Weight{p},2);
+        
+        Within_Module_Degree_tha_R(p,s,:) = nanmean(Graph.Right_Within_Module_Degree{p},2);
+        Out_Module_Degree_tha_R(p,s,:) = nanmean(Graph.Right_Out_Module_Degree{p},2);
+        Within_Module_Weight_tha_R(p,s,:) = nanmean(Graph.Right_Within_Module_Weight{p},2);
+        Out_Module_Weight_tha_R(p,s,:) = nanmean(Graph.Right_Out_Module_Weight{p},2);
+ 
+
+        CC_tha(p,s,:) =nanmean(Graph.Full_CC{p},2);
+        CC_tha_L(p,s,:) = nanmean(Graph.Left_CC{p},2);
+        CC_tha_R(p,s,:) = nanmean(Graph.Right_CC{p},2);
     end
     
     s=s+1;
@@ -134,10 +109,10 @@ set(0, 'DefaulttextInterpreter', 'none')
 
 close all
 T=0.05:0.005:0.15;
-for t=[12, 20];
+for t=Partitions;
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
     H2=plot(T,squeeze(Modularity_tha(t,1,:)),'linewidth',3,'color','b');
     H3=plot(T,squeeze(Modularity_tha(t,2,:)),'linewidth',3,'color','r');
@@ -156,37 +131,37 @@ for t=[12, 20];
     fn = strcat('Modularity_',num2str(t),'.png');
     export_fig(fn, '-opengl');
     
-%     figure
-%     H1=shadedErrorBar(T,squeeze(Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',2,'Color',rgb('grey')},1);
-%     hold on;
-%     H2=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)),{@mean, @ste},{'--','LineWidth',2,'Color',rgb('grey')},1);
-%     H3=plot(T,squeeze(Modularity_tha_L(t,1,:)),'linewidth',3,'color','b');
-%     H4=plot(T,squeeze(Modularity_tha_R(t,2,:)),'linewidth',3,'color','r');
-%     H5=plot(T,squeeze(Modularity_tha_L(t,3,:)),'linewidth',3,'color','g');
-%     H6=plot(T,squeeze(Modularity_tha_R(t,4,:)),'linewidth',3,'color','y');
-%     H7=plot(T,squeeze(Modularity_tha_R(t,5,:)),'linewidth',3,'color','m');
-%     
-%     xlim([0.05 0.16])
-%     %ylim([0.25 0.65])
-%     hl=legend([H1.mainLine,H2.mainLine,H3, H4, H5, H6, H7],'Controls Left','Controls Right','Patient 128','Patient 162', 'Patient 163', 'Patient 168', 'Patient 176', 'Location','Northeast' );
-%     set(gca,'FontSize',16,'box','off','XGrid','off','YGrid','off','linewidth',2)
-%     set(hl,'FontSize', 12, 'Box','off');
-%     xlabel('Cost','FontSize',16)
-%     ylabel('Modularity','FontSize',16)
-%     title('Lesioned Hemisphere Modularity','FontSize',24)
-%     set(gcf, 'Color', 'white');
-%     fn = strcat('Modularity_lesioned_hemisphere_',num2str(t),'.png');
-%     export_fig(fn, '-opengl');
-%     %export_fig Modularity_lesioned_hemisphere_350.png -opengl
+        figure
+        H1=shadedErrorBar(T,squeeze(Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',2,'Color',rgb('gray')},1);
+        hold on;
+        H2=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)),{@mean, @ste},{'--','LineWidth',2,'Color',rgb('lightgray')},1);
+        H3=plot(T,squeeze(Modularity_tha_L(t,1,:)),'linewidth',3,'color','b');
+        H4=plot(T,squeeze(Modularity_tha_R(t,2,:)),'linewidth',3,'color','r');
+        H5=plot(T,squeeze(Modularity_tha_L(t,3,:)),'linewidth',3,'color','g');
+        H6=plot(T,squeeze(Modularity_tha_R(t,4,:)),'linewidth',3,'color','y');
+        H7=plot(T,squeeze(Modularity_tha_L(t,5,:)),'linewidth',3,'color','m');
+    
+        xlim([0.05 0.16])
+        %ylim([0.25 0.65])
+        hl=legend([H1.mainLine,H2.mainLine,H3, H4, H5, H6, H7],'Controls Left','Controls Right','Patient 128','Patient 162', 'Patient 163', 'Patient 168', 'Patient 176', 'Location','Northeast' );
+        set(gca,'FontSize',16,'box','off','XGrid','off','YGrid','off','linewidth',2)
+        set(hl,'FontSize', 12, 'Box','off');
+        xlabel('Cost','FontSize',16)
+        ylabel('Modularity','FontSize',16)
+        title('Lesioned Hemisphere Modularity','FontSize',24)
+        set(gcf, 'Color', 'white');
+        fn = strcat('Modularity_lesioned_hemisphere_',num2str(t),'.png');
+        export_fig(fn, '-opengl');
+        %export_fig Modularity_lesioned_hemisphere_350.png -opengl
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)-Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)-Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
     H3=plot(T,squeeze(Modularity_tha_L(t,1,:)-Modularity_tha_R(t,1,:)),'linewidth',3,'color','b');
     H4=plot(T,squeeze(Modularity_tha_R(t,2,:)-Modularity_tha_L(t,2,:)),'linewidth',3,'color','r');
     H5=plot(T,squeeze(Modularity_tha_L(t,3,:)-Modularity_tha_R(t,3,:)),'linewidth',3,'color','g');
-    H6=plot(T,squeeze(Modularity_tha_L(t,4,:)-Modularity_tha_R(t,4,:)),'linewidth',3,'color','y');
-    H7=plot(T,squeeze(Modularity_tha_R(t,5,:)-Modularity_tha_L(t,5,:)),'linewidth',3,'color','m');
+    H6=plot(T,squeeze(Modularity_tha_R(t,4,:)-Modularity_tha_L(t,4,:)),'linewidth',3,'color','y');
+    H7=plot(T,squeeze(Modularity_tha_L(t,5,:)-Modularity_tha_R(t,5,:)),'linewidth',3,'color','m');
     xlim([0.05 0.16])
     %ylim([0.25 0.65])
     hl=legend([H1.mainLine,H3, H4, H5, H6, H7],'Controls R-L','Patient 128 Lesioned - Intact','Patient 162 Lesioned - Intact', 'Patient 163 Lesioned - Intact', 'Patient 168 Lesioned - Intact', 'Patient 176 Lesioned - Intact','Location','best' );
@@ -205,7 +180,7 @@ end
 set(0, 'DefaulttextInterpreter', 'none')
 close all
 T=0.05:0.005:0.15;
-for t=[12, 20];
+for t=Partitions;
     
     figure
     H1=shadedErrorBar(T,squeeze(Out_Module_Weight_Control(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
@@ -436,13 +411,13 @@ end
 %    hl=legend([H1.mainLine,H2, H3, H4, H5, H6],'Controls ','Patient 128','Patient 162', 'Patient 163', 'Patient 168', 'Patient 176','Location','SWithinheast' );
 %    set(gca,'FontSize',16,'box','off','XGrid','off','YGrid','off','linewidth',2)
 %    set(hl,'FontSize', 12, 'Box','off');
-%    
+%
 %    ylabel('Efficiency','FontSize',16)
 %    xlabel(gca, 'Cost','FontSize',16)
 %    title('Whole Brain Efficiency','FontSize',24)
 %    set(gcf, 'Color', 'white');
 %    export_fig Efficiency_350.png -opengl
-%    
+%
 %    figure
 %    H1=shadedErrorBar(T,squeeze(Efficiency_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',6,'Color',rgb('grey')},1);
 %    hold on;
@@ -462,7 +437,7 @@ end
 %    title('Lesioned Hemisphere Efficiency','FontSize',24)
 %    set(gcf, 'Color', 'white');
 %    export_fig Efficiency_lesioned_hemisphere_350.png -opengl
-%    
+%
 %    figure
 %    H1=shadedErrorBar(T,squeeze(Efficiency_Control_R(t,:,:)-Efficiency_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',6,'Color',rgb('grey')},1);
 %    hold on;

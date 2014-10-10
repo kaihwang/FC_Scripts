@@ -47,7 +47,7 @@ for s in 128 162 163 168 176; do
 
 	echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/ROIg${s}.m" >> ROIfc_${s}.sh
 	
-	#qsub -V -M kaihwang -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	qsub -V -M kaihwang -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 	
 done
 
@@ -86,13 +86,21 @@ for s in b116 b117 b120 b121 b122 b138 b143 b153; do
 		
 	echo "done" >> ROIfc_${s}.sh
 	
-	#qsub -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	#graph theory
+	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> ROIg${s}.m
+	echo "addpath(genpath('/home/despo/kaihwang/matlab/'));" >> ROIg${s}.m
+	echo "[Adj, Graph] = cal_graph('${s}');" >> ROIg${s}.m
+	echo "save /home/despo/kaihwang/Rest/Graph/g_${s}.mat; exit;" >> ROIg${s}.m
+
+	echo "matlab -nodisplay -nosplash < /home/despo/kaihwang/bin/Thalamo/ROIg${s}.m" >> ROIfc_${s}.sh
+	
+	qsub -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 
 done
 
 
 # Control
-for s in 214; do
+for s in 114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220; do
 	
 	echo "cd /home/despo/kaihwang/Rest/Control/${s}/Rest" >> ROIfc_${s}.sh
 	echo "" >> ROIfc_${s}.sh
@@ -135,7 +143,7 @@ for s in 214; do
 	
 #	. ROIfc_${s}.sh
 	#. ROIfc_${s}.sh > ~/tmp/fc_${s}_NetCorr.log 2>&1 &
-	#qsub -M kaihwang -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
+	qsub -M kaihwang -V -e ~/tmp -o ~/tmp ROIfc_${s}.sh
 
 done
 
