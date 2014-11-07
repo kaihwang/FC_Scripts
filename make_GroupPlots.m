@@ -251,11 +251,12 @@ for t=Partitions;
     hold on;
     H2=shadedErrorBar(T,squeeze(Out_Module_Weight_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(Out_Module_Weight_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
+    xlim([0.05 0.16])
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
     
-    xlim([0.05 0.16])
+    
     %ylim([0.25 0.65])
-    set(gca,'FontSize',12,'box','off','XGrid','off','YGrid','off','linewidth',2)
+    set(gca,'FontSize',12,'Box','Off','XGrid','off','YGrid','off','linewidth',2)
     set(hl,'FontSize', 12, 'Box','off');
     xlabel('Cost','FontSize',14)
     ylabel('Connectivity Weight','FontSize',14)
