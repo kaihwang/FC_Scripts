@@ -14,6 +14,7 @@ for s in 100307; do
 		cd ${WD}/${s}/MNINonLinear/Results/${run}/
 				
 		rm ${WD}/${s}/MNINonLinear/Results/${run}/${run}_input*
+		rm __*
 		#rm ${WD}/${s}/MNINonLinear/Results/${run}/anat*
 		rm ${WD}/${s}/MNINonLinear/Results/${run}/aseg*
 		
