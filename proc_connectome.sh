@@ -44,7 +44,7 @@ for s in 100307; do
 		3dcopy ${WD}/connectome/${s}/MNINonLinear/${run}.nii.gz ${WD}/connectome/${s}/MNINonLinear/${run}_input
 		
 		@ANATICOR \
-		-ts ${WD}/connectome/${s}/MNINonLinear/${run}_input \
+		-ts ${WD}/connectome/${s}/MNINonLinear/${run}_input+tlrc \
 		-polort 3 \
 		-aseg ${WD}/connectome/${s}/MNINonLinear/aseg+tlrc \
 		-motion ${WD}/connectome/${s}/MNINonLinear/${run}_mopar.1D \
