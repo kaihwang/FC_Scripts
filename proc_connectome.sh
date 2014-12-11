@@ -48,7 +48,7 @@ for s in 100307; do
 		-polort 3 \
 		-aseg ${WD}/connectome/${s}/MNINonLinear/aseg+tlrc \
 		-motion ${WD}/connectome/${s}/MNINonLinear/${run}_mopar.1D \
-		-prefix  ${WD}/connectome/${s}/MNINonLinear/${run}_reg \
+		-prefix ${run}_reg \
 		-view +tlrc
 		
 		3dBandpass \
