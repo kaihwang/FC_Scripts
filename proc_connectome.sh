@@ -33,7 +33,7 @@ for s in 100307; do
 		
 		#create symbolic link of functional data and regressors for motion data
 		ln -s ${RAW}/${s}/MNINonLinear/Results/${run}/${run}.nii.gz ${WD}/connectome/${s}/MNINonLinear/${run}.nii.gz
-		cp ${WD}/${s}/MNINonLinear/Results/${run}/Movement_Regressors_dt.txt ${WD}/connectome/${s}/MNINonLinear/${run}_mopar.1D
+		cp ${RAW}/${s}/MNINonLinear/Results/${run}/Movement_Regressors_dt.txt ${WD}/connectome/${s}/MNINonLinear/${run}_mopar.1D
 		
 		#remove previous version
 		#rm ${WD}/${s}/MNINonLinear/Results/${run}/${run}_input*
