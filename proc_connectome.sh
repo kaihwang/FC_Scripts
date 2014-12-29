@@ -59,7 +59,7 @@ for s in 100307; do
 		-nodetrend -automask \
 		-blur 5 -band 0.009 0.08 \
 		-prefix ${WD}/connectome/${s}/MNINonLinear/${run}_reg_bp.nii.gz \
-		-input $/tmp/${s}/${run}/${run}_reg+tlrc 
+		-input /tmp/${s}/${run}/${run}_reg+tlrc 
 				
 		#rm ${WD}/connectome/${s}/MNINonLinear/${run}_reg+tlrc* 
 		#rm ${WD}/connectome/${s}/MNINonLinear/${run}_input*
