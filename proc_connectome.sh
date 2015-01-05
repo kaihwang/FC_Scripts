@@ -23,7 +23,7 @@ for s in 100307; do
 	3dcopy ${RAW}/${s}/MNINonLinear/aparc+aseg.nii.gz ${WD}/connectome/${s}/MNINonLinear/aseg
 	3drefit -view tlrc ${WD}/connectome/${s}/MNINonLinear/aseg+orig
 	
-	# bunc of T1s no idea what is what at this point...
+	# bunch of T1s no idea what is what at this point...
 	ln -s ${RAW}/${s}/MNINonLinear/T1w_restore.nii.gz ${WD}/connectome/${s}/MNINonLinear/T1w_restore.nii.gz
 	ln -s ${RAW}/${s}/MNINonLinear/T1w.nii.gz ${WD}/connectome/${s}/MNINonLinear/T1w.nii.gz
 	ln -s ${RAW}/${s}/MNINonLinear/T1w_restore.2.nii.gz ${WD}/connectome/${s}/MNINonLinear/T1w_restore.2.nii.gz
