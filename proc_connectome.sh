@@ -43,10 +43,13 @@ for s in 100307; do
 
 		cd /tmp/${s}/${run}
 
+
+		# some of AFNI's program doesn't like NIFTI... so copy to afni BRIK/HEAD format
 		3dcopy ${WD}/connectome/${s}/MNINonLinear/${run}.nii.gz /tmp/${s}/${run}/${run}_input
 		cp ${WD}/connectome/${s}/MNINonLinear/aseg+tlrc* /tmp/${s}/${run}/
 		cp ${WD}/connectome/${s}/MNINonLinear/${run}_mopar.1D /tmp/${s}/${run}/
 
+		# local WM + motion parameters regression.
 		@ANATICOR \
 		-ts /tmp/${s}/${run}/${run}_input+tlrc \
 		-polort 3 \
@@ -55,6 +58,7 @@ for s in 100307; do
 		-prefix ${run}_reg \
 		-view +tlrc
 		
+		# bandpass filtering
 		3dBandpass \
 		-nodetrend -automask \
 		-blur 5 -band 0.009 0.08 \
