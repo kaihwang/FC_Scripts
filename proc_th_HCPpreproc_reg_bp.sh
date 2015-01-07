@@ -82,5 +82,26 @@ for s in 128; do
 done
 
 
+#for not doing local WM regression, use afni_restproc.py?
+#3dcopy template_brain.nii anat
+
+# afni_restproc.py \
+# -anat anat+tlrc \
+# -epi nwkmt_input+tlrc \
+# -align off \
+# -globalwm \
+# -aseg aseg_mni+tlrc \
+# -dest afni_restproc \
+# -regressor mopar.1D \
+# -smoothrad 5 \
+# -despike off \
+# -polort 3 \
+# -bandpass \
+# -bpassregs \
+# -script proc_test \
+# -prefix afni_restproc_test
+
+
+
 
 

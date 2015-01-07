@@ -73,3 +73,22 @@ for s in 100307; do
 	done
 	rm -rf /tmp/${s}/
 done
+
+# this is command for using afni_restproc. if not wanting to do local WM 
+# 3dcopy rfMRI_REST1_LR.nii.gz input
+# 3dcopy T1w_restore_brain.nii.gz anat
+# afni_restproc.py \
+# -anat anat+tlrc \
+# -epi input+tlrc \
+# -align off \
+# -globalwm \
+# -aseg aseg+tlrc \
+# -dest afni_restproc \
+# -regressor rfMRI_REST1_LR_mopar.1D \
+# -smoothrad 5 \
+# -despike off \
+# -polort 3 \
+# -bandpass \
+# -bpassregs \
+# -script proc_test \
+# -prefix afni_restproc_test
