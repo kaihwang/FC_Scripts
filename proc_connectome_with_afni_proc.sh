@@ -41,7 +41,7 @@ for s in 100307 ; do
 		-script proc_test \
 		-prefix ${run}_gwreg_bp
 
-		3dAFNItoNIFTI -prefix $WD/connectome/${s}/MNINonLinear/${run}_gwreg_bp.nii.gz ${run}_gwreg_bp.cleanEPI+tlrc
+		3dAFNItoNIFTI -prefix $WD/connectome/${s}/MNINonLinear/${run}_gwreg_bp.nii.gz ${run}_afni_restproc/${run}_gwreg_bp.cleanEPI+tlrc
 
 	done
 
