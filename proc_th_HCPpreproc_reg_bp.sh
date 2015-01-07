@@ -73,9 +73,11 @@ for s in 128; do
 		-input input_reg+tlrc 
 
 		cp mopar.1D ${WD}/${s}/MNINonLinear/rfMRI_REST${r}_PA_mopar.1D 
-
+		
+		cd ${WD}/${s}/MNINonLinear/
+		rm -rf /tmp/KH_${s}_run${r} 
 	done
-
+	
 
 done
 
