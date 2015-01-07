@@ -4,8 +4,8 @@
 
 WD='/home/despoB/connectome-thalamus'
 
-# 105216  113215  120515  128127  133928  140824  148032  153429  159340  164939  172332  179346  188347  195849 100408  106016  113619  121315  128329  134324  140925  148335  153833  159441  165032  172534  179548  189349  196144
-for s in 100307 ; do
+#   172332  179346  188347  195849 100408  106016  113619  121315  128329  134324  140925  148335  153833  159441  165032  172534  179548  189349  196144
+for s in 105216  113215  120515  128127  133928  140824  148032  153429  159340  164939 ; do
 
 	for run in rfMRI_REST1_LR  rfMRI_REST1_RL rfMRI_REST2_LR  rfMRI_REST2_RL  ; do
 		
@@ -43,6 +43,7 @@ for s in 100307 ; do
 
 		3dAFNItoNIFTI -prefix $WD/connectome/${s}/MNINonLinear/${run}_gwreg_bp.nii.gz ${run}_afni_restproc/${run}_gwreg_bp.cleanEPI+tlrc
 
+		rm -rf /tmp/KH_${s}_${run}	
 	done
 
 done
