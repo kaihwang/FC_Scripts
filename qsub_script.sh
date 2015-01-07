@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# script to submit PPI analysis to the grid
-
-
 mkdir tmp;
 
 WD='/home/despoB/connectome-thalamus'
