@@ -15,10 +15,11 @@ for s in 100307 ; do
 		mkdir /tmp/KH_${s}_${run}
 
 		3dcopy T1w_restore_brain.nii.gz anat
-		mv anat_tlrc* /tmp/KH_${s}_${run}
+		mv anat+tlrc* /tmp/KH_${s}_${run}
 		
 		cp ${run}_mopar.1D /tmp/KH_${s}_${run}
-
+		cp aseg+tlrc* /tmp/KH_${s}_${run}
+		
 		3dcopy ${run}.nii.gz ${run}_input
 		mv ${run}_input* /tmp/KH_${s}_${run}
 		
