@@ -6,13 +6,15 @@
 
 WD='/home/despoB/kaihwang/Rest/BG'
 
-if [ ! -d "${WD}/${s}/MNINonLinear/" ]; then
-		mkdir ${WD}/${s}/MNINonLinear/
-fi
+
 
 
 for s in 128; do
 	cd ${WD}/${s}/Rest
+
+	if [ ! -d "${WD}/${s}/MNINonLinear/" ]; then
+		mkdir ${WD}/${s}/MNINonLinear/
+	fi
 
 	# first determine the number of runs that need to be processed. Its quite annoying different subjects have different runs.
 	for r in $(seq 1 1 $(ls ${s}-EPI*.nii.gz | wc -l)); do
