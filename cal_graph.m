@@ -6,10 +6,10 @@ function  [Adj, Graph] = cal_graph(subjid)
 %loop through parcellations
 
 n=1;
-for Parcellation = 0:22
-    Full_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_full_corrmat_',num2str(Parcellation,'%02i')); %full matrix
-    Right_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_corrmat_',num2str(Parcellation,'%02i')); %right hemi
-    Left_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_corrmat_',num2str(Parcellation,'%02i')); %left hemi
+for Parcellation = 0  %:22
+    Full_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat_',num2str(Parcellation,'%02i')); %full matrix
+    Right_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_WashU333_corrmat_',num2str(Parcellation,'%02i')); %right hemi
+    Left_fn = strcat('/home/despo/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_WashU333_corrmat_',num2str(Parcellation,'%02i')); %left hemi
     
     Adj.Matrix_Full{n} = load(Full_fn);
     Adj.Matrix_Right{n} = load(Right_fn);
@@ -24,7 +24,7 @@ for n = 1:length(Adj.Matrix_Full)
    M = Adj.Matrix_Full{n};
    
    i = 1;
-   for T = 0.05:0.005:0.15;
+   for T = 0.05:0.005:0.15; %density threshold
       
        [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
