@@ -3,9 +3,9 @@
 # script to create adj matrices using WashU's 333 ROI partition. Then submit to graph analysis.
 
 
-WD='/home/despoB/kaihwang/Rest/connectome'
+WD='/home/despoB/kaihwang/Rest/Patients/'
 
-for s in 100307; do
+for s in 128; do
 
 	mkdir /tmp/KH_${s}
 
@@ -13,7 +13,7 @@ for s in 100307; do
 
 	#grab list of files to concat
 ls
-	rsfMRI_runs_list=(`ls rfMRI_REST1*_reg_bp.nii.gz`)
+	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
 
 	#concat the files into one run
 	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
