@@ -7,7 +7,7 @@ function  [Adj, Graph] = cal_graph(subjid)
 
 n=1;
 for Parcellation = 0  %:22
-    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat_corrmat'); %full matrix % num2str(Parcellation,'%03i')
+    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat'); %full matrix % num2str(Parcellation,'%03i')
     Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_WashU333_corrmat'); %right hemi
     Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_WashU333_corrmat'); %left hemi
     
