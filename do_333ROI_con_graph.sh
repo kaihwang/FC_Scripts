@@ -13,7 +13,7 @@ for s in 100307; do
 
 	#grab list of files to concat
 ls
-	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
+	rsfMRI_runs_list=(`ls rfMRI_REST1*_reg_bp.nii.gz`)
 
 	#concat the files into one run
 	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
@@ -21,8 +21,8 @@ ls
 	# run NetCorr
 	cd /tmp/KH_${s}
 	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm.nii.gz
-	3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_right.nii.gz
-	3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_left.nii.gz
+	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_right.nii.gz
+	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_left.nii.gz
 
 	# exract adj matrices
 	num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
@@ -42,5 +42,7 @@ ls
 
 	matlab -nodisplay -nosplash < /tmp/KH_${s}/ROIg${s}.m
 
+	cd ${WD}/${s}/MNINonLinear/
+	rm -rf /tmp/KH_${s}/
 
 done
