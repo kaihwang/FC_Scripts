@@ -12,7 +12,7 @@ for s in 100307; do
 	cd ${WD}/${s}/MNINonLinear/
 
 	#grab list of files to concat
-
+ls
 	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
 
 	#concat the files into one run
@@ -28,11 +28,11 @@ for s in 100307; do
 	num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
 	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_WashU333_corrmat
 
-	num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_WashU333_corrmat
+	#num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
+	#tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_WashU333_corrmat
 
-	num=$(expr $(wc -l ${s}_Left_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Left_WashU333_corrmat
+	#num=$(expr $(wc -l ${s}_Left_corrmat_000.netcc | awk '{print $1}') - 4)
+	#tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Left_WashU333_corrmat
 		
 	#graph theory
 	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> ROIg${s}.m
