@@ -7,9 +7,9 @@ function  [Adj, Graph] = cal_graph(subjid)
 
 n=1;
 for Parcellation = 0  %:22
-    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat_',num2str(Parcellation,'%03i')); %full matrix
-    Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_WashU333_corrmat_',num2str(Parcellation,'%03i')); %right hemi
-    Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_WashU333_corrmat_',num2str(Parcellation,'%03i')); %left hemi
+    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat_corrmat'); %full matrix % num2str(Parcellation,'%03i')
+    Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_WashU333_corrmat'); %right hemi
+    Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_WashU333_corrmat'); %left hemi
     
     Adj.Matrix_Full{n} = load(Full_fn);
     Adj.Matrix_Right{n} = load(Right_fn);
