@@ -14,7 +14,9 @@ for s in 1101 1102 1103 1104 1209 1210 1214 1220 1222 1223 1306 1307 1309 1310 1
 		ln -s /home/despo/reach/Aging_Rehab_Study/Analysis/reach_mri/${s}/SourceDICOMs/Resting_Scan/ ${s}/rest_run1
 	fi
 
-	ln -s /home/despo/reach/Aging_Rehab_Study/Analysis/reach_mri/${s}/SourceDICOMs/Resting_Scan_2/ ${s}/rest_run2
-
+	if [ -d "/home/despo/reach/Aging_Rehab_Study/Analysis/reach_mri/${s}/SourceDICOMs/Resting_Scan_2/" ]; then
+		ln -s /home/despo/reach/Aging_Rehab_Study/Analysis/reach_mri/${s}/SourceDICOMs/Resting_Scan_2/ ${s}/rest_run2
+	fi
+		
 	ln -s /home/despo/reach/Aging_Rehab_Study/Analysis/reach_mri/${s}/SourceDICOMs/MPRAGE/ ${s}/mprage
 done
