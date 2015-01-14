@@ -63,6 +63,7 @@ for s in 128; do
 		-polort 3 \
 		-aseg aseg_mni+tlrc \
 		-motion mopar.1D \
+		-radius 30 \
 		-prefix input_reg \
 		-view +tlrc
 		
