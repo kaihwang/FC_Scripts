@@ -12,7 +12,6 @@ for s in 100307; do
 	cd ${WD}/${s}/MNINonLinear/
 
 	#grab list of files to concat
-ls
 	rsfMRI_runs_list=(`ls rfMRI_REST1*_reg_bp.nii.gz`)
 
 	#concat the files into one run
