@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 cd /home/despoB/kaihwang/Rest/Older_Controls
 

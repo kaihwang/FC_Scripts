@@ -1,41 +1,43 @@
-#!/bin/sh
+#!/bin/bash
 
 # script to submit jobs to cluster for preprocessing anatomical data.
 
 #for lesion patients
-for s in 128 162 163 168; do
+export SUBJECTS_DIR="/home/despoB/kaihwang/Subjects"
+WD='/home/despoB/kaihwang/Rest/Older_Controls'
+
+for s in 1103; do
 	
-	
-	echo ". /etc/bashrc" >> a_$s.sh
-	echo ". ~/.bashrc" >> a_$s.sh
-	
+	cd ${WD}/${s}
+
 	# Need to first run freesurfer
-	#echo "recon-all -i ~/Lesion/$s/$s-T1.nii.gz -all -subjid $s" >> a_$s.sh
+	dcm2nii -d N -e N -f N -i N -n Y -o . mprage/
+	recon-all -i t1mprage.nii.gz -all -subjid $s
 	
 	#then do SUMA transformation
-	echo 'cd $SUBJECTS_DIR/'$s'' >> a_$s.sh
-	echo "@SUMA_Make_Spec_FS -sid $s" >> a_$s.sh
+	cd $SUBJECTS_DIR/$s
+	@SUMA_Make_Spec_FS -sid $s
 	
 	
 	#call preprocessMPrage for normalization
-	echo 'cd $SUBJECTS_DIR/'$s/SUMA'' >> a_$s.sh
-	echo "3dcopy ${s}_SurfVol+orig ${s}_SurfVol.nii.gz" >> a_$s.sh
+	cd $SUBJECTS_DIR/$s/SUMA
+	3dcopy ${s}_SurfVol+orig ${s}_SurfVol.nii.gz
 	
-	echo "preprocessMprage -r MNI_2mm \\
-	-b \"-R -S -B -f 0.05 -g -0.3\" \\
-	-no_bias \\
-	-o ${s}_MNI_final.nii.gz -n ${s}_SurfVol.nii.gz" >> a_$s.sh
+	preprocessMprage -r MNI_2mm \
+	-b "-R -S -B -f 0.05 -g -0.3" \
+	-no_bias \
+	-o ${s}_MNI_final.nii.gz -n ${s}_SurfVol.nii.gz
 	
 	#align aseg, then turn it into afni format
-	echo "fslreorient2std aseg.nii aseg_r.nii.gz" >> a_$s.sh
-	echo "rm aseg.nii" >> a_$s.sh
+	fslreorient2std aseg.nii aseg_r.nii.gz
+	rm aseg.nii
 	
-	echo "applywarp -i aseg_r.nii.gz \\
-	-r template_brain.nii -o aseg_mni.nii.gz \\
-	--warp=${s}_SurfVol_warpcoef.nii.gz" >> a_$s.sh
+	applywarp -i aseg_r.nii.gz \
+	-r template_brain.nii -o aseg_mni.nii.gz \
+	--warp=${s}_SurfVol_warpcoef.nii.gz
 	
-	echo "3dcopy aseg_mni.nii.gz aseg_mni+tlrc" >> a_$s.sh
-	echo "3dcopy ${s}_MNI_final.nii.gz ${s}_MNI_final+tlrc" >> a_$s.sh
+	3dcopy aseg_mni.nii.gz aseg_mni+tlrc
+	3dcopy ${s}_MNI_final.nii.gz ${s}_MNI_final+tlrc
 	
 	#qsub a_$s.sh
 done
