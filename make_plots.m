@@ -152,7 +152,7 @@ set(0, 'DefaulttextInterpreter', 'none')
 
 close all
 T=0.05:0.005:0.15;
-for t=Partitions(end);
+for t=Partitions;
     
     figure
     H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('gray')},1);
@@ -222,7 +222,7 @@ end
 
 %% plot between module connectivity
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
 for t=Partitions;
     
@@ -294,9 +294,9 @@ end
 
 %% plot within module connectivity
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
-for t=[12, 20];
+for t=Partitions;
     
     figure
     H1=shadedErrorBar(T,squeeze(Within_Module_Weight_Control(t,:,:)),{@nanmean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
@@ -365,10 +365,10 @@ end
 
 %% plot CC
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
 
-for t=[12, 20];
+for t=Partitions;
     
     figure
     H1=shadedErrorBar(T,squeeze(CC_Control(t,:,:)),{@nanmean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
