@@ -21,8 +21,8 @@ for s in 128; do
 	# run NetCorr
 	cd /tmp/KH_${s}
 	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_largerFOV.nii.gz
-	3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_R_2mm_largerFOV.nii.gz
-	3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_L_2mm_largerFOV.nii.gz
+	dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_R_largerFOV.nii.gz
+	3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_L_largerFOV.nii.gz
 
 	# exract adj matrices
 	num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
