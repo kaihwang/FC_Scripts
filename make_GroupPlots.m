@@ -5,6 +5,7 @@
 %load connectome
 
 Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
+Control_Subj = Control_Subj'
 %Subjects
 %Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
 Tha_Subj = [128 162 163 168 176];
