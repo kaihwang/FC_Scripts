@@ -9,7 +9,7 @@ for s in 128; do
 
 	mkdir /tmp/KH_${s}
 
-	cd ${WD}/${s}/MNINonLinear/
+	cd ${WD}/${s}/Rest/
 
 	#grab list of files to concat
 ls
