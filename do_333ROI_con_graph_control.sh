@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # script to create adj matrices using WashU's 333 ROI partition. Then submit to graph analysis.
 
