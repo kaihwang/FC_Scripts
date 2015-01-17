@@ -13,7 +13,7 @@ for s in 128; do
 
 	#grab list of files to concat
 ls
-	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
+	rsfMRI_runs_list=(`ls *-rest-preproc-cen.nii.gz`)
 
 	#concat the files into one run
 	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
