@@ -161,7 +161,7 @@ T=0.05:0.005:0.15;
 for t=Partitions;
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('gray')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, 1.5*@std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
     H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
@@ -179,9 +179,9 @@ for t=Partitions;
     %export_fig(fn, '-opengl');
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',2,'Color',rgb('gray')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_Control_L(t,:,:)),{@mean, @std},{'-','LineWidth',2,'Color',rgb('gray')},1);
     hold on;
-    H2=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)),{@mean, @ste},{'--','LineWidth',2,'Color',rgb('light grey')},1);
+    H2=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)),{@mean, @std},{'--','LineWidth',2,'Color',rgb('light grey')},1);
     H3=plot(T,squeeze(Modularity_tha_L(t,1,:)),'linewidth',3,'color','b');
     H4=plot(T,squeeze(Modularity_tha_R(t,2,:)),'linewidth',3,'color','r');
     H5=plot(T,squeeze(Modularity_tha_L(t,3,:)),'linewidth',3,'color','g');
