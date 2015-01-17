@@ -7,7 +7,7 @@ BG_Subj = [116 117 120 121 122 138 143 153];
 
 
 %Partitins
-Partitions = 1:23;
+Partitions = 1; % if using the 333 only 1 then.
 
 %load previously obtaiend modularity parition
 load /home/despo/kaihwang/Rest/Graph/Control_Communities.mat;
@@ -162,7 +162,7 @@ for t=Partitions(end);
     H4=plot(T,squeeze(Modularity_tha(t,3,:)),'linewidth',3,'color',rgb('blue'));
     H5=plot(T,squeeze(Modularity_tha(t,4,:)),'linewidth',3,'color',rgb('slightly dark blue'));
     H6=plot(T,squeeze(Modularity_tha(t,5,:)),'linewidth',3,'color',rgb('very dark blue'));
-    H1=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @st},{'-','LineWidth',3,'Color',rgb('orange')},1);
     xlim([0.05 0.16])
     %ylim([0.25 0.65])
     hl=legend([H1.mainLine,H2, H3, H4, H5, H6],'Controls ','Patient 128','Patient 162', 'Patient 163', 'Patient 168', 'Patient 176' ,'Location','Best' );
