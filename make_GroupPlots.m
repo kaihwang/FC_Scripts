@@ -161,7 +161,7 @@ T=0.05:0.005:0.15;
 for t=Partitions;
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @std*1.5},{'-','LineWidth',3,'Color',rgb('gray')},1);
+    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
     H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
