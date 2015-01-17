@@ -29,7 +29,7 @@ done
 
 for Subject in $(cat /home/despoB/kaihwang/Rest/connectome/list_of_complete_subjects); do
 
-	sed "s/s in 100307/s in ${Subject}/g" < do_333ROI_con_graph_conbectine.sh > tmp/do_333ROI_con_graph_connectome_${Subject}.sh
+	sed "s/s in 100307/s in ${Subject}/g" < do_333ROI_con_graph_connectome.sh > tmp/do_333ROI_con_graph_connectome_${Subject}.sh
 	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp tmp/do_333ROI_con_graph_connectome_${Subject}.sh
 
 

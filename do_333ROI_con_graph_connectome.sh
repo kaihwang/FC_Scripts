@@ -28,10 +28,10 @@ for s in 100307; do
 	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_Craddock700_corrmat
 
 	num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_Craddock700_corrmat
+	tail -n $num ${s}_Right_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_Craddock700_corrmat
 
 	num=$(expr $(wc -l ${s}_Left_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Left_Craddock700_corrmat
+	tail -n $num ${s}_Left_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Left_Craddock700_corrmat
 		
 	#graph theory
 	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> ROIg${s}.m
