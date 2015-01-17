@@ -8,10 +8,10 @@ BG_Subj = [116 117 120 121 122 138 143 153];
 
 
 %Partitins
-Partitions = 23%1:23;
+Partitions = 1%23%1:23;
 
 %load previously obtaiend modularity parition
-load /home/despo/kaihwang/Rest/Graph/Control_Communities.mat;
+%load /home/despo/kaihwang/Rest/Graph/Control_Communities.mat;
 
 %threshold
 T=0.05:0.005:0.15;
@@ -19,7 +19,7 @@ T=0.05:0.005:0.15;
 %load controls
 s=1;
 for sub = Control_Subj
-    fn = strcat('/home/despo/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
     load (fn);
     
     for p = Partitions %1: length(Graph.Full_Q)
@@ -63,7 +63,7 @@ end
 % load tha patients
 s=1;
 for sub = Tha_Subj
-    fn = strcat('/home/despo/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
     load (fn);
     for p = Partitions %1: length(Graph.Full_Q)
         Modularity_tha(p,s,:) = Graph.Full_Q{p};
@@ -105,7 +105,7 @@ end
 % load BG patients
 s=1;
 for sub = BG_Subj
-    fn = strcat('/home/despo/kaihwang/Rest/Graph/g_b',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_b',num2str(sub),'.mat');
     load (fn);
     for p = Partitions %1: length(Graph.Full_Q)
         Modularity_BG(p,s,:) = Graph.Full_Q{p};
@@ -171,7 +171,7 @@ for t=Partitions;
     title('Whole Brain Modularity','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('Modularity_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',2,'Color',rgb('gray')},1);
@@ -193,7 +193,7 @@ for t=Partitions;
     title('Lesioned Hemisphere Modularity','FontSize',24)
     set(gcf, 'Color', 'white');
     fn = strcat('Modularity_lesioned_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Modularity_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -216,7 +216,7 @@ for t=Partitions;
     title('Intact Hemisphere Modularity','FontSize',24)
     set(gcf, 'Color', 'white');
     fn = strcat('Modularity_Intact_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(Modularity_Control_R(t,:,:)-Modularity_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('gray')},1);
@@ -236,13 +236,13 @@ for t=Partitions;
     title('Hemispheric Diff in Modularity','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('Modularity_hemDiff_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Modularity_hemDiff_350.png -opengl
 end
 
 %% plot between module connectivity
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
 for t=Partitions;
     
@@ -263,7 +263,7 @@ for t=Partitions;
     title('Whole Brain Between Modules Connectivity Weight','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('InterModule_Weight_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(Out_Module_Weight_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
@@ -285,7 +285,7 @@ for t=Partitions;
     title('Between Modules Connectivity Weight fot the Lesioned Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('InterModule_Weight_lesioned_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Out_Module_Weight_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -308,7 +308,7 @@ for t=Partitions;
     title('Between Modules Connectivity Weight fot the Intact Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('InterModule_Weight_Intact_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(Out_Module_Weight_Control_R(t,:,:)-Out_Module_Weight_Control_L(t,:,:)),{@mean, @ste},{'-','LineWidth',6,'Color',rgb('grey')},1);
@@ -328,14 +328,14 @@ for t=Partitions;
     title('Hemispheric Diff in Between Modules Connectivity Weight','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('Inter_Module_Weight_hemDiff_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Out_Module_Weight_hemDiff_350.png -opengl
 end
 
 
 %% plot within module connectivity
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
 for t=Partitions;
     
@@ -355,7 +355,7 @@ for t=Partitions;
     title('Whole Brain Within Module Connectivity Weight','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('WithinModule_Weight_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(Within_Module_Weight_Control_L(t,:,:)),{@nanmean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
@@ -377,7 +377,7 @@ for t=Partitions;
     title('Within Module Connectivity Weight fot the Lesioned Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('WithinModule_Weight_lesioned_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Within_Module_Weight_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -400,7 +400,7 @@ for t=Partitions;
     title('Within Module Connectivity Weight fot the Intact Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('WithinModule_Weight_Intact_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Within_Module_Weight_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -421,13 +421,13 @@ for t=Partitions;
     title('Hemispheric Diff in Within Modules Connectivity Weight','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('Within_Module_Weight_hemDiff_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig Within_Module_Weight_hemDiff_350.png -opengl
 end
 
 %% plot CC
 set(0, 'DefaulttextInterpreter', 'none')
-close all
+%close all
 T=0.05:0.005:0.15;
 
 for t=Partitions;
@@ -448,7 +448,7 @@ for t=Partitions;
     title('Whole Brain Clustering Coef','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('CC_Weight_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     
     figure
     H1=shadedErrorBar(T,squeeze(CC_Control_L(t,:,:)),{@nanmean, @ste},{'-','LineWidth',3,'Color',rgb('grey')},1);
@@ -470,7 +470,7 @@ for t=Partitions;
     title('Clustering Coef fot the intact Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('CC_Weight_intact_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig CC_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -493,7 +493,7 @@ for t=Partitions;
     title('Clustering Coef fot the Lesioned Hemisphere','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('CC_Weight_lesioned_hemisphere_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig CC_lesioned_hemisphere_350.png -opengl
     
     figure
@@ -514,7 +514,7 @@ for t=Partitions;
     title('Hemispheric Diff in Clustering Coef','FontSize',16)
     set(gcf, 'Color', 'white');
     fn = strcat('CC_hemDiff_',num2str(t),'.png');
-    export_fig(fn, '-opengl');
+    %export_fig(fn, '-opengl');
     %export_fig CC_hemDiff_350.png -opengl
 end
 
