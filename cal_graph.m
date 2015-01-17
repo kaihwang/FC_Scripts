@@ -7,13 +7,13 @@ function  [Adj, Graph] = cal_graph(subjid)
 
 n=1;
 for Parcellation = 0  %:22
-    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_WashU333_corrmat'); %full matrix % num2str(Parcellation,'%03i')
-    %Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_WashU333_corrmat'); %right hemi
-    %Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_WashU333_corrmat'); %left hemi
+    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Full_Craddock700_corrmat'); %full matrix % num2str(Parcellation,'%03i')
+    Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_Craddock700_corrmat'); %right hemi
+    Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_Craddock700_corrmat'); %left hemi
     
     Adj.Matrix_Full{n} = load(Full_fn);
-    %Adj.Matrix_Right{n} = load(Right_fn);
-    %Adj.Matrix_Left{n} = load(Left_fn);
+    Adj.Matrix_Right{n} = load(Right_fn);
+    Adj.Matrix_Left{n} = load(Left_fn);
     
     n=n+1;
 end
@@ -46,8 +46,8 @@ for n = 1:length(Adj.Matrix_Full)
 end
 
 for n = 1:length(Adj.Matrix_Full)
-   M = Adj.Matrix_Full{n};
-   M = M(162:333, 162:333);
+   M = Adj.Matrix_Right{n};
+   %M = M(162:333, 162:333);
    i = 1;
    for T =  0.05:0.005:0.15;
       
@@ -70,8 +70,8 @@ for n = 1:length(Adj.Matrix_Full)
 end
 
 for n = 1:length(Adj.Matrix_Full)
-   M = Adj.Matrix_Full{n};
-   M = M(1:161, 1:161);
+   M = Adj.Matrix_Left{n};
+   %M = M(1:161, 1:161);
    i = 1;
    for T = 0.05:0.005:0.15;
       
