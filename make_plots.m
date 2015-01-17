@@ -10,7 +10,7 @@ BG_Subj = [116 117 120 121 122 138 143 153];
 Partitions = 1; % if using the 333 only 1 then.
 
 %load previously obtaiend modularity parition
-load /home/despoB/kaihwang/Rest/Graph/Control_Communities.mat;
+%load /home/despoB/kaihwang/Rest/Graph/Control_Communities.mat;
 
 %threshold
 T=0.05:0.005:0.15;
