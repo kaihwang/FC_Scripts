@@ -4,12 +4,12 @@
 
 %load connectome
 
-Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
-Control_Subj = Control_Subj'
+%Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
+%Control_Subj = Control_Subj'
 %Subjects
-%Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
+Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
 Tha_Subj = [128 162 163 168 176];
-BG_Subj = [116 117 121 122 138 143 153];
+BG_Subj =  [117 121 122 153];
 
 
 %Partitins
@@ -28,9 +28,9 @@ for sub = Control_Subj
     load (fn);
     
     for p = Partitions %1: length(Graph.Full_Q)
-        Modularity_Control(p,s,:) = Graph.Full_Q{p}+.1;
-        Modularity_Control_R(p,s,:) = Graph.Right_Q{p}+.1;
-        Modularity_Control_L(p,s,:) = Graph.Left_Q{p}+.1;
+        Modularity_Control(p,s,:) = Graph.Full_Q{p};
+        Modularity_Control_R(p,s,:) = Graph.Right_Q{p};
+        Modularity_Control_L(p,s,:) = Graph.Left_Q{p};
         
         Efficiency_Control(p,s,:) = Graph.Full_E{p};
         Efficiency_Control_R(p,s,:) = Graph.Right_E{p};
@@ -163,9 +163,10 @@ for t=Partitions;
     figure
     H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
-    %H3=plot(T,squeeze(Modularity_BG(t,7,:)),'linewidth',3,'color','b');
+    H8=plot(T,squeeze(Modularity_BG(t,:,:)),'linewidth',3,'color','g');
+    H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
     H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
-    H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
+    H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
     
     xlim([0.05 0.16])
@@ -441,8 +442,10 @@ for t=Partitions;
     figure
     H1=shadedErrorBar(T,squeeze(CC_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
+    H8=plot(T,squeeze(CC_tha(t,:,:)),'linewidth',3,'color','b');
+    H9=plot(T,squeeze(CC_BG(t,:,:)),'linewidth',3,'color','g');
     H2=shadedErrorBar(T,squeeze(CC_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
-    H3=shadedErrorBar(T,squeeze(CC_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('orange')},1);
+    H3=shadedErrorBar(T,squeeze(CC_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
     
     xlim([0.05 0.16])
