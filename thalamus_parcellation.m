@@ -27,8 +27,8 @@ for Thalamic_voxel = 1:length(thalamus_ROI_vector);
 	[~,ROI_rank]=sort(connectivity_vector, 'descend');
 
 	% save the sorted ROIs as well as the community assignemnt
-	Thalamic_target(Thalamic_voxel, 1) = thalamus_ROI_vector(Thalamic_voxel);
-	Thalamic_target(Thalamic_voxel, 2:1+length(ROI_rank)) = ROI_rank;
+	Thalamic_target(Thalamic_voxel, 1) = thalamus_ROI_vector(Thalamic_voxel); % be clear, this is ROI label, not index
+	Thalamic_target(Thalamic_voxel, 2:1+length(ROI_rank)) = WashU333_ROI_vector(ROI_rank); % be clear, this is ROI label, not index
 	Thalamic_target_CI(Thalamic_voxel, 1) = thalamus_ROI_vector(Thalamic_voxel);
 	Thalamic_target_CI(Thalamic_voxel, 2:1+length(ROI_rank)) = WashU333ROI_CI(ROI_rank); 
 end

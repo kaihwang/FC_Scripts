@@ -7,13 +7,15 @@ cd /home/despoB/kaihwang/Rest/Graph/
 Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
 
 
-NumROIs = round(323*.05);
+NumROIs = 6%round(323*.05);
 Patient_Wegihts=[];
 Patient_Intact_Weights=[];
 
 
 n=1;
-for patients = [128, 162, 163, 168, 176];
+for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
+	
+	%load their graph analysis output plus the lesion voxel mas
 	fn = strcat('g_',num2str(patients),'.mat');
 	load(fn);
 	fn = strcat('/home/despoB/kaihwang/Rest/Lesion_Masks/','lesioned_voxels_',num2str(patients));
@@ -21,23 +23,32 @@ for patients = [128, 162, 163, 168, 176];
 	lesioned_thalamus_voxel = load(fn);
 	lesioned_thalamus_voxel(:,1:3)=[];
 
+	%for each lesioned voxel, compile a list of targeted ROIs 
 	Targeted_ROIs = [];
 	for voxel = 1:length(lesioned_thalamus_voxel)
-		i_thalamus = find(lesioned_thalamus_voxel(voxel)==Thalamic_target(:,1));
+
+		%match the ROI label in the two vectors, find the index
+		i_thalamus = find(lesioned_thalamus_voxel(voxel)==Thalamic_target(:,1)); 
+
+		%after finding the idex, extract the ROI label corresponding to that index!
 		Targeted_ROIs = [Targeted_ROIs, Thalamic_target(i_thalamus, 2:1+NumROIs)];	
 	end
+
+	%sort out overlapping ROI labels!
 	Targeted_ROIs = unique(Targeted_ROIs);
 	
+	% now, need to convert label to index again!!
 	Targeted_ROI_index =[];
 	for roi = 1:length(Targeted_ROIs)
 		Targeted_ROI_index(roi) = find(Targeted_ROIs(roi) == WashU333_ROI_vector);
 	end
 	Intact_ROI_index = setdiff([1:323], Targeted_ROI_index);
 
+	%extract weight
 	Patient_Wegihts(n,:) = nanmean(Graph.Weight{1}(:,Targeted_ROI_index)');
 	Patient_Intact_Weights(n,:) = nanmean(Graph.Weight{1}(:,Intact_ROI_index)');
 	
-
+	%do controls
 	i = 1;
 	Control_Weights=[];
 	Control_Intact_Weights=[];

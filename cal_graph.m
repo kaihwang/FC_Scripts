@@ -2,6 +2,7 @@ function  [Adj, Graph] = cal_graph(subjid)
 % wrapper function to load adj matrices and do graph analyses.
 
 %% load dataset
+load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 
 %loop through parcellations
 

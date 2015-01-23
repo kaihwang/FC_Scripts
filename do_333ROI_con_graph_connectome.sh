@@ -36,8 +36,8 @@ for s in 100307; do
 	#graph theory
 	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> ROIg${s}.m
 	echo "addpath(genpath('/home/despo/kaihwang/matlab/'));" >> ROIg${s}.m
-	echo "[Adj, Graph] = cal_graph('${s}');" >> ROIg${s}.m
-	echo "save /home/despo/kaihwang/Rest/Graph/g_${s}.mat; exit;" >> ROIg${s}.m
+	echo "[Adj, Graph] = cal_graph_connectome_setCI('${s}');" >> ROIg${s}.m
+	echo "save /home/despo/kaihwang/Rest/Graph/gsetCI_${s}.mat; exit;" >> ROIg${s}.m
 
 	matlab -nodisplay -nosplash < /tmp/KH_${s}/ROIg${s}.m
 
