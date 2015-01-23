@@ -4,12 +4,12 @@
 
 %load connectome
 
-%Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
-%Control_Subj = Control_Subj'
+Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
+Control_Subj = Control_Subj';
 %Subjects
-Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
+%Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
 Tha_Subj = [128 162 163 168 176];
-BG_Subj =  [117 121 122 153];
+BG_Subj =  [116 117 144 121 122 143 138 153];
 
 
 %Partitins
@@ -32,9 +32,9 @@ for sub = Control_Subj
         Modularity_Control_R(p,s,:) = Graph.Right_Q{p};
         Modularity_Control_L(p,s,:) = Graph.Left_Q{p};
         
-        Efficiency_Control(p,s,:) = Graph.Full_E{p};
-        Efficiency_Control_R(p,s,:) = Graph.Right_E{p};
-        Efficiency_Control_L(p,s,:) = Graph.Left_E{p};
+        %Efficiency_Control(p,s,:) = Graph.Full_E{p};
+        %Efficiency_Control_R(p,s,:) = Graph.Right_E{p};
+        %Efficiency_Control_L(p,s,:) = Graph.Left_E{p};
         
         %Adj_Control{p}(s,:,:) = Adj.Matrix_Full{p};
         %Adj_Control_R{p}(s,:,:) = Adj.Matrix_Right{p};
@@ -75,9 +75,9 @@ for sub = Tha_Subj
         Modularity_tha_R(p,s,:) = Graph.Right_Q{p};
         Modularity_tha_L(p,s,:) = Graph.Left_Q{p};
         
-        Efficiency_tha(p,s,:) = Graph.Full_E{p};
-        Efficiency_tha_R(p,s,:) = Graph.Right_E{p};
-        Efficiency_tha_L(p,s,:) = Graph.Left_E{p};
+        %Efficiency_tha(p,s,:) = Graph.Full_E{p};
+        %Efficiency_tha_R(p,s,:) = Graph.Right_E{p};
+        %Efficiency_tha_L(p,s,:) = Graph.Left_E{p};
         
         %Adj_Tha{p}(s,:,:) = Adj.Matrix_Full{p};
         %Adj_Tha_R{p}(s,:,:) = Adj.Matrix_Right{p};
@@ -117,9 +117,9 @@ for sub = BG_Subj
         Modularity_BG_R(p,s,:) = Graph.Right_Q{p};
         Modularity_BG_L(p,s,:) = Graph.Left_Q{p};
         
-        Efficiency_BG(p,s,:) = Graph.Full_E{p};
-        Efficiency_BG_R(p,s,:) = Graph.Right_E{p};
-        Efficiency_BG_L(p,s,:) = Graph.Left_E{p};
+        %Efficiency_BG(p,s,:) = Graph.Full_E{p};
+        %Efficiency_BG_R(p,s,:) = Graph.Right_E{p};
+        %Efficiency_BG_L(p,s,:) = Graph.Left_E{p};
         
         %Adj_Tha{p}(s,:,:) = Adj.Matrix_Full{p};
         %Adj_Tha_R{p}(s,:,:) = Adj.Matrix_Right{p};
@@ -157,14 +157,14 @@ clear Graph Adj s sub p t i
 set(0, 'DefaulttextInterpreter', 'none')
 
 close all
-T=0.05:0.005:0.15;
+T=0.05:0.005:0.25;
 for t=Partitions;
     
     figure
     H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
-    H8=plot(T,squeeze(Modularity_BG(t,:,:)),'linewidth',3,'color','g');
-    H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
+    H8=plot(T,squeeze(Modularity_Control(t,:,:)),'linewidth',3,'color','k');
+    %H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
     H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
@@ -435,7 +435,7 @@ end
 %% plot CC
 set(0, 'DefaulttextInterpreter', 'none')
 %close all
-T=0.05:0.005:0.15;
+T=0.05:0.005:0.25;
 
 for t=Partitions;
     
