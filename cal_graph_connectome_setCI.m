@@ -33,7 +33,7 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU325ROI_CI); %threshould by desntiy but keep weights
        
        %save graph outputs
-       Graph.Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T));
+       Graph.Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        Graph.Weight{n}(i,:) = strengths_und(threshold_proportional(M,T));
        [Graph.Pos_Weight{n}(i,:), Graph.Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'), WashU325ROI_CI);
@@ -64,7 +64,7 @@ for n = 1:length(Adj.Matrix_Full)
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU325ROI_CI(152:325));
        
        Graph.Right_Weight{n}(i,:) = strengths_und(threshold_proportional(M,T));
-       Graph.Right_Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T));
+       Graph.Right_Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        [Graph.Right_Pos_Weight{n}(i,:), Graph.Right_Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.Right_P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'),WashU325ROI_CI(152:325));
        Graph.Right_Q{n}(i) = Q;
@@ -92,7 +92,7 @@ for n = 1:length(Adj.Matrix_Full)
        Output = cal_modularity_connectivity(threshold_proportional(M,T), WashU325ROI_CI(1:151));
        
        Graph.Left_Weight{n}(i,:) = strengths_und(threshold_proportional(M,T));
-       Graph.Left_Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T));
+       Graph.Left_Degree{n}(i,:) = degrees_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        [Graph.Left_Pos_Weight{n}(i,:), Graph.Left_Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.Left_P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'),WashU325ROI_CI(1:151));
        Graph.Left_Q{n}(i) = Q;

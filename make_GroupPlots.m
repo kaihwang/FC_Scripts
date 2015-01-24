@@ -4,10 +4,10 @@
 
 %load connectome
 
-Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
-Control_Subj = Control_Subj';
+%Control_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
+%Control_Subj = Control_Subj';
 %Subjects
-%Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
+Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
 Tha_Subj = [128 162 163 168 176];
 BG_Subj =  [116 117 144 121 122 143 138 153];
 
@@ -19,12 +19,12 @@ Partitions = 1%23%23%1:23;
 %load /home/despo/kaihwang/Rest/Graph/Control_Communities.mat;
 
 %threshold
-T=0.05:0.005:0.15;
+T=0.05:0.005:0.25;
 
 %load controls
 s=1;
 for sub = Control_Subj
-    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(sub),'.mat');
     load (fn);
     
     for p = Partitions %1: length(Graph.Full_Q)
@@ -68,7 +68,7 @@ end
 % load tha patients
 s=1;
 for sub = Tha_Subj
-    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(sub),'.mat');
     load (fn);
     for p = Partitions %1: length(Graph.Full_Q)
         Modularity_tha(p,s,:) = Graph.Full_Q{p};
@@ -110,7 +110,7 @@ end
 % load BG patients
 s=1;
 for sub = BG_Subj
-    fn = strcat('/home/despoB/kaihwang/Rest/Graph/g_b',num2str(sub),'.mat');
+    fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_b',num2str(sub),'.mat');
     load (fn);
     for p = Partitions %1: length(Graph.Full_Q)
         Modularity_BG(p,s,:) = Graph.Full_Q{p};
@@ -161,11 +161,11 @@ T=0.05:0.005:0.25;
 for t=Partitions;
     
     figure
-    H1=shadedErrorBar(T,squeeze(Modularity_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
+    H1=shadedErrorBar(T,mean(squeeze(Modularity_Control(t,:,:))),1.5*std(squeeze(Modularity_Control(t,:,:))),{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
-    H8=plot(T,squeeze(Modularity_Control(t,:,:)),'linewidth',3,'color','k');
-    %H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
-    H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
+    %H8=plot(T,squeeze(Modularity_Control(t,:,:)),'linewidth',3,'color','k');
+    H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
+    %H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
     
@@ -442,8 +442,8 @@ for t=Partitions;
     figure
     H1=shadedErrorBar(T,squeeze(CC_Control(t,:,:)),{@mean, @std},{'-','LineWidth',3,'Color',rgb('gray')},1);
     hold on;
-    H8=plot(T,squeeze(CC_tha(t,:,:)),'linewidth',3,'color','b');
-    H9=plot(T,squeeze(CC_BG(t,:,:)),'linewidth',3,'color','g');
+    %H8=plot(T,squeeze(CC_tha(t,:,:)),'linewidth',3,'color','b');
+    %H9=plot(T,squeeze(CC_BG(t,:,:)),'linewidth',3,'color','g');
     H2=shadedErrorBar(T,squeeze(CC_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
     H3=shadedErrorBar(T,squeeze(CC_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
     hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );

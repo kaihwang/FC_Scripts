@@ -7,25 +7,25 @@ WD='/home/despoB/kaihwang/Rest/Control/'
 
 for s in 128; do
 
-	mkdir /tmp/KH_${s}
+	#mkdir /tmp/KH_${s}
 
-	cd ${WD}/${s}/MNINonLinear/
+	#cd ${WD}/${s}/MNINonLinear/
 
 	#grab list of files to concat
-	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
+	#rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
 
 	#concat the files into one run
-	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
+	#3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
 
 	# run NetCorr
-	cd /tmp/KH_${s}
-	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_lfov_tsnrMasked.nii.gz
+	#cd /tmp/KH_${s}
+	#3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_lfov_tsnrMasked.nii.gz
 	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_R_largerFOV.nii.gz
 	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_L_largerFOV.nii.gz
 
 	# exract adj matrices
-	num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_WashU333_corrmat
+	#num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
+	#tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_WashU333_corrmat
 
 	#num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
 	#tail -n $num ${s}_Right_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_Craddock700_corrmat
@@ -34,14 +34,14 @@ for s in 128; do
 	#tail -n $num ${s}_Left_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Left_Craddock700_corrmat
 		
 	#graph theory
-	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> ROIg${s}.m
-	echo "addpath(genpath('/home/despo/kaihwang/matlab/'));" >> ROIg${s}.m
-	echo "[Adj, Graph] = cal_graph_setCI('${s}');" >> ROIg${s}.m
-	echo "save /home/despo/kaihwang/Rest/Graph/gsetCI_${s}.mat; exit;" >> ROIg${s}.m
+	echo "addpath(genpath('/home/despo/kaihwang/bin/'));" >> /home/despoB/kaihwang/bin/Thalamo/tmp/ROIg${s}.m
+	echo "addpath(genpath('/home/despo/kaihwang/matlab/'));" >> /home/despoB/kaihwang/bin/Thalamo/tmp/ROIg${s}.m
+	echo "[Adj, Graph] = cal_graph_setCI('${s}');" >> /home/despoB/kaihwang/bin/Thalamo/tmp/ROIg${s}.m
+	echo "save /home/despo/kaihwang/Rest/Graph/gsetCI_${s}.mat; exit;" >> /home/despoB/kaihwang/bin/Thalamo/tmp/ROIg${s}.m
 
-	matlab -nodisplay -nosplash < /tmp/KH_${s}/ROIg${s}.m
+	matlab -nodisplay -nosplash < /home/despoB/kaihwang/bin/Thalamo/tmp/ROIg${s}.m
 
-	cd ${WD}/${s}/MNINonLinear/
-	rm -rf /tmp/KH_${s}/
+	#cd ${WD}/${s}/MNINonLinear/
+	#rm -rf /tmp/KH_${s}/
 
 done
