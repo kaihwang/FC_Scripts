@@ -36,18 +36,19 @@ DataFrame{1,18} = 'NegWeight_Right_Hemisphere';
 % loop through groups then append rows
 row = 2;
 for g = 1:length(Groups);
-	subjects = squeeze(Groups{g});
-
-	for s = subjects{1}
+	sublist = cell2mat(Groups{g});
+    s=[];
+	for s = sublist
 		for d = 1:length(Densities)
 			%load data
-			if g == 4
+			if g == 4 %#ok<ALIGN>
 				load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_b',num2str(s),'.mat'));
 				subID = strcat('b',num2str(s));
-    		else
+            elseif g~=4
     			load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(s),'.mat'));
     			subID = num2str(s);
-    		end
+            end
+            
     		DataFrame{row,1} = GroupName{g};
     		DataFrame{row,2} = subID;
     		DataFrame{row,3} = Densities(d);

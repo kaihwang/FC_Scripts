@@ -8,7 +8,7 @@ Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 
 
 Output=[];
 
-NumROIs = 15;%round(323*.05);
+NumROIs = 1;%round(323*.05);
 Patient_Degree=[];
 Patient_Intact_Degree=[];
 Patient_wDegree= [];
@@ -31,6 +31,8 @@ Output{1,5} = 'Cortical_Target_Within_Degree';
 Output{1,6} = 'Cortical_nonTarget_Within_Degree';
 Output{1,7} = 'Cortical_Target_Between_Degree';
 Output{1,8} = 'Cortical_nonTarget_Between_Degree';
+Output{1,9} = 'Cortical_Target_PC';
+Output{1,10} = 'Cortical_nonTarget_PC';
 
 n=1;
 row = 2;
@@ -130,6 +132,9 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Output{row,6} = (Patient_Intact_wDegree(n,densities)-mean(Control_Intact_wDegree(:,densities)))./std(Control_Intact_wDegree(:,densities));
 		Output{row,7} = (Patient_bDegree(n,densities)-mean(Control_bDegree(:,densities)))./std(Control_bDegree(:,densities));
 		Output{row,8} = (Patient_Intact_bDegree(n,densities)-mean(Control_Intact_bDegree(:,densities)))./std(Control_Intact_bDegree(:,densities));
+		Output{row,9} = mean(Control_P(:,densities));
+		Output{row,10} = mean(Control_Intact_P(:,densities));
+		%Output{row,10} = (Patient_Intact_bDegree(n,densities)-mean(Control_Intact_bDegree(:,densities)))./std(Control_Intact_bDegree(:,densities));
 		row = row+1;
 	end	
 	%figure
