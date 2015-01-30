@@ -19,7 +19,7 @@ for s in 100307; do
 
 	# run NetCorr
 	cd /tmp/KH_${s}
-	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_plus_thalamus_voxels_ROIset_RPI.nii.gz
+	3dNetCorr -prefix ${s}_thalamocortical_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_plus_thalamus_25prob_voxels_ROIset_RPI.nii.gz
 	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_R_2mm.nii.gz
 	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_L_2mm.nii.gz
 
@@ -39,7 +39,7 @@ for s in 100307; do
 	echo "[Adj, Graph] = cal_thalamo_cortical_graph('${s}');" >> thalamocorticalROIg${s}.m
 	echo "save /home/despo/kaihwang/Rest/Thalamic_parcel/g_FIX_${s}.mat; exit;" >> thalamocorticalROIg${s}.m
 
-	matlab -nodisplay -nosplash < /tmp/KH_${s}_thalamocortical/thalamocorticalROIg${s}.m
+	matlab -nodisplay -nosplash < /tmp/KH_${s}/thalamocorticalROIg${s}.m
 
 	cd ${WD}/${s}/MNINonLinear/Results
 	rm -rf /tmp/KH_${s}/
