@@ -7,7 +7,7 @@ function  [Adj, Graph] = cal_thalamo_cortical_graph(subjid)
 
 n=1;
 for Parcellation = 1  %:22
-    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_thalamocortical_corrmat'); %full matrix % num2str(Parcellation,'%03i')
+    Full_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_FIX_thalamocortical_corrmat'); %full matrix % num2str(Parcellation,'%03i')
     %Right_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Right_Craddock700_corrmat'); %right hemi
     %Left_fn = strcat('/home/despoB/kaihwang/Rest/AdjMatrices/t',subjid,'_Left_Craddock700_corrmat'); %left hemi
     
