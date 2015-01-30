@@ -12,7 +12,7 @@ for s in 100307; do
 	cd ${WD}/${s}/MNINonLinear/Results
 
 	#grab list of files to concat
-	rsfMRI_runs_list=(`ls rfMRI_REST*/*hp2000_clean.nii.gz`)
+	rsfMRI_runs_list=(`ls rfMRI_REST1*/*hp2000_clean.nii.gz`)
 
 	#concat the files into one run
 	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}

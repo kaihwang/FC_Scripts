@@ -1,6 +1,7 @@
 % script to analyze patients thalamic cortical target weight change. 
 
 load /home/despoB/kaihwang/Rest/Thalamic_parcel/Thalamus_voxel_CorticalTarget_plus_parcellation.mat
+load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 %cd /home/despoB/kaihwang/Rest/Graph/
 %Connectome_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
 %Connectome_Subj = Connectome_Subj';
@@ -8,7 +9,7 @@ Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 
 
 Output=[];
 
-NumROIs = 3;%round(323*.05);
+NumROIs = 1;%round(323*.05);
 Patient_Degree=[];
 Patient_Intact_Degree=[];
 Patient_wDegree= [];
@@ -47,7 +48,7 @@ row = 2;
 for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	
 	%load their graph analysis output plus the lesion voxel mas
-	fn = strcat('gsetCI_',num2str(patients),'.mat');
+	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(patients),'.mat');
 	load(fn);
 	fn = strcat('/home/despoB/kaihwang/Rest/Lesion_Masks/','lesioned_voxels_',num2str(patients));
 	
@@ -79,13 +80,20 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	% now, need to convert label to index again!!
 	Targeted_ROI_index =[];
 	for roi = 1:length(Targeted_ROIs)
-		Targeted_ROI_index(roi) = find(Targeted_ROIs(roi) == WashU333_ROI_vector);
+		if ~ isempty(find(Targeted_ROIs(roi) == ROIID))
+			Targeted_ROI_index(roi) = find(Targeted_ROIs(roi) == ROIID);
+		end
 	end
-	
+	Targeted_ROI_index(Targeted_ROI_index==0)=[]; 
+
+
 	Intact_ROI_index = []; %setdiff([1:323], Targeted_ROI_index);
 	for roi = 1:length(nonTargeted_ROIs)
-		Intact_ROI_index(roi) = find(nonTargeted_ROIs(roi) == WashU333_ROI_vector);
+		if ~ isempty(find(nonTargeted_ROIs(roi) == ROIID))
+			Intact_ROI_index(roi) = find(nonTargeted_ROIs(roi) == ROIID);
+		end
 	end
+	Intact_ROI_index(Intact_ROI_index==0)=[]; 
 
 	%save the cortical Target info (roi number, CI...)
 	Patient_Cortical_Target{n}.Targeted_ROIs = Targeted_ROIs;
@@ -140,7 +148,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	i = 1;
 	for controls = Control_Subj;
 	
-		fn = strcat('gsetCI_',num2str(controls),'.mat');
+		fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(controls),'.mat');
 		
 		load(fn);
 		
@@ -190,8 +198,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Output{row,12} = (Patient_Intact_wWeight(n,densities)-nanmean(Control_Intact_wWeight(:,densities)))./nanstd(Control_Intact_wWeight(:,densities));
 		Output{row,13} = (Patient_bWeight(n,densities)-nanmean(Control_bWeight(:,densities)))./nanstd(Control_bWeight(:,densities));
 		Output{row,14} = (Patient_Intact_bWeight(n,densities)-nanmean(Control_Intact_bWeight(:,densities)))./nanstd(Control_Intact_bWeight(:,densities));
-		Output{row,15} = nanmean(Control_P(:,densities));
-		Output{row,16} = nanmean(Control_Intact_P(:,densities));
+		Output{row,15} = (Patient_P(n,densities)-nanmean(Control_P(:,densities)))./nanstd(Control_P(:,densities));
+		Output{row,16} = (Patient_Intact_P(n,densities)-nanmean(Control_Intact_P(:,densities)))./nanstd(Control_Intact_P(:,densities));
 		row = row+1;
 	end	
 	%figure

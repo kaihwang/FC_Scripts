@@ -1,6 +1,10 @@
 % script to parcellate thalamsu
 
 load /home/despoB/kaihwang/Rest/Thalamic_parcel/AveAdjM.mat
+load /home/despoB/kaihwang/Rest/Thalamic_parcel/thalamocortical_ROI_vector
+load /home/despoB/kaihwang/Rest/Thalamic_parcel/thalamus_ROI_vector
+load /home/despoB/kaihwang/Rest/Thalamic_parcel/WashU333_ROI_vector
+load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 
 %declare output structures
 Thalamic_target = zeros(length(thalamus_ROI_vector), 1+length(WashU333_ROI_vector));
@@ -30,5 +34,5 @@ for Thalamic_voxel = 1:length(thalamus_ROI_vector);
 	Thalamic_target(Thalamic_voxel, 1) = thalamus_ROI_vector(Thalamic_voxel); % be clear, this is ROI label, not index
 	Thalamic_target(Thalamic_voxel, 2:1+length(ROI_rank)) = WashU333_ROI_vector(ROI_rank); % be clear, this is ROI label, not index
 	Thalamic_target_CI(Thalamic_voxel, 1) = thalamus_ROI_vector(Thalamic_voxel);
-	Thalamic_target_CI(Thalamic_voxel, 2:1+length(ROI_rank)) = WashU333ROI_CI(ROI_rank); 
+	Thalamic_target_CI(Thalamic_voxel, 2:1+length(ROI_rank)) = WashU325ROI_CI(ROI_rank); 
 end
