@@ -119,7 +119,7 @@ Fig_hemdiff <- ggplot(data=summaryControlHemDiffDATA , aes(x=Density, y=mean)) +
 Fig_hemdiff <- Fig_hemdiff + geom_line(data=summaryControlHemDiffDATA , aes(x=Density, y=mean,  color=Group), size = 2, inherit.aes=FALSE) + scale_colour_manual(values=c(BlueScale[2:6],"#666666"))
 Fig_hemdiff <- Fig_hemdiff + geom_ribbon(data = summaryControlHemDiffDATA, aes( ymin=upperCI, ymax=lowerCI, x=Density, fill='Control CI (1.5 SD)' ), alpha = 0.15, inherit.aes=FALSE) 
 Fig_hemdiff <- Fig_hemdiff + geom_line(data=THData, aes(x=Density, y=Modularity_hemispheric_diff, color=Subject ), size = 2)  
-Fig_hemdiff <- Fig_hemdiff + labs(y = "Hemi differences in Modularity") + labs(Color='') + labs(fill='') 
+Fig_hemdiff <- Figw_hemdiff + labs(y = "Hemi differences in Modularity") + labs(Color='') + labs(fill='') 
 Fig_hemdiff <- Fig_hemdiff + guides(linetype = guide_legend(keywidth = 3, keyheight = 1))
 Fig_hemdiff
 #ggsave(filename = "HemiDiffModularity.pdf", plot = Fig_hemdiff, width=8, height=8) 
@@ -127,7 +127,8 @@ Fig_hemdiff
 
 ## plot nodal data
 #read in nodal data
-NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/NodalGraphData.csv', header=TRUE);
+NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/Nodal.csv', header=TRUE);
+#NodalDATA = read.csv('/Volumes//neuro//Nodal.csv', header=TRUE);
 NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 
 # plot target v non target weight
@@ -137,7 +138,7 @@ fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  
 fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
 fig_nodal 
-#ggsave(filename = "CorticalTarget_Weight.pdf", plot = fig_nodal, width=13, height=4) 
+ggsave(filename = "CorticalTarget_Weight.pdf", plot = fig_nodal, width=13, height=4) 
 
 # plot between v within weight
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Within_Weight", "Cortical_Target_Between_Weight"))
@@ -145,7 +146,31 @@ fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  
 fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
 fig_nodal
-#ggsave(filename = "CorticalTarget_wvb_Weight.pdf", plot = fig_nodal, width=13, height=4) 
+ggsave(filename = "CorticalTarget_wvb_Weight.pdf", plot = fig_nodal, width=13, height=4) 
+
+# plot within weight for target v nontarget
+plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Within_Weight", "Cortical_nonTarget_Within_Weight"))
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal
+ggsave(filename = "CorticalTarget_Within_Weight_TvNT.pdf", plot = fig_nodal, width=13, height=4) 
+
+# plot between weight for target v nontarget
+plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Between_Weight", "Cortical_nonTarget_Between_Weight"))
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal
+ggsave(filename = "CorticalTarget_Between_Weight_TvNT.pdf", plot = fig_nodal, width=13, height=4) 
+
+# plot PC values
+plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_PC", "Cortical_nonTarget_PC"))
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal
+ggsave(filename = "NodalPC.pdf", plot = fig_nodal, width=13, height=4) 
 
 
 ## plot NMI of community assignment
