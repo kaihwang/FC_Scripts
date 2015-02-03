@@ -181,3 +181,25 @@ NMIplot <- ggplot(data=NMIDATA, aes(x=Group, y=Value, color = Group)) + geom_box
 NMIplot <- NMIplot + theme_grey(base_size = 16) + labs(y="Mutual Information")
 NMIplot
 #ggsave(filename = "CI_NMI.pdf", plot = NMIplot, width=12, height=8) 
+
+## plot thalamic parcellation distribution (percentage)
+
+parcel.color <- c('#fb9a99', '#ffff00', '#0000ff', '#cab2d6', '#6a3d9a', '#ff7f00', '#e31a1c')
+#parcel.header <- c('Network','Percentage')
+Network <- c('Default','Somato-Motor','Auditory', 'Visual','CO','FP','DA')
+Percentage <- c(13, 12.86, 0.59, 22.29,34.25,10.88,5.43)
+parcel.dataframe <-data.frame(Network, Percentage)
+
+parcel.plot <- ggplot(data=parcel.dataframe, aes(x=Network, y=Percentage)) 
+parcel.plot <- parcel.plot + geom_bar(aes(fill=Network),stat='identity') + scale_fill_manual(values = parcel.color) + theme_classic(base_size = 15)
+parcel.plot <- parcel.plot + theme(axis.title.x = element_blank(), axis.text.x=element_blank(), axis.ticks=element_blank())
+parcel.plot
+ggsave(filename = 'parcel.plot.pdf', plot = parcel.plot, width = 5, height = 8)
+
+## plot patients thalamic voxel's community assignment
+patient.parcelData <- read.csv('~/Google Drive/Projects/Thalamus-Rest/Parcels.csv', header = TRUE)
+patient.parcelPlot <- ggplot(data=patient.parcelData, aes(x=Assignment, y = VoxelCount))
+patient.parcelPlot <- patient.parcelPlot + geom_bar(aes(fill=Assignment), stat='identity') + scale_fill_manual(values = parcel.color) + theme_classic(base_size = 15)
+patient.parcelPlot <- patient.parcelPlot + facet_wrap(~Subject, ncol = 2)  + theme(axis.title.x = element_blank(), axis.text.x=element_blank(), axis.ticks=element_blank())
+patient.parcelPlot 
+ggsave(filename = 'patient_parcel.plot.pdf', plot = patient.parcelPlot , width = 5, height = 8)
