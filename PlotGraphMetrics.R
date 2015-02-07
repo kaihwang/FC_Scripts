@@ -4,6 +4,8 @@ setwd("~/Google Drive/Projects/Thalamus-Rest/")
 # import libraries
 library(ggplot2)
 library(plyr)
+library(reshape2)
+library(scales)
 
 # read global graph data
 DATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/GlobalGraphData.csv', header=TRUE);
@@ -15,7 +17,9 @@ cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2"
 cPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 BlueScale<-c("#f7fbff", "#deebf7", "#c6dbef", "#9ecae1", "#6baed6",  "#4292c6", "#2171b5", "#084594")
 WarmScale<-c("#ffffcc","#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026")
-labelcolors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442")
+labelcolors <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33","#a65628","#f781bf", "#d9d9d9", "#bc80bd")
+
+
 
 
 ## plot modularity
@@ -134,41 +138,46 @@ NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 # plot target v non target weight
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Weight", "Cortical_nonTarget_Weight"))
 
-fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
-fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[1:2])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
-fig_nodal 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
+fig_nodal
 ggsave(filename = "CorticalTarget_Weight.pdf", plot = fig_nodal, width=13, height=4) 
 
 # plot between v within weight
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Within_Weight", "Cortical_Target_Between_Weight"))
-fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
 fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
 fig_nodal
 ggsave(filename = "CorticalTarget_wvb_Weight.pdf", plot = fig_nodal, width=13, height=4) 
 
 # plot within weight for target v nontarget
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Within_Weight", "Cortical_nonTarget_Within_Weight"))
-fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
-fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[5:6])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
 fig_nodal
 ggsave(filename = "CorticalTarget_Within_Weight_TvNT.pdf", plot = fig_nodal, width=13, height=4) 
 
 # plot between weight for target v nontarget
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Between_Weight", "Cortical_nonTarget_Between_Weight"))
-fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
-fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[7:8])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
 fig_nodal
 ggsave(filename = "CorticalTarget_Between_Weight_TvNT.pdf", plot = fig_nodal, width=13, height=4) 
 
 # plot PC values
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_PC", "Cortical_nonTarget_PC"))
-fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject)  
-fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[3:4])
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[9:10])
 fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
 fig_nodal
 ggsave(filename = "NodalPC.pdf", plot = fig_nodal, width=13, height=4) 
 
@@ -200,6 +209,6 @@ ggsave(filename = 'parcel.plot.pdf', plot = parcel.plot, width = 5, height = 8)
 patient.parcelData <- read.csv('~/Google Drive/Projects/Thalamus-Rest/Parcels.csv', header = TRUE)
 patient.parcelPlot <- ggplot(data=patient.parcelData, aes(x=Assignment, y = VoxelCount))
 patient.parcelPlot <- patient.parcelPlot + geom_bar(aes(fill=Assignment), stat='identity') + scale_fill_manual(values = parcel.color) + theme_classic(base_size = 15)
-patient.parcelPlot <- patient.parcelPlot + facet_wrap(~Subject, ncol = 2)  + theme(axis.title.x = element_blank(), axis.text.x=element_blank(), axis.ticks=element_blank())
+patient.parcelPlot <- patient.parcelPlot + facet_wrap(~Subject, ncol = 3)  + theme(axis.title.x = element_blank(), axis.text.x=element_blank(), axis.ticks=element_blank())
 patient.parcelPlot 
-ggsave(filename = 'patient_parcel.plot.pdf', plot = patient.parcelPlot , width = 5, height = 8)
+ggsave(filename = 'patient_parcel.plot.pdf', plot = patient.parcelPlot , width = 7, height = 8)
