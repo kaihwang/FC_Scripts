@@ -23,7 +23,7 @@ for s in 1103; do
 		#create tmp folder to do read/write
 		mkdir /tmp/KH_${s}_run${r}
 
-		dcm2nii -d N -e N -f N -i N -n Y -o /tmp/KH_${s}_run${r} rest_run{r}/
+		dcm2nii -d N -e N -f N -i N -n Y -o /tmp/KH_${s}_run${r} rest_run${r}/
 		cd /tmp/KH_${s}_run${r}
 		raw_nii=$(ls *.nii.gz)
 		3dcopy $raw_nii input.nii.gz
