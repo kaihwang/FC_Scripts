@@ -17,6 +17,10 @@ for s in 1103; do
 		mkdir ${WD}/${s}/MNINonLinear/
 	fi
 
+	# get the bet brain
+	3dresample -oreint LPI -inset /home/despoB/kaihwang/Subjects/${s}/SUMA/brain.nii.gz \
+	-prefix /home/despoB/kaihwang/Subjects/${s}/SUMA/brain_lpi.nii.gz
+
 	# first determine the number of runs that need to be processed. Its quite annoying different subjects have different runs.
 	for r in $(seq 1 1 $(ls -d rest_run* | wc -l)); do
 		
@@ -36,7 +40,7 @@ for s in 1103; do
 		# michael's functional preprocessing script for spatial preprocessing
 		preprocessFunctional -4d input.nii.gz \
 		-tr ${TR} \
-		-mprage_bet /home/despoB/kaihwang/Subjects/${s}/SUMA/${s}_SurfVol_bet.nii.gz \
+		-mprage_bet /home/despoB/kaihwang/Subjects/${s}/SUMA/brain_lpi.nii.gz \
 		-threshold 98_2 \
 		-rescaling_method 10000_globalmedian \
 		-template_brain MNI_2mm \
