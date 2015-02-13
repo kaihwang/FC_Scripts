@@ -30,7 +30,7 @@
 
 # done
 
-for Subject in 1220 1222 1223 1306 1307 1309 1310 1311 1313 1314 1318 1325 1326 1328 1329 1331 1333 1335 1336 1337 1338 1339 1340 1342 1343 1344 1345 1346 1347 1349 1350; do
+for Subject in 1103 1220 1222 1223 1306 1307 1309 1310 1311 1313 1314 1318 1325 1326 1328 1329 1331 1333 1335 1336 1337 1338 1339 1340 1342 1343 1344 1345 1346 1347 1349 1350; do
 
 	sed "s/s in 1103/s in ${Subject}/g" < proc_ag_HCPpreproc_reg_bp.sh> tmp/q_proc_ag_HCPpreproc_reg_bp_${Subject}.sh
 	qsub -V -M kaihwang -m e -l mem_free=5G -e ~/tmp -o ~/tmp tmp/q_proc_ag_HCPpreproc_reg_bp_${Subject}.sh
