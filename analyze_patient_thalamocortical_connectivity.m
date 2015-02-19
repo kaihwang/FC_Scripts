@@ -5,7 +5,10 @@ load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 %cd /home/despoB/kaihwang/Rest/Graph/
 %Connectome_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
 %Connectome_Subj = Connectome_Subj';
-Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
+%Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220]; %young folks
+Control_Subj = [1103 1220 1306 1223 1222 1307 1310 1309 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1342 1344 1340 1343 1345 1350];
+
+
 
 Output=[];
 
@@ -202,43 +205,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Output{row,16} = (Patient_Intact_P(n,densities)-nanmean(Control_Intact_P(:,densities)))./nanstd(Control_Intact_P(:,densities));
 		row = row+1;
 	end	
-	%figure
-	%H1=shadedErrorBar(0.05:0.005:0.25,Control_Weights,{@nanmean, @nanstd},{'-','LineWidth',3,'Color',rgb('gray')},0);
-    %hold on;
-    %H2=plot(0.05:0.005:0.25,Patient_Wegihts(n,:),'linewidth',3,'color','k');
-    %H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
-    %H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
-    %H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
-    %hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
-    
-    %xlim([0.05 0.25])
-    %ylim([0.25 0.65])
-   	%set(gca,'FontSize',12,'box','off','XGrid','off','YGrid','off','linewidth',2)
-    %set(hl,'FontSize', 12, 'Box','off');
-    %xlabel('Cost','FontSize',14)
-    %ylabel('Modularity','FontSize',14)
-    %title('Targeted ROIs','FontSize',16)
-    %set(gcf, 'Color', 'white');
-    %fn = strcat('Modularity_',num2str(t),'.png');
 
-    %figure
-	%H1=shadedErrorBar(0.05:0.005:0.25,Control_Intact_Weights,{@nanmean, @nanstd},{'-','LineWidth',3,'Color',rgb('gray')},0);
-    %hold on;
-    %H2=plot(0.05:0.005:0.25,Patient_Intact_Weights(n,:),'linewidth',3,'color','k');
-    %H9=plot(T,squeeze(Modularity_tha(t,:,:)),'linewidth',3,'color','b');
-    %H2=shadedErrorBar(T,squeeze(Modularity_tha(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('blue')},1);
-    %H3=shadedErrorBar(T,squeeze(Modularity_BG(t,:,:)),{@mean, @ste},{'-','LineWidth',3,'Color',rgb('green')},1);
-    %hl=legend([H1.mainLine,H2.mainLine, H3.mainLine],'Controls ','Thalamic Patients','BG Patients', 'Location','Best' );
-    
-    %xlim([0.05 0.25])
-    %ylim([0.25 0.65])
-    %set(gca,'FontSize',12,'box','off','XGrid','off','YGrid','off','linewidth',2)
-    %set(hl,'FontSize', 12, 'Box','off');
-    %xlabel('Cost','FontSize',14)
-    %ylabel('Modularity','FontSize',14)
-    %title('Spared ROIs','FontSize',16)
-    %set(gcf, 'Color', 'white');
-    %fn = strcat('Modularity_',num2str(t),'.png');
 
     n = n+1;
 end

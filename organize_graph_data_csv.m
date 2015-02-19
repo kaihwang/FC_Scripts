@@ -4,13 +4,15 @@
 
 Connectome_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
 Connectome_Subj = Connectome_Subj';
-Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220];
+%Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220]; %young
+Control_Subj = [1103 1220 1306 1223 1222 1307 1310 1309 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1342 1344 1340 1343 1345 1350];
 Tha_Subj = [128 162 163 168 176];
 BG_Subj =  [116 117 144 121 122 143 138 153];
+Older_Subj = [ ];
 Densities = 0.05:0.005:0.25;
 
 Groups ={{Connectome_Subj},{Control_Subj},{Tha_Subj},{BG_Subj}};
-GroupName = {'Connectome','Young_Controls','Thalamic_Patients','Striatal_Patients'};
+GroupName = {'Connectome','Controls','Thalamic_Patients','Striatal_Patients'};
 DataFrame = {};
 
 %scpecify variable names at row 1

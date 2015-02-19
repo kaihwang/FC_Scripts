@@ -32,3 +32,12 @@ for Subject in $(cat /home/despoB/kaihwang/Rest/connectome/list_of_complete_subj
 	fi
 
 done
+
+for Subject in 1103 1220 1222 1223 1306 1307 1309 1310 1311 1313 1314 1318 1325 1326 1328 1329 1331 1333 1335 1336 1337 1338 1339 1340 1342 1343 1344 1345 1346 1347 1349 1350; do
+
+	if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
+	sed "s/s in 128/s in ${Subject}/g" < do_333ROI_con_graph_control.sh > tmp/graph_${Subject}.sh
+	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp tmp/graph_${Subject}.sh
+	fi
+
+done
