@@ -25,7 +25,7 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
    M = Adj.Matrix_Full{n};
    
    i = 1;
-   for T = 0.05:0.005:0.25; %density threshold
+   for T = 0.01:0.005:0.25; %density threshold
       
        [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize')); %convert to binary adj matrices
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
@@ -53,10 +53,9 @@ end
 
 for n = 1:length(Adj.Matrix_Full)
    M = Adj.Matrix_Full{n};
-   %M = M(162:333, 162:333); %this is without tSNR masking.
-   M = M(152:323, 152:323);
+   M = M(146:297, 146:297);
    i = 1;
-   for T =  0.05:0.005:0.25;
+   for T =  0.01:0.005:0.25;
       
        [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
@@ -82,9 +81,9 @@ end
 
 for n = 1:length(Adj.Matrix_Full)
    M = Adj.Matrix_Full{n};
-   M = M(1:151, 1:151);
+   M = M(1:145, 1:145);
    i = 1;
-   for T = 0.05:0.005:0.25;
+   for T = 0.01:0.005:0.25;
       
        [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));

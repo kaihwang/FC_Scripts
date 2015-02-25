@@ -19,7 +19,7 @@ for s in 128; do
 
 	# run NetCorr
 	cd /tmp/KH_${s}
-	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_lfov_tsnrMasked.nii.gz
+	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_overlapMasked_clust.nii.gz
 	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_R_largerFOV.nii.gz
 	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_2mm_L_largerFOV.nii.gz
 
