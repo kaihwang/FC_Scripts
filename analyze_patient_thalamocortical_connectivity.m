@@ -6,7 +6,7 @@ load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 %Connectome_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
 %Connectome_Subj = Connectome_Subj';
 %Control_Subj = [114 116 117 118 119 201 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220]; %young folks
-Control_Subj = [1103 1220 1306 1223 1222 1307 1310 1309 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1342 1344 1340 1343 1345 1350];
+Control_Subj = [1103 1220 1306 1223 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1344 1340];
 
 
 
