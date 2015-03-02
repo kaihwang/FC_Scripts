@@ -27,7 +27,18 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
    i = 1;
    for T = 0.01:0.005:0.25; %density threshold
       
-       [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize')); %convert to binary adj matrices
+       Q = 0; 
+       Ci=[];
+       for iter = 1:100
+          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          
+          if q_iter > Q;
+            Q = q_iter;
+            Ci = Ci_iter;
+          end
+          
+       end
+       %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize')); %convert to binary adj matrices
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU297ROI_CI); %threshould by desntiy but keep weights
@@ -56,8 +67,19 @@ for n = 1:length(Adj.Matrix_Full)
    M = M(146:297, 146:297);
    i = 1;
    for T =  0.01:0.005:0.25;
-      
-       [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+       
+       Q = 0; 
+       Ci=[];
+       for iter = 1:100
+          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          
+          if q_iter > Q;
+            Q = q_iter;
+            Ci = Ci_iter;
+          end
+          
+       end 
+       %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU297ROI_CI(146:297));
@@ -84,8 +106,19 @@ for n = 1:length(Adj.Matrix_Full)
    M = M(1:145, 1:145);
    i = 1;
    for T = 0.01:0.005:0.25;
-      
-       [Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+       
+       Q = 0; 
+       Ci=[];
+       for iter = 1:100
+          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          
+          if q_iter > Q;
+            Q = q_iter;
+            Ci = Ci_iter;
+          end
+          
+       end
+       %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
        %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T), WashU297ROI_CI(1:145));

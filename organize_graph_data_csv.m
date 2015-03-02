@@ -9,10 +9,10 @@ Control_Subj = [1103 1220 1306 1223 1314 1311 1318 1313 1326 1325 1328 1329 1333
 Tha_Subj = [128 162 163 168 176];
 BG_Subj =  [116 117 144 121 122 143 138 153];
 Older_Subj = [ ];
-Densities = 0.05:0.005:0.25;
+Densities = 0.01:0.005:0.25;
 
-Groups ={{Connectome_Subj},{Control_Subj},{Tha_Subj},{BG_Subj}};
-GroupName = {'Connectome','Controls','Thalamic_Patients','Striatal_Patients'};
+Groups ={{Control_Subj},{Tha_Subj},{BG_Subj}};
+GroupName = {'Controls','Thalamic_Patients','Striatal_Patients'};
 DataFrame = {};
 
 %scpecify variable names at row 1
@@ -43,10 +43,10 @@ for g = 1:length(Groups);
 	for s = sublist
 		for d = 1:length(Densities)
 			%load data
-			if g == 4 %#ok<ALIGN>
+			if g == 3 %#ok<ALIGN>
 				load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_b',num2str(s),'.mat'));
 				subID = strcat('b',num2str(s));
-            elseif g~=4
+            elseif g~=3
     			load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(s),'.mat'));
     			subID = num2str(s);
             end
