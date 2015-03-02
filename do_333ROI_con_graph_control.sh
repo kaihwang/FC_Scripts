@@ -11,10 +11,10 @@ for s in 128; do
 	cd ${WD}/${s}/MNINonLinear/
 
 	#grab list of files to concat
-	rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
+	#rsfMRI_runs_list=(`ls rfMRI_REST*_reg_bp.nii.gz`)
 
 	#concat the files into one run
-	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
+	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz rfMRI_REST1_PA_reg_bp.nii.gz'[1dcat run1_scrub.1D]' rfMRI_REST2_PA_reg_bp.nii.gz'[1dcat run2_scrub.1D]'
 
 	# run NetCorr
 	cd /tmp/KH_${s}

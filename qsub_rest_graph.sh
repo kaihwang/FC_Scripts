@@ -4,7 +4,7 @@
 
 #cd /home/despo/kaihwang/Rest/Connectome
 
-for Subject in 128 162 163 168 176 b116 b117 b120 b121 b122 b138 b143 b144 b153; do
+for Subject in 128 162 163 168 176 b116 b117 b120 b121 b122 b138 b143 b153; do
 
 	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
 	sed "s/s in 128/s in ${Subject}/g" < do_333ROI_con_graph.sh > tmp/graph_${Subject}.sh
@@ -33,11 +33,11 @@ done
 
 # done
 
-# for Subject in 1103 1220 1306 1223 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1344 1340; do
+for Subject in 1103 1220 1306 1223 1314 1311 1318 1313 1326 1325 1328 1329 1333 1331 1335 1338 1336 1339 1337 1344 1340; do
 
-# 	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
-# 	sed "s/s in 128/s in ${Subject}/g" < do_333ROI_con_graph_control.sh > tmp/graph_${Subject}.sh
-# 	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp tmp/graph_${Subject}.sh
-# 	#fi
+	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
+	sed "s/s in 128/s in ${Subject}/g" < do_333ROI_con_graph_control.sh > tmp/graph_${Subject}.sh
+	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp tmp/graph_${Subject}.sh
+	#fi
 
-# done
+done
