@@ -30,7 +30,7 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
        Q = 0; 
        Ci=[];
        for iter = 1:100
-          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
             Q = q_iter;
@@ -71,7 +71,7 @@ for n = 1:length(Adj.Matrix_Full)
        Q = 0; 
        Ci=[];
        for iter = 1:100
-          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
             Q = q_iter;
@@ -110,7 +110,7 @@ for n = 1:length(Adj.Matrix_Full)
        Q = 0; 
        Ci=[];
        for iter = 1:100
-          [Ci_iter, q_iter] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
+          [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
             Q = q_iter;
