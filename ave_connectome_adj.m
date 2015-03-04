@@ -3,8 +3,8 @@
 Subjects = load('~/Rest/connectome/list_of_complete_subjects')';
 
 
-M=zeros(1,3864,3864);
-tempM=zeros(1,3864,3864);
+M=zeros(1,3836,3836);
+tempM=zeros(1,3836,3836);
 for sub = Subjects;
 	fn = strcat('g_FIX_',num2str(sub),'.mat');
 	load(fn);
