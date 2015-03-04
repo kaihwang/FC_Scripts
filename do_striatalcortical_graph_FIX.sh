@@ -36,7 +36,7 @@ for s in 100307; do
 	#graph theory
 	echo "addpath(genpath('/home/despoB/kaihwang/bin/'));" >> striatalcorticalROIg${s}.m
 	echo "addpath(genpath('/home/despoB/kaihwang/matlab/'));" >> striatalcorticalROIg${s}.m
-	echo "[Adj, Graph] = cal_thalamo_cortical_graph('${s}');" >> striatalcorticalROIg${s}.m
+	echo "[Adj, Graph] = cal_striatal_cortical_graph('${s}');" >> striatalcorticalROIg${s}.m
 	echo "save /home/despoB/kaihwang/Rest/Striatum_parcel/g_FIX_${s}.mat; exit;" >> striatalcorticalROIg${s}.m
 
 	matlab -nodisplay -nosplash < /tmp/KH_${s}/striatalcorticalROIg${s}.m
