@@ -15,7 +15,7 @@ for s in 128; do
 	#-prefix ${s}_native_lesion_mask_RPI.nii.gz
 	fslreorient2std ${s}_native_lesion_mask.nii.gz ${s}_native_lesion_mask.nii.gz
 
-	applywarp --interp=nn --in=${s}_native_lesion_mask_RPI.nii.gz \
+	applywarp --interp=nn --in=${s}_native_lesion_mask.nii.gz \
 	--ref=/home/despoB/kaihwang/standard/mni_icbm152_nlin_asym_09c/mni_icbm152_t1_tal_nlin_asym_09c_2mm \
 	--warp=/home/despoB/kaihwang/Subjects/${s}/SUMA/${s}_SurfVol_warpcoef.nii.gz \
 	-o ${s}_mni_lesion_mask_RPI.nii.gz
