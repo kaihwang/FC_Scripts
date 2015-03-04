@@ -8,7 +8,7 @@ library(reshape2)
 library(scales)
 
 # read global graph data
-DATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/GlobalGraphData.csv', header=TRUE);
+DATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/GlobalGraphwOldControl.csv', header=TRUE);
 
 
 
