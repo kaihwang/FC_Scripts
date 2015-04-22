@@ -76,7 +76,7 @@
 # done
 
 cd /home/despoB/kaihwang/Rest/Control
-Controls=$(ls -d 1*)
+Controls=$(ls -d *)
 
 for s in $Controls; do
 
