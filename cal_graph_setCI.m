@@ -39,7 +39,8 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
           
        end
        %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize')); %convert to binary adj matrices
-       %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       loc_E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'), 1);
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU297ROI_CI); %threshould by desntiy but keep weights
        
@@ -49,7 +50,8 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
        [Graph.Pos_Weight{n}(i,:), Graph.Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'), WashU297ROI_CI);
        Graph.Full_Q{n}(i) = Q;
-       %Graph.Full_E{n}(i) = E;
+       Graph.Full_E{n}(i) = E;
+       Graph.Full_locE{n}(i,:) = loc_E;
        Graph.Full_Ci{n}(i,:) = Ci;
        Graph.Full_CC{n}(i,:) = CC;
        Graph.Within_Module_Degree{n}(i,:) = Output.Within_Degree;
@@ -80,7 +82,8 @@ for n = 1:length(Adj.Matrix_Full)
           
        end 
        %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
-       %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       loc_E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'), 1);
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T),  WashU297ROI_CI(146:297));
        
@@ -89,7 +92,8 @@ for n = 1:length(Adj.Matrix_Full)
        [Graph.Right_Pos_Weight{n}(i,:), Graph.Right_Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.Right_P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'),WashU297ROI_CI(146:297));
        Graph.Right_Q{n}(i) = Q;
-       %Graph.Right_E{n}(i) = E;
+       Graph.Right_E{n}(i) = E;
+       Graph.Right_locE{n}(i,:) = loc_E;
        Graph.Right_Ci{n}(i,:) = Ci;
        Graph.Right_CC{n}(i,:) = CC;
        Graph.Right_Within_Module_Degree{n}(i,:) = Output.Within_Degree;
@@ -119,7 +123,8 @@ for n = 1:length(Adj.Matrix_Full)
           
        end
        %[Ci,Q] = modularity_und(weight_conversion(threshold_proportional(M,T),'binarize'));
-       %E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'));
+       loc_E = efficiency_bin(weight_conversion(threshold_proportional(M,T),'binarize'), 1);
        CC=clustering_coef_bu(weight_conversion(threshold_proportional(M,T),'binarize'));
        Output = cal_modularity_connectivity(threshold_proportional(M,T), WashU297ROI_CI(1:145));
        
@@ -128,7 +133,8 @@ for n = 1:length(Adj.Matrix_Full)
        [Graph.Left_Pos_Weight{n}(i,:), Graph.Left_Neg_Weight{n}(i,:)] = strengths_und_sign(threshold_proportional(M,T));
        Graph.Left_P{n}(i,:) = participation_coef(weight_conversion(threshold_proportional(M,T),'binarize'),WashU297ROI_CI(1:145));
        Graph.Left_Q{n}(i) = Q;
-       %Graph.Left_E{n}(i) = E;
+       Graph.Left_E{n}(i) = E;
+       Graph.Left_locE{n}(i,:) = loc_E;
        Graph.Left_Ci{n}(i,:) = Ci;
        Graph.Left_CC{n}(i,:) = CC;
        Graph.Left_Within_Module_Degree{n}(i,:) = Output.Within_Degree;
