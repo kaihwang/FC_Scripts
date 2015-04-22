@@ -2,7 +2,7 @@
 # script to create adj matrices using WashU's 333 ROI partition. Then submit to graph analysis.
 
 
-WD='/home/despoB/kaihwang/Rest/Controls'
+WD='/home/despoB/kaihwang/Rest/Control'
 
 for s in 114; do
 
