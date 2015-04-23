@@ -34,7 +34,12 @@ DataFrame{1,15} = 'PosWeight_Right_Hemisphere';
 DataFrame{1,16} = 'NegWeight';
 DataFrame{1,17} = 'NegWeight_Left_Hemisphere';
 DataFrame{1,18} = 'NegWeight_Right_Hemisphere';
-
+DataFrame{1,19} = 'Global_Efficiency';
+DataFrame{1,20} = 'Global_Efficiency_Left_Hemisphere';
+DataFrame{1,21} = 'Global_Efficiency_Right_Hemisphere';
+DataFrame{1,22} = 'Local_Efficiency';
+DataFrame{1,23} = 'Local_Efficiency_Left_Hemisphere';
+DataFrame{1,24} = 'Local_Efficiency_Right_Hemisphere';
 % loop through groups then append rows
 row = 2;
 for g = 1:length(Groups);
