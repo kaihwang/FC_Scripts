@@ -40,6 +40,19 @@ DataFrame{1,21} = 'Global_Efficiency_Right_Hemisphere';
 DataFrame{1,22} = 'Local_Efficiency';
 DataFrame{1,23} = 'Local_Efficiency_Left_Hemisphere';
 DataFrame{1,24} = 'Local_Efficiency_Right_Hemisphere';
+DataFrame{1,25} = 'Within_Module_Degree';
+DataFrame{1,26} = 'Within_Module_Degree_Left_Hemisphere';
+DataFrame{1,27} = 'Within_Module_Degree_Right_Hemisphere';
+DataFrame{1,28} = 'Within_Module_Weight';
+DataFrame{1,29} = 'Within_Module_Weight_Left_Hemisphere';
+DataFrame{1,30} = 'Within_Module_Weight_Right_Hemisphere';
+DataFrame{1,31} = 'Out_Module_Degree';
+DataFrame{1,32} = 'Out_Module_Degree_Left_Hemisphere';
+DataFrame{1,33} = 'Out_Module_Degree_Right_Hemisphere';
+DataFrame{1,34} = 'Out_Module_Weight';
+DataFrame{1,35} = 'Out_Module_Weight_Left_Hemisphere';
+DataFrame{1,36} = 'Out_Module_Weight_Right_Hemisphere';
+
 % loop through groups then append rows
 row = 2;
 for g = 1:length(Groups);
@@ -80,6 +93,18 @@ for g = 1:length(Groups);
 			DataFrame{row,22} = nanmean(Graph.Full_locE{1}(d,:));
 			DataFrame{row,23} = nanmean(Graph.Left_locE{1}(d,:));
 			DataFrame{row,24} = nanmean(Graph.Right_locE{1}(d,:));
+			DataFrame{row,25} = nanmean(Graph.Within_Module_Degree{1}(d,:));
+			DataFrame{row,26} = nanmean(Graph.Left_Within_Module_Degree{1}(d,:));
+			DataFrame{row,27} = nanmean(Graph.Right_Within_Module_Degree{1}(d,:));
+			DataFrame{row,28} = nanmean(Graph.Within_Module_Weight{1}(d,:));
+			DataFrame{row,29} = nanmean(Graph.Left_Within_Module_Weight{1}(d,:));
+			DataFrame{row,30} = nanmean(Graph.Right_Within_Module_Weight{1}(d,:));
+			DataFrame{row,31} = nanmean(Graph.Out_Module_Degree{1}(d,:));
+			DataFrame{row,32} = nanmean(Graph.Left_Out_Module_Degree{1}(d,:));
+			DataFrame{row,33} = nanmean(Graph.Right_Out_Module_Degree{1}(d,:));
+			DataFrame{row,34} = nanmean(Graph.Out_Module_Weight{1}(d,:));
+			DataFrame{row,35} = nanmean(Graph.Left_Out_Module_Weight{1}(d,:));
+			DataFrame{row,36} = nanmean(Graph.Right_Out_Module_Weight{1}(d,:));
 
 			row = row+1;
 		end
