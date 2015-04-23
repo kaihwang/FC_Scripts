@@ -20,50 +20,27 @@ WarmScale<-c("#ffffcc","#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#
 labelcolors <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#ffff33","#a65628","#f781bf", "#d9d9d9", "#bc80bd")
 
 
+# plot global graph measures
+Variables <- c('Global_Efficiency', 'Modularity', 'Clustering_Coefficient', 'Within_Module_Degree', 'Out_Module_Degree', 'Within_Module_Weight', 'Out_Module_Weight', 'Weight')
 
+for (v in Variables){
+  summaryDATA <- ddply(DATA, c('Group', 'Density'), summarise,
+                       N = sum(!is.na(get(v))),
+                       mean = mean(get(v), na.rm=TRUE),
+                       sd = sd(get(v), na.rm=TRUE),
+                       se = sd/ sqrt(N),
+                       upperSE = mean(get(v), na.rm=TRUE) + se, 
+                       lowerSE = mean(get(v), na.rm=TRUE) - se,
+                       upperCI = mean(get(v), na.rm=TRUE) + 2*sd(get(v), na.rm=TRUE),
+                       lowerCI = mean(get(v), na.rm=TRUE) - 2*sd(get(v), na.rm=TRUE))  
+  
+  fig_group <- ggplot(data=summaryDATA, aes(x=Density, y=mean))+ theme_classic(base_size = 24) + scale_colour_manual(values=c("Black","Yellow", "Blue","#888888")) 
+  fig_group <- fig_group + geom_line(aes(color=Group), size = 2)
+  fig_group <- fig_group + geom_ribbon(data = summaryDATA, aes(fill=Group, ymin=upperSE, ymax=lowerSE, x=Density ), alpha = 0.35)+ scale_fill_manual(values=c("Black","Yellow", "Blue","#888888")) 
+  fig_group <- fig_group + labs(y = as.name(v))
+  plot(fig_group)
+}
 
-## plot efficiency
-# calculate summary statistics of the Modularity data
-summaryDATA <- ddply(DATA, c('Group', 'Density'), summarise,
-                     N = sum(!is.na(Global_Efficiency)),
-                     mean = mean(Global_Efficiency, na.rm=TRUE),
-                     sd = sd(Global_Efficiency, na.rm=TRUE),
-                     se = sd/ sqrt(N),
-                     upperSE = mean(Global_Efficiency, na.rm=TRUE) + se, #*clearsd(Modularity, na.rm=TRUE),
-                     lowerSE = mean(Global_Efficiency, na.rm=TRUE) - se,
-                     upperCI = mean(Global_Efficiency, na.rm=TRUE) + 1.5*sd(Modularity, na.rm=TRUE),
-                     lowerCI = mean(Global_Efficiency, na.rm=TRUE) - 1.5*sd(Modularity, na.rm=TRUE))
-
-
-
-# plot group efficiency data
-fig_group <- ggplot(data=summaryDATA, aes(x=Density, y=mean))+ theme_classic(base_size = 24) + scale_colour_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + geom_line(aes(color=Group), size = 2)
-fig_group <- fig_group + geom_ribbon(data = summaryDATA, aes(fill=Group, ymin=upperSE, ymax=lowerSE, x=Density ), alpha = 0.35)+ scale_fill_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + labs(y = "Efficiency")
-fig_group
-
-## plot modularity
-# calculate summary statistics of the Modularity data
-summaryDATA <- ddply(DATA, c('Group', 'Density'), summarise,
-                             N = sum(!is.na(Modularity)),
-                             mean = mean(Modularity, na.rm=TRUE),
-                             sd = sd(Modularity, na.rm=TRUE),
-                             se = sd/ sqrt(N),
-                             upperSE = mean(Modularity, na.rm=TRUE) + se, #*clearsd(Modularity, na.rm=TRUE),
-                             lowerSE = mean(Modularity, na.rm=TRUE) - se,
-                             upperCI = mean(Modularity, na.rm=TRUE) + 2*sd(Modularity, na.rm=TRUE),
-                             lowerCI = mean(Modularity, na.rm=TRUE) - 2*sd(Modularity, na.rm=TRUE))
-              
-
-
-# plot group Modularity data
-fig_group <- ggplot(data=summaryDATA, aes(x=Density, y=mean))+ theme_classic(base_size = 24) + scale_colour_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + geom_line(aes(color=Group), size = 2)
-fig_group <- fig_group + geom_ribbon(data = summaryDATA, aes(fill=Group, ymin=upperSE, ymax=lowerSE, x=Density ), alpha = 0.35)+ scale_fill_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + labs(y = "Modularity")
-fig_group
-#ggsave(filename = "GroupModularity.pdf", plot = fig_group, width=8, height=8) 
 
 
 # plot indiv patient modulairty against young controls
@@ -81,41 +58,6 @@ fig_patient <- fig_patient + guides(linetype = guide_legend(keywidth = 3, keyhei
 fig_patient
 #ggsave(filename = "IndivModularity.pdf", plot = fig_patient, width=8, height=8) 
 
-
-## plot clustering coefficeint data
-summaryDATA <- ddply(DATA, c('Group', 'Density'), summarise,
-                     N = sum(!is.na(Clustering_Coefficient)),
-                     mean = mean(Clustering_Coefficient, na.rm=TRUE),
-                     sd = sd(Clustering_Coefficient, na.rm=TRUE),
-                     se = sd/ sqrt(N),
-                     upperSE = mean(Clustering_Coefficient, na.rm=TRUE) + se, #*clearsd(Clustering_Coefficient, na.rm=TRUE),
-                     lowerSE = mean(Clustering_Coefficient, na.rm=TRUE) - se,
-                     upperCI = mean(Clustering_Coefficient, na.rm=TRUE) + 1.5*sd(Clustering_Coefficient, na.rm=TRUE),
-                     lowerCI = mean(Clustering_Coefficient, na.rm=TRUE) - 1.5*sd(Clustering_Coefficient, na.rm=TRUE))
-
-# plot group Clustering_Coefficient data
-fig_group <- ggplot(data=summaryDATA, aes(x=Density, y=mean))+ theme_classic(base_size = 24) + scale_colour_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + geom_line(aes(color=Group), size = 2)
-fig_group <- fig_group + geom_ribbon(data = summaryDATA, aes(fill=Group, ymin=upperSE, ymax=lowerSE, x=Density ), alpha = 0.35)+ scale_fill_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_group <- fig_group + labs(y = "Clustering_Coefficient")
-fig_group
-#ggsave(filename = "GroupClustering_Coefficient.pdf", plot = fig_group, width=8, height=8) 
-
-
-# plot indiv patient modulairty against young controls
-ControlDATA <- subset(summaryDATA, Group=='Young_Controls')
-ComparisonDATA <- subset(summaryDATA, Group=='Young_Controls' | Group =='Thalamic_Patients')
-THData <- subset(summaryDATA, Group =='Thalamic_Patients')
-BGData <- subset(DATA, Group =='Striatal_Patients')
-
-fig_patient <- ggplot(data=ControlDATA , aes(x=Density, y=mean)) + theme_classic(base_size = 24) 
-fig_patient <- fig_patient + geom_line(data=ComparisonDATA , aes(x=Density, y=mean,  color=Group), size = 2, inherit.aes=FALSE) + scale_colour_manual(values=c(WarmScale,"Blue","#888888"))
-fig_patient <- fig_patient + geom_ribbon(data = ControlDATA, aes( ymin=upperCI, ymax=lowerCI, x=Density, fill='Control CI (1.5 SD)' ), alpha = 0.15, inherit.aes=FALSE) + scale_fill_manual(values=c("Black","Yellow", "Blue","#888888")) 
-fig_patient <- fig_patient + geom_line(data=BGData, aes(x=Density, y=Clustering_Coefficient, color=Subject ), size = 2)  
-fig_patient <- fig_patient + labs(y = "Clustering_Coefficient") + labs(Color='') + labs(fill='') 
-fig_patient <- fig_patient + guides(linetype = guide_legend(keywidth = 3, keyheight = 1))
-fig_patient
-#ggsave(filename = "IndivClustering_Coefficient.pdf", plot = fig_patient, width=8, height=8) 
 
 
 
