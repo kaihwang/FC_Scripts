@@ -46,7 +46,7 @@ for g = 1:length(Groups);
 			if g == 4 %#ok<ALIGN>
 				load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_b',num2str(s),'.mat'));
 				subID = strcat('b',num2str(s));
-            elseif g ~= 3
+            elseif g ~= 4
     			load(strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(s),'.mat'));
     			subID = num2str(s);
             end
