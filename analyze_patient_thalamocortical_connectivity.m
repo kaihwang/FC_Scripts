@@ -50,36 +50,47 @@ n=1;
 row = 2;
 for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	
+
+	
 	%load their graph analysis output plus the lesion voxel mas
 	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(patients),'.mat');
-	load(fn);
-	fn = strcat('/home/despoB/kaihwang/Rest/Lesion_Masks/','lesioned_voxels_',num2str(patients));
 	
-	lesioned_thalamus_voxel = load(fn);
-	lesioned_thalamus_voxel(:,1:3)=[];
+	%% this part is now being replaced by python...
 
-	%for each lesioned voxel, compile a list of targeted ROIs 
-	Targeted_ROIs = [];
-	nonTargeted_ROIs = [];
-	Targeted_ROICI = [];
-	nonTargeted_ROICI = [];
+	% load(fn);
+	% fn = strcat('/home/despoB/kaihwang/Rest/Lesion_Masks/',num2str(patients),'_lesioned_voxels');
+	
+	% lesioned_thalamus_voxel = load(fn);
+	% lesioned_thalamus_voxel(:,1:3)=[];
 
-	for voxel = 1:length(lesioned_thalamus_voxel)
+	% %for each lesioned voxel, compile a list of targeted ROIs 
+	% Targeted_ROIs = [];
+	% nonTargeted_ROIs = [];
+	% Targeted_ROICI = [];
+	% nonTargeted_ROICI = [];
 
-		%match the ROI label in the two vectors, find the index
-		i_thalamus = find(lesioned_thalamus_voxel(voxel)==Thalamic_target(:,1)); 
+	% for voxel = 1:length(lesioned_thalamus_voxel)
 
-		%after finding the idex, extract the ROI label corresponding to that index!
-		Targeted_ROIs = [Targeted_ROIs, Thalamic_target(i_thalamus, 2:1+NumROIs)];
-		nonTargeted_ROIs = [nonTargeted_ROIs, Thalamic_target(i_thalamus, end-NumROIs:end)];	
-		Targeted_ROICI = [Targeted_ROICI, Thalamic_target_CI(i_thalamus, 2:1+NumROIs)];
-		nonTargeted_ROICI = [nonTargeted_ROICI, Thalamic_target_CI(i_thalamus, end-NumROIs:end)];	
-	end
+	% 	%match the ROI label in the two vectors, find the index
+	% 	i_thalamus = find(lesioned_thalamus_voxel(voxel)==Thalamic_target(:,1)); 
 
-	%sort out overlapping ROI labels!
-	Targeted_ROIs = unique(Targeted_ROIs);
-	nonTargeted_ROIs = unique(nonTargeted_ROIs);
+	% 	%after finding the idex, extract the ROI label corresponding to that index!
+	% 	Targeted_ROIs = [Targeted_ROIs, Thalamic_target(i_thalamus, 2:1+NumROIs)];
+	% 	nonTargeted_ROIs = [nonTargeted_ROIs, Thalamic_target(i_thalamus, end-NumROIs:end)];	
+	% 	Targeted_ROICI = [Targeted_ROICI, Thalamic_target_CI(i_thalamus, 2:1+NumROIs)];
+	% 	nonTargeted_ROICI = [nonTargeted_ROICI, Thalamic_target_CI(i_thalamus, end-NumROIs:end)];	
+	% end
 
+	% %sort out overlapping ROI labels!
+	% Targeted_ROIs = unique(Targeted_ROIs);
+	% nonTargeted_ROIs = unique(nonTargeted_ROIs);
+
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',num2str(patients),'_cortical_target');
+	Targeted_ROIs = load(fn);
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',num2str(patients),'_cortical_nontarget');
+	nonTargeted_ROIs = load(fn);
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/Cortical_ROI_index');
+	ROIID = load(fn);
 	% now, need to convert label to index again!!
 	Targeted_ROI_index =[];
 	for roi = 1:length(Targeted_ROIs)
@@ -185,7 +196,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 
 
 	%create R data strcuture
-	D=0.05:0.005:0.25;
+	D=0.01:0.005:0.25;
 	for densities = 1:length(D)
 		Output{row,1} = num2str(patients);
 		Output{row,2} = D(densities);
