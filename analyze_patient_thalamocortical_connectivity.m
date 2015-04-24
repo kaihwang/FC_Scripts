@@ -112,8 +112,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	%save the cortical Target info (roi number, CI...)
 	Patient_Cortical_Target{n}.Targeted_ROIs = Targeted_ROIs;
 	Patient_Cortical_Target{n}.nonTargeted_ROIs = nonTargeted_ROIs;
-	Patient_Cortical_Target{n}.Targeted_ROICI = Targeted_ROICI;
-	Patient_Cortical_Target{n}.nonTargeted_ROICI = nonTargeted_ROICI;
+	%Patient_Cortical_Target{n}.Targeted_ROICI = Targeted_ROICI;
+	%Patient_Cortical_Target{n}.nonTargeted_ROICI = nonTargeted_ROICI;
 
 	%extract weight
 	Patient_Degree(n,:) = nanmean(Graph.Degree{1}(:,Targeted_ROI_index)');
