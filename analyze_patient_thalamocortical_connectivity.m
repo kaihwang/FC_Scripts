@@ -54,6 +54,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	
 	%load their graph analysis output plus the lesion voxel mas
 	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(patients),'.mat');
+	load(fn);
 	
 	%% this part is now being replaced by python...
 
