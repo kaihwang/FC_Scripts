@@ -94,7 +94,7 @@ Fig_hemdiff
 
 ## plot nodal data
 #read in nodal data
-NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/Nodal.csv', header=TRUE);
+NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/nodal.csv', header=TRUE);
 #NodalDATA = read.csv('/Volumes//neuro//Nodal.csv', header=TRUE);
 NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 

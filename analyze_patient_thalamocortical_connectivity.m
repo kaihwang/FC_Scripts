@@ -27,6 +27,9 @@ Patient_Intact_CC= [];
 Patient_P= [];
 Patient_Intact_P= [];
 
+Patient_locE = [];
+Patient_Intact_locE = [];
+
 Output{1,1} = 'Subject';
 Output{1,2} = 'Density';
 Output{1,3} = 'Cortical_Target_Degree';
@@ -43,6 +46,8 @@ Output{1,13} = 'Cortical_Target_Between_Weight';
 Output{1,14} = 'Cortical_nonTarget_Between_Weight';
 Output{1,15} = 'Cortical_Target_PC';
 Output{1,16} = 'Cortical_nonTarget_PC';
+Output{1,17} = 'Cortical_Target_locE';
+Output{1,18} = 'Cortical_nonTarget_locE';
 
 
 Patient_Cortical_Target={};
@@ -55,7 +60,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	%load their graph analysis output plus the lesion voxel mas
 	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(patients),'.mat');
 	load(fn);
-	
+
 	%% this part is now being replaced by python...
 
 	% load(fn);
@@ -141,6 +146,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	Patient_P(n,:) = nanmean(Graph.P{1}(:,Targeted_ROI_index)');
 	Patient_Intact_P(n,:) = nanmean(Graph.P{1}(:,Intact_ROI_index)');
 
+	Patient_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Targeted_ROI_index)');
+	Patient_Intact_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Intact_ROI_index)');
 	
 	%do controls
 	Control_Degree=[];
@@ -159,6 +166,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	Control_Intact_CC= [];
 	Control_P= [];
 	Control_Intact_P= [];
+	Control_locE = [];
+	Control_Intact_locE = [];
 
 	i = 1;
 	for controls = Control_Subj;
@@ -191,13 +200,16 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Control_P(i,:) = nanmean(Graph.P{1}(:,Targeted_ROI_index)');
 		Control_Intact_P(i,:) = nanmean(Graph.P{1}(:,Intact_ROI_index)');
 
+		Control_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Targeted_ROI_index)');
+		Control_Intact_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Intact_ROI_index)');
+
 	
 		i=i+1;
 	end
 
 
 	%create R data strcuture
-	D=0.01:0.005:0.25;
+	D=0.02:0.005:0.1;
 	for densities = 1:length(D)
 		Output{row,1} = num2str(patients);
 		Output{row,2} = D(densities);
@@ -215,6 +227,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Output{row,14} = (Patient_Intact_bWeight(n,densities)-nanmean(Control_Intact_bWeight(:,densities)))./nanstd(Control_Intact_bWeight(:,densities));
 		Output{row,15} = (Patient_P(n,densities)-nanmean(Control_P(:,densities)))./nanstd(Control_P(:,densities));
 		Output{row,16} = (Patient_Intact_P(n,densities)-nanmean(Control_Intact_P(:,densities)))./nanstd(Control_Intact_P(:,densities));
+		Output{row,15} = (Patient_locE(n,densities)-nanmean(Control_locE(:,densities)))./nanstd(Control_locE(:,densities));
+		Output{row,16} = (Patient_Intact_locE(n,densities)-nanmean(Control_Intact_locE(:,densities)))./nanstd(Control_Intact_locE(:,densities));
 		row = row+1;
 	end	
 
