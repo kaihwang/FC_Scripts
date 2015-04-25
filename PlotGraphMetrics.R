@@ -98,6 +98,8 @@ NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/nodal.csv', header=
 #NodalDATA = read.csv('/Volumes//neuro//Nodal.csv', header=TRUE);
 NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 
+# plot locE
+
 # plot target v non target weight
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Weight", "Cortical_nonTarget_Weight"))
 

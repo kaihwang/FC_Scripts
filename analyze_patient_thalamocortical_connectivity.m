@@ -200,8 +200,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Control_P(i,:) = nanmean(Graph.P{1}(:,Targeted_ROI_index)');
 		Control_Intact_P(i,:) = nanmean(Graph.P{1}(:,Intact_ROI_index)');
 
-		Control_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Targeted_ROI_index)');
-		Control_Intact_locE(n,:) = nanmean(Graph.Full_locE{1}(:,Intact_ROI_index)');
+		Control_locE(i,:) = nanmean(Graph.Full_locE{1}(:,Targeted_ROI_index)');
+		Control_Intact_locE(i,:) = nanmean(Graph.Full_locE{1}(:,Intact_ROI_index)');
 
 	
 		i=i+1;
