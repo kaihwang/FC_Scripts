@@ -25,7 +25,7 @@ for s in Sub0001_Ses1; do
 
 	# exract adj matrices
 	num=$(expr $(wc -l ${s}_thalamocortical_corrmat_000.netcc | awk '{print $1}') - 4)
-	tail -n $num ${s}_thalamocortical_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_thalamocortical_corrmat
+	tail -n $num ${s}_thalamocortical_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_FIX_thalamocortical_corrmat
 
 	#num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
 	#tail -n $num ${s}_Right_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_Craddock700_corrmat
