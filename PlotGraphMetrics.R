@@ -99,6 +99,14 @@ NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/nodal.csv', header=
 NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 
 # plot locE
+plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Weight", "Cortical_nonTarget_Weight"))
+
+fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
+fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[1:2])
+fig_nodal <- fig_nodal + guides(linetype = guide_legend(keywidth = 2, keyheight = 1))+ labs(y = "Z score") + labs(linetype='thalamic patients') 
+fig_nodal <- fig_nodal + scale_x_continuous(breaks=pretty_breaks(n=2))
+fig_nodal
+ggsave(filen
 
 # plot target v non target weight
 plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Weight", "Cortical_nonTarget_Weight"))

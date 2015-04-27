@@ -227,8 +227,8 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 		Output{row,14} = (Patient_Intact_bWeight(n,densities)-nanmean(Control_Intact_bWeight(:,densities)))./nanstd(Control_Intact_bWeight(:,densities));
 		Output{row,15} = (Patient_P(n,densities)-nanmean(Control_P(:,densities)))./nanstd(Control_P(:,densities));
 		Output{row,16} = (Patient_Intact_P(n,densities)-nanmean(Control_Intact_P(:,densities)))./nanstd(Control_Intact_P(:,densities));
-		Output{row,15} = (Patient_locE(n,densities)-nanmean(Control_locE(:,densities)))./nanstd(Control_locE(:,densities));
-		Output{row,16} = (Patient_Intact_locE(n,densities)-nanmean(Control_Intact_locE(:,densities)))./nanstd(Control_Intact_locE(:,densities));
+		Output{row,17} = (Patient_locE(n,densities)-nanmean(Control_locE(:,densities)))./nanstd(Control_locE(:,densities));
+		Output{row,18} = (Patient_Intact_locE(n,densities)-nanmean(Control_Intact_locE(:,densities)))./nanstd(Control_Intact_locE(:,densities));
 		row = row+1;
 	end	
 
