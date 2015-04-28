@@ -99,7 +99,7 @@ NodalDATA = read.csv('~/Google Drive//Projects/Thalamus-Rest/nodal.csv', header=
 NodalDATA$Subject <- as.factor(NodalDATA$Subject)
 
 # plot locE
-plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_Weight", "Cortical_nonTarget_Weight"))
+plotData<-melt(data=NodalDATA, id.vars=c("Subject","Density"), measure.vars = c("Cortical_Target_locE", "Cortical_nonTarget_locE"))
 
 fig_nodal <- ggplot(data=plotData , aes(x=Density, y=value, color = variable))  + facet_wrap(~Subject, ncol = 5)  
 fig_nodal <- fig_nodal + geom_line(size =2) + theme_classic(base_size = 14) + scale_colour_manual(values=labelcolors[1:2])

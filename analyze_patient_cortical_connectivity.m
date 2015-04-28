@@ -1,6 +1,7 @@
-% script to analyze patients thalamic cortical target weight change. 
+Output = analyze_patient_cortical_connectivity(list_of_patients)
+% function to analyze patients' cortical target nodal properties
 
-load /home/despoB/kaihwang/Rest/Thalamic_parcel/Thalamus_voxel_CorticalTarget_plus_parcellation.mat
+%load /home/despoB/kaihwang/Rest/Thalamic_parcel/Thalamus_voxel_CorticalTarget_plus_parcellation.mat
 load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 %cd /home/despoB/kaihwang/Rest/Graph/
 %Connectome_Subj = load('/home/despoB/connectome-thalamus/connectome/list_of_complete_subjects');
@@ -53,12 +54,12 @@ Output{1,18} = 'Cortical_nonTarget_locE';
 Patient_Cortical_Target={};
 n=1;
 row = 2;
-for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
+for patients = list_of_patients; % loop through thalamic patients
 	
 
 	
 	%load their graph analysis output plus the lesion voxel mas
-	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',num2str(patients),'.mat');
+	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',patients,'.mat');
 	load(fn);
 
 	%% this part is now being replaced by python...
@@ -91,9 +92,9 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	% Targeted_ROIs = unique(Targeted_ROIs);
 	% nonTargeted_ROIs = unique(nonTargeted_ROIs);
 
-	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',num2str(patients),'_cortical_target');
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',patients,'_cortical_target');
 	Targeted_ROIs = load(fn);
-	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',num2str(patients),'_cortical_nontarget');
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',patients,'_cortical_nontarget');
 	nonTargeted_ROIs = load(fn);
 	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/Cortical_ROI_index');
 	ROIID = load(fn);
@@ -211,7 +212,7 @@ for patients = [128, 162, 163, 168, 176]; % loop through thalamic patients
 	%create R data strcuture
 	D=0.02:0.005:0.1;
 	for densities = 1:length(D)
-		Output{row,1} = num2str(patients);
+		Output{row,1} = patients;
 		Output{row,2} = D(densities);
 		Output{row,3} = (Patient_Degree(n,densities)-nanmean(Control_Degree(:,densities)))./nanstd(Control_Degree(:,densities));
 		Output{row,4} = (Patient_Intact_Degree(n,densities)-nanmean(Control_Intact_Degree(:,densities)))./nanstd(Control_Intact_Degree(:,densities));
