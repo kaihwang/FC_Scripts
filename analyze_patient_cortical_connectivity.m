@@ -1,4 +1,4 @@
-Output = analyze_patient_cortical_connectivity(list_of_patients)
+function Output = analyze_patient_cortical_connectivity(list_of_patients)
 % function to analyze patients' cortical target nodal properties
 
 %load /home/despoB/kaihwang/Rest/Thalamic_parcel/Thalamus_voxel_CorticalTarget_plus_parcellation.mat
