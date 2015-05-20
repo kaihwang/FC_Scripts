@@ -41,5 +41,7 @@ for s in Sub0001_Ses1; do
 
 	matlab -nodisplay -nosplash < /home/despoB/kaihwang/tmp/ROIg${s}.m
 
+	cd ${WD}/${s}
+	rm -rf /tmp/KH_${s}/
 
 done
