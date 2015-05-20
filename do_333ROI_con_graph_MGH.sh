@@ -19,7 +19,7 @@ for s in Sub0001_Ses1; do
 
 	# run NetCorr
 	cd /tmp/KH_${s}
-	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_overlapMasked_clust.nii.gz
+	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_overlapMasked_clust_RPI.nii.gz
 	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_R_2mm.nii.gz
 	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_L_2mm.nii.gz
 
