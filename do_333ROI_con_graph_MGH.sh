@@ -7,26 +7,26 @@ WD='/home/despoB/connectome-thalamus/MGH/'
 
 for s in Sub0001_Ses1; do
 
-	#mkdir /tmp/KH_${s}
+	mkdir /tmp/KH_${s}
 
-	cd /home/despoB/kaihwang/Rest/AdjMatrices
+	cd ${WD}/${s}
 
 	#grab list of files to concat
-	#rsfMRI_runs_list=(`ls run*/gbreg*/*.nii.gz`)
+	rsfMRI_runs_list=(`ls run*/gbreg*/*.nii.gz`)
 
 	#concat the files into one run
-	#3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
+	3dTcat -rlt++ -prefix /tmp/KH_${s}/input.nii.gz ${rsfMRI_runs_list[*]}
 
 	# run NetCorr
-	#cd /tmp/KH_${s}
-	#3dNetCorr -prefix ${s}_thalamocortical_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU297_plus_thalamus_25prob_voxels_ROIset_RPI.nii.gz
+	cd /tmp/KH_${s}
+	3dNetCorr -prefix ${s}_Full_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/WashU333_2mm_overlapMasked_clust.nii.gz
 	#3dNetCorr -prefix ${s}_Right_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_R_2mm.nii.gz
 	#3dNetCorr -prefix ${s}_Left_corrmat -inset input.nii.gz -in_rois /home/despoB/kaihwang/Rest/ROIs/Craddock700_Cortical_L_2mm.nii.gz
 
 	# exract adj matrices
-	#num=$(expr $(wc -l ${s}_thalamocortical_corrmat_000.netcc | awk '{print $1}') - 4)
-	head -n 297 /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_FIX_thalamocortical_corrmat > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_WashU333_corrmat
-
+	num=$(expr $(wc -l ${s}_Full_corrmat_000.netcc | awk '{print $1}') - 4)
+	tail -n $num ${s}_Full_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Full_WashU333_corrmat
+	
 	#num=$(expr $(wc -l ${s}_Right_corrmat_000.netcc | awk '{print $1}') - 4)
 	#tail -n $num ${s}_Right_corrmat_000.netcc > /home/despoB/kaihwang/Rest/AdjMatrices/t${s}_Right_Craddock700_corrmat
 
