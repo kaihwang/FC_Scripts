@@ -54,12 +54,11 @@ Output{1,18} = 'Cortical_nonTarget_locE';
 Patient_Cortical_Target={};
 n=1;
 row = 2;
-for patients = list_of_patients; % loop through thalamic patients
-	
+for p = 1:length(list_of_patients); % loop through thalamic patients
 
-	
+	patients = list_of_patients(p);
 	%load their graph analysis output plus the lesion voxel mas
-	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',patients,'.mat');
+	fn = strcat('/home/despoB/kaihwang/Rest/Graph/gsetCI_',cell2mat(patients),'.mat')
 	load(fn);
 
 	%% this part is now being replaced by python...
@@ -92,9 +91,9 @@ for patients = list_of_patients; % loop through thalamic patients
 	% Targeted_ROIs = unique(Targeted_ROIs);
 	% nonTargeted_ROIs = unique(nonTargeted_ROIs);
 
-	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',patients,'_cortical_target');
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/Data',cell2mat(patients),'_cortical_target');
 	Targeted_ROIs = load(fn);
-	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/',patients,'_cortical_nontarget');
+	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/Data',cell2mat(patients),'_cortical_nontarget');
 	nonTargeted_ROIs = load(fn);
 	fn = strcat('/home/despoB/kaihwang/bin/FuncParcel/Cortical_ROI_index');
 	ROIID = load(fn);
@@ -212,7 +211,7 @@ for patients = list_of_patients; % loop through thalamic patients
 	%create R data strcuture
 	D=0.02:0.005:0.1;
 	for densities = 1:length(D)
-		Output{row,1} = patients;
+		Output{row,1} = cell2mat(patients);
 		Output{row,2} = D(densities);
 		Output{row,3} = (Patient_Degree(n,densities)-nanmean(Control_Degree(:,densities)))./nanstd(Control_Degree(:,densities));
 		Output{row,4} = (Patient_Intact_Degree(n,densities)-nanmean(Control_Intact_Degree(:,densities)))./nanstd(Control_Intact_Degree(:,densities));

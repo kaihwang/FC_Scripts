@@ -3,7 +3,7 @@ function  [Adj, Graph] = cal_graph_setCI(subjid)
 
 %% load dataset
 load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
-
+WashU297ROI_CI = load('/home/despoB/kaihwang/bin/FuncParcel/Data/MGH_CI');
 %loop through parcellations
 
 n=1;
