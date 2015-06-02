@@ -4,6 +4,7 @@ function  [Adj, Graph] = cal_graph_setCI(subjid)
 %% load dataset
 load /home/despoB/kaihwang/Rest/ROIs/WashU333_Communities.mat
 WashU297ROI_CI = load('/home/despoB/kaihwang/bin/FuncParcel/Data/MGH_CI');
+WashU297ROI_CI = WashU297ROI_CI+1;
 %loop through parcellations
 
 n=1;
@@ -29,7 +30,7 @@ for n = 1:length(Adj.Matrix_Full) % loop through parcellations.. although now ju
       
        Q = 0; 
        Ci=[];
-       for iter = 1:100
+       for iter = 1:5
           [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
@@ -73,7 +74,7 @@ for n = 1:length(Adj.Matrix_Full)
        
        Q = 0; 
        Ci=[];
-       for iter = 1:100
+       for iter = 1:5
           [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
@@ -115,7 +116,7 @@ for n = 1:length(Adj.Matrix_Full)
        
        Q = 0; 
        Ci=[];
-       for iter = 1:100
+       for iter = 1:5
           [Ci_iter, q_iter] = community_louvain(weight_conversion(threshold_proportional(M,T),'binarize'),1);
           
           if q_iter > Q;
