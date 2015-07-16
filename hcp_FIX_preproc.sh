@@ -6,7 +6,7 @@ WD='/home/despoB/connectome-thalamus/connectome'
 
 for s in 100307; do
 	3dresample -inset ${WD}/${s}/MNINonLinear/brainmask.nii.gz \
-	-master ${WD}/${s}/MNINonLinear/${session}_hp2000_clean.nii.gz \
+	-master ${WD}/${s}/MNINonLinear/rfMRI_REST1_LR_hp2000_clean.nii.gz \
 	-prefix ${WD}/${s}/MNINonLinear/brainmask_ds.nii.gz
 
 	#extract signal

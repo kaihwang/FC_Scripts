@@ -2,7 +2,7 @@
 # compare NKI data and connectome data tsnr
 
 
-WD='/home/despoB/kaihwang/Compare_TSNR'
+WD='/home/despoB/kaihwang/Compare_TSNR/FIX'
 NKI_Path='/home/despoB/mb3152/data/nki_data/preprocessed/pipeline_pipeline'
 
 # cd $NKI_Path
@@ -33,12 +33,14 @@ for Subject in 100307; do #$(cat list_of_complete_subjects)
 
 	for Sequence in rfMRI_REST1_LR rfMRI_REST1_RL rfMRI_REST2_LR rfMRI_REST2_RL; do
 		cd ${Connectome_Path}/${Subject}/MNINonLinear
-		ln -s ${Connectome_Path}/${Subject}/MNINonLinear/${Sequence}_hp2000_clean_wbsreg.nii.gz ${WD}/${Subject}_${Sequence}_FIX.nii.gz
+		ln -s ${Connectome_Path}/${Subject}/MNINonLinear/${Sequence}_hp2000_clean.nii.gz \
+		${WD}/${Subject}_${Sequence}_FIX.nii.gz
 
 		cd ${WD}
 		3dTstat -nzmean -prefix ${Subject}_${Sequence}_Tmean_FIX.nii.gz ${Subject}_${Sequence}_FIX.nii.gz
 		3dTstat -stdev -prefix ${Subject}_${Sequence}_Tstd_FIX.nii.gz ${Subject}_${Sequence}_FIX.nii.gz
-		3dcalc -a ${Subject}_${Sequence}_Tmean_FIX.nii.gz -b ${Subject}_${Sequence}_Tstd_FIX.nii.gz -expr 'a/b' -prefix ${Subject}_${Sequence}_TSNR_FIX.nii.gz
+		3dcalc -a ${Subject}_${Sequence}_Tmean_FIX.nii.gz -b ${Subject}_${Sequence}_Tstd_FIX.nii.gz \
+		-expr 'a/b' -prefix ${Subject}_${Sequence}_TSNR_FIX.nii.gz
 
 	done
 done
