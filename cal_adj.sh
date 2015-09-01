@@ -14,58 +14,39 @@ for s in 0102826_session_1; do
 	for run in _mx_1400 _mx_645 _std_2500; do
 
 		#Crotical ROIs + Thalamsu (lobe), partial corr
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Cortex_plus_thalamus_ROIs.nii.gz \
-		-part_corr \
-		-prefix Adj_cortex_thalamus_${run}_par
-
-		#Crotical ROIs + Thalamsu (lobe)
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Cortex_plus_thalamus_ROIs.nii.gz \
-		-prefix Adj_cortex_thalamus_${run}
+		# 3dNetCorr \
+		# -inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
+		# -in_rois /home/despoB/connectome-thalamus/ROIs/Cortex_plus_thalamus_ROIs.nii.gz \
+		# -part_corr \
+		# -prefix Adj_cortex_thalamus_${run}_par
 
 
-		#craddockROIs
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_300_cortical.nii.gz \
-		-prefix Adj_Craddock_300_${run}
+		for roi in Cortex_plus_thalamus_ROIs Craddock_300_plus_thalamus_ROIs Craddock_900_plus_thalamus_ROIs; do
 
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_900_cortical.nii.gz \
-		-prefix Adj_Craddock_900_${run}
+			3dNetCorr \
+			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}_ncsreg.nii.gz \
+			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			-prefix Adj_${roi}_${run}_ncsreg
 
+			num=$(expr $(wc -l Adj_${roi}_${run}_ncsreg_000.netcc | awk '{print $1}') - 6)
+			tail -n $num Adj_${roi}_${run}_ncsreg_000.netcc > /home/despoB/connectome-thalamus/AdjMatrices/NKI_${s}_${roi}_${run}_ncsreg_corrmat
 
-		#craddockROIs+thalamus
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_300_plus_thalamus_ROIs.nii.gz \
-		-prefix Adj_Craddock_300_thalamus_${run}
-
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_900_plus_thalamus_ROIs.nii.gz \
-		-prefix Adj_Craddock_900_thalamus_${run}
-
-		#craddockROIs+thalamus, partial corr
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_300_plus_thalamus_ROIs.nii.gz \
-		-part_corr \
-		-prefix Adj_Craddock_300_thalamus_${run}_par
-
-		3dNetCorr \
-		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-		-in_rois /home/despoB/connectome-thalamus/ROIs/Craddock_900_plus_thalamus_ROIs.nii.gz \
-		-part_corr \
-		-prefix Adj_Craddock_900_thalamus_${run}_par
+		done
 
 
+		for roi in Cortex_plus_thalamus_ROIs Craddock_300_cortical Craddock_900_cortical Craddock_300_plus_thalamus_ROIs Craddock_900_plus_thalamus_ROIs; do
+
+			3dNetCorr \
+			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
+			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			-prefix Adj_${roi}_${run}
+
+			num=$(expr $(wc -l Adj_${roi}_${run}_000.netcc | awk '{print $1}') - 6)
+			tail -n $num Adj_${roi}_${run}_000.netcc > /home/despoB/connectome-thalamus/AdjMatrices/NKI_${s}_${roi}_${run}_corrmat
+
+		done
 	done	
-	
 
-
+	rm *netcc
+	rm *dset
 done
