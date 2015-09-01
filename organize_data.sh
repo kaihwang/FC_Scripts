@@ -72,7 +72,6 @@ for s in $(ls -d 0*); do
 	r=1
 	for run in _mx_1400 _mx_645 _std_2500; do
 
-
 		if [ ! -e ${WD}/${s}/MNINonLinear/rfMRI_REST${r}.nii.gz ]; then
 			ln -s /${Source}/${s}/functional_mni/_scan_RfMRI${run}_rest/_csf_threshold_0.96/_gm_threshold_0.7/_wm_threshold_0.96/_compcor_ncomponents_5_selector_pc10.linear1.wm0.global0.motion1.quadratic1.gm0.compcor1.csf0/_bandpass_freqs_0.009.0.08/bandpassed_demeaned_filtered_antswarp.nii.gz ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz
 		fi
