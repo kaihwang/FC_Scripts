@@ -20,7 +20,9 @@ for s in Sub0001_Ses1; do
 	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
 		#
 		#Cortex_plus_thalamus_ROIs
-		for roi in Craddock_300_plus_thalamus_ROIs Craddock_900_plus_thalamus_ROIs; do
+		#Cortical_CI_plus_thalamus
+		#Craddock_300_plus_thalamus_ROIs Craddock_900_plus_thalamus_ROIs
+		for roi in Cortical_CI_plus_thalamus; do
 
 			3dNetCorr \
 			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
