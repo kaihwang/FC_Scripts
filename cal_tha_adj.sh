@@ -7,24 +7,25 @@ WD='/home/despoB/kaihwang/Rest/Tha_patients'
 cd ${WD}
 
 
-for s in 162 163 168 176; do
+for s in 128 162 163 168 176; do
 
 	mkdir /tmp/KH_${s}/
 	cd ${WD}/${s}/MNINonLinear
 
 
 	## concat
-	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST2.nii.gz ]; then
-		3dTcat -prefix rfMRI_REST.nii.gz rfMRI_REST1_PA_reg_bp.nii.gz rfMRI_REST2_PA_reg_bp.nii.gz
-	else
-		3dcopy rfMRI_REST1_PA_reg_bp.nii.gz rfMRI_REST.nii.gz
-
-	fi
+	#if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST2.nii.gz ]; then
+	#	3dTcat -prefix rfMRI_REST.nii.gz rfMRI_REST1_PA_reg_bp.nii.gz rfMRI_REST2_PA_reg_bp.nii.gz
+	#else
+	#	3dcopy rfMRI_REST1_PA_reg_bp.nii.gz rfMRI_REST.nii.gz
+	#
+	#fi
+	
 	3dresample -master /home/despoB/connectome-thalamus/ROIs/Craddock_300_cortical.nii.gz \
-	-inset ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz \
+	-inset ${WD}/${s}/Rest/${s}-rest-preproc-cen.nii.gz \
 	-prefix ${WD}/${s}/MNINonLinear/rfMRI_REST_RPI.nii.gz
 
-	rm ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz
+	#rm ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz
 
 	for roi in Craddock_300_cortical Craddock_900_cortical; do
 
