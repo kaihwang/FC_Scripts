@@ -70,7 +70,8 @@ for s in 0102826_session_1; do
 
 		### for saving timeseries
 		# 4 sets of timeseries, thalamus_indices, cortex, network, cortical ROIs
-		for roi in Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs; do
+		# Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs
+		for roi in Gordon_333_cortical; do
 			3dNetCorr \
 			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}_ncsreg.nii.gz \
 			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
