@@ -36,35 +36,35 @@ for s in Sub0001_Ses1; do
 	# 	done
 	# fi
 
-	# #Craddock_300_cortical Craddock_900_cortical
-	# if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz ]; then
-	# 	for roi in Gordon_333_cortical; do
+	#Craddock_300_cortical Craddock_900_cortical
+	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz ]; then
+		for roi in Gordon_333_cortical; do
 
-	# 		3dNetCorr \
-	# 		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz \
-	# 		-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-	# 		-prefix /tmp/KH_${s}/Adj_${roi}
+			3dNetCorr \
+			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz \
+			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			-prefix /tmp/KH_${s}/Adj_${roi}
 
-	# 		num=$(expr $(wc -l /tmp/KH_${s}/Adj_${roi}_000.netcc | awk '{print $1}') - 6)
-	# 		tail -n $num /tmp/KH_${s}/Adj_${roi}_000.netcc > /tmp/KH_${s}/MGH_${s}_${roi}_corrmat
-	# 		mv /tmp/KH_${s}/MGH_${s}_${roi}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/AdjMatrices/ 
-	# 	done
-	# fi
+			num=$(expr $(wc -l /tmp/KH_${s}/Adj_${roi}_000.netcc | awk '{print $1}') - 6)
+			tail -n $num /tmp/KH_${s}/Adj_${roi}_000.netcc > /tmp/KH_${s}/MGH_${s}_${roi}_corrmat
+			mv /tmp/KH_${s}/MGH_${s}_${roi}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/AdjMatrices/ 
+		done
+	fi
 
 
 	### get TS
 	#Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs
-	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
-		for roi in Gordon_333_cortical; do
-			3dNetCorr \
-			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
-			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-			-ts_out \
-			-prefix /tmp/KH_${s}/MGH_${s}_${roi}_TS
+	# if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
+	# 	for roi in Gordon_333_cortical; do
+	# 		3dNetCorr \
+	# 		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
+	# 		-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+	# 		-ts_out \
+	# 		-prefix /tmp/KH_${s}/MGH_${s}_${roi}_TS
 
-			mv /tmp/KH_${s}/MGH_${s}_${roi}_TS_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/		
-		done
-	fi
+	# 		mv /tmp/KH_${s}/MGH_${s}_${roi}_TS_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/		
+	# 	done
+	# fi
 
 	rm -rf /tmp/KH_${s}/
 done
