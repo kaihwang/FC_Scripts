@@ -21,13 +21,14 @@ for s in 128 162 163 168 176; do
 	#
 	#fi
 	
-	3dresample -master /home/despoB/connectome-thalamus/ROIs/Craddock_300_cortical.nii.gz \
-	-inset ${WD}/${s}/Rest/${s}-rest-preproc-cen.nii.gz \
-	-prefix ${WD}/${s}/MNINonLinear/rfMRI_REST_RPI.nii.gz
+	# 3dresample -master /home/despoB/connectome-thalamus/ROIs/Craddock_300_cortical.nii.gz \
+	# -inset ${WD}/${s}/Rest/${s}-rest-preproc-cen.nii.gz \
+	# -prefix ${WD}/${s}/MNINonLinear/rfMRI_REST_RPI.nii.gz
 
 	#rm ${WD}/${s}/MNINonLinear/rfMRI_REST.nii.gz
-
-	for roi in Craddock_300_cortical Craddock_900_cortical; do
+	#
+	#Craddock_300_cortical Craddock_900_cortical
+	for roi in Gordon_333_cortical; do
 
 		3dNetCorr \
 		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_RPI.nii.gz \
