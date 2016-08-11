@@ -3,24 +3,24 @@
 
 
 
-WD='/home/despoB/connectome-thalamus/NKI'
-SCRIPT='/home/despoB/kaihwang/bin/Thalamo'
-cd ${WD}
+# WD='/home/despoB/connectome-thalamus/NKI'
+# SCRIPT='/home/despoB/kaihwang/bin/Thalamo'
+# cd ${WD}
 
-for s in $(ls -d 0*); do
-	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
-	sed "s/s in 0102826_session_1/s in ${s}/g" < ${SCRIPT}/cal_adj.sh > ~/tmp/s${s}.sh
-	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp ~/tmp/s${s}.sh
-	#fi
+# for s in $(ls -d 0*); do
+# 	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
+# 	sed "s/s in 0102826_session_1/s in ${s}/g" < ${SCRIPT}/cal_adj.sh > ~/tmp/s${s}.sh
+# 	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp ~/tmp/s${s}.sh
+# 	#fi
 
-done
+# done
 
 
 WD='/home/despoB/connectome-thalamus/MGH'
 SCRIPT='/home/despoB/kaihwang/bin/Thalamo'
 cd ${WD}
 
-for s in $(ls -d Sub*); do
+for s in $(/bin/ls -d Sub*); do
 	#if [ ! -e "/home/despoB/kaihwang/Rest/Graph/gsetCI_${Subject}.mat" ]; then
 	sed "s/s in Sub0001_Ses1/s in ${s}/g" < ${SCRIPT}/cal_adj_MGH.sh > ~/tmp/${s}.sh
 	qsub -V -M kaihwang -m e -e ~/tmp -o ~/tmp ~/tmp/${s}.sh
