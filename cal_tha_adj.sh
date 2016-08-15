@@ -7,7 +7,7 @@ WD='/home/despoB/kaihwang/Rest/Tha_patients'
 cd ${WD}
 
 
-for s in 128 162 163 168 176; do
+for s in 128 163 168; do
 
 	mkdir /tmp/KH_${s}/
 	cd ${WD}/${s}/MNINonLinear
@@ -38,7 +38,7 @@ for s in 128 162 163 168 176; do
 		num=$(expr $(wc -l /tmp/KH_${s}/Adj_${roi}_000.netcc | awk '{print $1}') - 6)
 		tail -n $num /tmp/KH_${s}/Adj_${roi}_000.netcc > /tmp/KH_${s}/Tha_${s}_${roi}_corrmat
 
-		mv /tmp/KH_${s}/Tha_${s}_${roi}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/AdjMatrices
+		mv /tmp/KH_${s}/Tha_${s}_${roi}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/ParMatrices
 	done
 
 	rm -rf /tmp/KH_${s}/
