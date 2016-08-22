@@ -13,8 +13,9 @@ for s in 1106; do
 
 	for pipeline in FIR; do
 		
+		# Note, for task data, lp only
 		3dBandpass -input ${WD}/${s}/${pipeline}_errts.nii.gz \
-		-band 0.009 0.08 \
+		-band 0.009 10 \
 		-automask \
 		-prefix /tmp/${s}/${pipeline}_errts_bp.nii.gz
 
@@ -33,6 +34,7 @@ for s in 1106; do
 
 		for condition in Both FH HF Cat; do
 
+			### The following is for partial corr. 
 			#need to run Gordon first
 			for roi in Gordon_333_cortical_LPI; do
 
@@ -57,10 +59,14 @@ for s in 1106; do
 				
 				#subject, condition, tharoi = raw_input().split()
 				echo "${s} ${condition} ${roi}" | python /home/despoB/kaihwang/bin/FC_Scripts/cal_pcorr.py
-				#num=$(expr $(wc -l /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc | awk '{print $1}') - 6)
-				#tail -n $num /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc > /home/despoB/kaihwang/TRSE/TDSigEI/Graph/${s}_${pipeline}_${condition}_${roi}_bcorrmat.txt
-			
 			done
+
+			### This is for full correlation
+			# for roi in 
+			# 	#num=$(expr $(wc -l /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc | awk '{print $1}') - 6)
+			# 	#tail -n $num /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc > /home/despoB/kaihwang/TRSE/TDSigEI/Graph/${s}_${pipeline}_${condition}_${roi}_bcorrmat.txt
+			# done
+			
 		done
 	done
 
