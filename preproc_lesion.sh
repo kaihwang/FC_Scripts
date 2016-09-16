@@ -8,7 +8,7 @@ BRAIN_EXTRACTION_PROBABILITY_MASK_TEMPLATE='/home/despo/dlurie/Projects/lesion_p
 
 cd /home/despoB/lesion/anat_preproc
 
-for s in 102; do #$(/bin/ls 1*)
+for s in 105; do #$(/bin/ls 1*)
 	if [ ! -d ${WD}/${s} ]; then
 		mkdir ${WD}/${s}
 	fi
@@ -20,7 +20,7 @@ for s in 102; do #$(/bin/ls 1*)
 	fi
 
 	#create functional nii
-	a=($(/bin/ls -d /home/despoB/lesion/data/original/dicom/${s}/EPI*))
+	a=($(/bin/ls -d /home/despoB/lesion/data/original/dicom/${s}/*EPI*))
 	ii=1
 	for i in "${a[@]}"; do 
 		
@@ -75,7 +75,7 @@ for s in 102; do #$(/bin/ls 1*)
 				-4d functional.nii.gz -tr 2 \
 				-mprage_bet ${WD}/${s}/MPRAGE/mprage_bet.nii.gzBrainExtractionBrain.nii.gz \
 				-compute_warp_only \
-				-despike -motion_censor fd=0.5 \
+				-despike -motion_censor fd=0.3 \
 				-no_hp -rescaling_method 100_voxelmean \
 				-func_struc_dof bbr -smoothing_kernel 0 \
 				-slice_acquisition interleaved
@@ -94,9 +94,9 @@ for s in 102; do #$(/bin/ls 1*)
 			#rm 4dwarp.nii.gz
 			#rm template_replicated.nii.gz
 
-			#compcor regressors
-			3dpc -mask ../MPRAGE/CSF_mni.nii.gz -pcsave 5 -prefix CSF_PC ANTSed.nii.gz
-			3dpc -mask ../MPRAGE/WM_mni.nii.gz -pcsave 5 -prefix WM_PC ANTSed.nii.gz
+			#compcor regressors, 5 components
+			3dpc -vmean -mask ../MPRAGE/CSF_mni.nii.gz -pcsave 5 -prefix CSF_PC ANTSed.nii.gz
+			3dpc -vmean -mask ../MPRAGE/WM_mni.nii.gz -pcsave 5 -prefix WM_PC ANTSed.nii.gz
 
 			#get friston 24 motion regressors
 			1d_tool.py -infile motion.par -derivative -write motion_d.1d
@@ -138,7 +138,7 @@ for s in 102; do #$(/bin/ls 1*)
 			rm mc_initial.nii.gz
 			rm mt_functional.nii.gz
 			rm kmt*
-
+			rm epi_bet.nii.gz
 		fi
 	done
 
