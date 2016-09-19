@@ -8,7 +8,7 @@ BRAIN_EXTRACTION_PROBABILITY_MASK_TEMPLATE='/home/despo/dlurie/Projects/lesion_p
 
 cd /home/despoB/lesion/anat_preproc
 
-for s in 105; do #$(/bin/ls 1*)
+for s in 102; do #$(/bin/ls 1*)
 	if [ ! -d ${WD}/${s} ]; then
 		mkdir ${WD}/${s}
 	fi
@@ -75,7 +75,7 @@ for s in 105; do #$(/bin/ls 1*)
 				-4d functional.nii.gz -tr 2 \
 				-mprage_bet ${WD}/${s}/MPRAGE/mprage_bet.nii.gzBrainExtractionBrain.nii.gz \
 				-compute_warp_only \
-				-despike -motion_censor fd=0.3 \
+				-despike -motion_censor fd=0.5 \
 				-no_hp -rescaling_method 100_voxelmean \
 				-func_struc_dof bbr -smoothing_kernel 0 \
 				-slice_acquisition interleaved
@@ -117,7 +117,7 @@ for s in 105; do #$(/bin/ls 1*)
 			1dcat motion.par motion_d.1d tmp1.1D tmp2.1D tmp3.1D tmp4.1D tmp5.1D tmp6.1D tmp7.1D tmp8.1D tmp9.1D tmp10.1D tmp11.1D tmp12.1D > motion.txt
 
 			#regression
-			if [ ! -e preproc_functinal.nii.gz ]; then
+			if [ ! -e preproc_functional.nii.gz ]; then
 				3dTproject -input ANTSed.nii.gz \
 				-censor motion_info/censor_union.1D \
 				-ort CSF_PC_vec.1D \
@@ -126,7 +126,7 @@ for s in 105; do #$(/bin/ls 1*)
 				-passband 0.008 0.09 \
 				-automask \
 				-blur 6 \
-				-prefix preproc_functinal.nii.gz	
+				-prefix preproc_functional.nii.gz	
 			fi
 
 			#clean up
