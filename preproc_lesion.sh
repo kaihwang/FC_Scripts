@@ -64,7 +64,7 @@ for s in 102; do #$(/bin/ls 1*)
 	#### funcitonal preproc
 	cd ${WD}/${s}/
 
-	for r in 1 2; do
+	for r in 1 2 3; do
 	# no alignment is calcualted here. use Ants for subsequent co-registration 
 		if [ -d ${WD}/${s}/run${r} ]; then
 
