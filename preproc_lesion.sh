@@ -27,7 +27,7 @@ for s in 102; do #$(/bin/ls 1*)
 		if [ ! -e ${WD}/${s}/run${ii}/functional.nii.gz ]; then
 			ln -s $i ${WD}/${s}/run${ii}_raw  
 			mkdir ${WD}/${s}/run${ii}
-			dcm2nii -o ${WD}/${s}/run${ii} ${WD}/${s}/run${ii}_raw/*dcm
+			dcm2nii -o ${WD}/${s}/run${ii} ${WD}/${s}/run${ii}_raw/*.dcm
 			3dcopy ${WD}/${s}/run${ii}/2*.nii.gz ${WD}/${s}/run${ii}/functional.nii.gz
 			rm ${WD}/${s}/run${ii}/2*.nii.gz
 		fi
@@ -119,7 +119,6 @@ for s in 102; do #$(/bin/ls 1*)
 			#regression
 			if [ ! -e preproc_functional.nii.gz ]; then
 				3dTproject -input ANTSed.nii.gz \
-				-censor motion_info/censor_union.1D \
 				-ort CSF_PC_vec.1D \
 				-ort WM_PC_vec.1D \
 				-ort motion.txt \
