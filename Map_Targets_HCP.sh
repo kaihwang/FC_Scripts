@@ -26,7 +26,9 @@ for s in 100206; do  #$(/bin/ls -d *)
 		done
 
 	fi	
+	rm -rf /tmp/${s}
 
 done
+
 
 #_wbsreg.nii.gz
