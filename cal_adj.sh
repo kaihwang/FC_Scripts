@@ -37,18 +37,18 @@ for s in 0102826_session_1; do
 		# done
 
 		# Craddock_300_cortical Craddock_900_cortical
-		for roi in Gordon_333_cortical; do
+		# for roi in Gordon_333_cortical; do
 
-			3dNetCorr \
-			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
-			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-			-prefix /tmp/KH_${s}/Adj_${roi}_${run}
+		# 	3dNetCorr \
+		# 	-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}.nii.gz \
+		# 	-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+		# 	-prefix /tmp/KH_${s}/Adj_${roi}_${run}
 
-			num=$(expr $(wc -l /tmp/KH_${s}/Adj_${roi}_${run}_000.netcc | awk '{print $1}') - 6)
-			tail -n $num /tmp/KH_${s}/Adj_${roi}_${run}_000.netcc > /tmp/KH_${s}/NKI_${s}_${roi}_${run}_corrmat
+		# 	num=$(expr $(wc -l /tmp/KH_${s}/Adj_${roi}_${run}_000.netcc | awk '{print $1}') - 6)
+		# 	tail -n $num /tmp/KH_${s}/Adj_${roi}_${run}_000.netcc > /tmp/KH_${s}/NKI_${s}_${roi}_${run}_corrmat
 
-			mv /tmp/KH_${s}/NKI_${s}_${roi}_${run}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/ParMatrices/ 
-		done
+		# 	mv /tmp/KH_${s}/NKI_${s}_${roi}_${run}_corrmat /home/despoB/connectome-thalamus/NotBackedUp/ParMatrices/ 
+		# done
 
 		### for partial regression
 		# Thalamus_plus_cortical_ROIs Thalamus_plus_cortical_network_ROIs Thalamus_plus_cortex_ROIs
@@ -69,16 +69,16 @@ for s in 0102826_session_1; do
 
 
 		### for saving timeseries
-		# Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs Gordon_333_cortical
-		# for roi in MGH_Gordon_333_consensus_CI; do
-		# 	3dNetCorr \
-		# 	-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}_ncsreg.nii.gz \
-		# 	-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-		# 	-ts_out \
-		# 	-prefix /tmp/KH_${s}/NKI_${s}_${run}_${roi}_TS
+		#Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs Gordon_333_cortical
+		for roi in Yeo17Network; do  #Thalamus_indices 400ROIs
+			3dNetCorr \
+			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST${run}_ncsreg.nii.gz \
+			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			-ts_out \
+			-prefix /tmp/KH_${s}/NKI_${s}_${run}_${roi}_TS
 
-		# 	mv /tmp/KH_${s}/NKI_${s}_${run}_${roi}_TS_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/		
-		# done
+			mv /tmp/KH_${s}/NKI_${s}_${run}_${roi}_TS_000.netts /home/despoB/kaihwang/Rest/ThaGate/NotBackedUp/		
+		done
 
 
 

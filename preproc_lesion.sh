@@ -117,7 +117,7 @@ for s in 102; do #$(/bin/ls 1*)
 			1dcat motion.par motion_d.1d tmp1.1D tmp2.1D tmp3.1D tmp4.1D tmp5.1D tmp6.1D tmp7.1D tmp8.1D tmp9.1D tmp10.1D tmp11.1D tmp12.1D > motion.txt
 
 			#regression
-			if [ ! -e preproc_functional.nii.gz ]; then
+			if [ ! -e ${WD}/${s}/run${r}/preproc_functional.nii.gz ]; then
 				3dTproject -input ANTSed.nii.gz \
 				-ort CSF_PC_vec.1D \
 				-ort WM_PC_vec.1D \

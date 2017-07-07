@@ -7,7 +7,7 @@ WD='/home/despoB/kaihwang/Rest/Tha_patients'
 cd ${WD}
 
 
-for s in 128 163 168; do
+for s in 176; do
 
 	mkdir /tmp/KH_${s}/
 	cd ${WD}/${s}/MNINonLinear

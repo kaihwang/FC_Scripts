@@ -20,8 +20,8 @@ def function_cal_pcorr_mat(subject , condition, tharoi, corroi ='Gordon_333_cort
 	#np.savetxt(fn, pcorr_mat, fmt='%.4f')
 	np.savetxt(fn, pcorr_mat)
 
-subject, condition, tharoi = raw_input().split()
+subject, pipeline, condition, tharoi = raw_input().split()
 #subject = sys.stdin.read().strip('\n')
 
 
-function_cal_pcorr_mat(subject, condition, tharoi)
+function_cal_pcorr_mat(subject, condition, tharoi, pipeline = pipeline)

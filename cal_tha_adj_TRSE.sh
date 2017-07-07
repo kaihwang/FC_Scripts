@@ -36,36 +36,42 @@ for s in 1106; do
 
 			### The following is for partial corr. 
 			#need to run Gordon first
-			for roi in Gordon_333_cortical_LPI; do
+			# for roi in Gordon_333_cortical_LPI; do
 
-				3dNetCorr \
-				-inset /tmp/${s}/${s}_${pipeline}_${condition}_errts_bp.nii.gz \
-				-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-				-ts_out \
-				-prefix /tmp/${s}/${s}_${pipeline}_${condition}_${roi}
+			# 	3dNetCorr \
+			# 	-inset /tmp/${s}/${s}_${pipeline}_${condition}_errts_bp.nii.gz \
+			# 	-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			# 	-ts_out \
+			# 	-prefix /tmp/${s}/${s}_${pipeline}_${condition}_${roi}
 
-				mv /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/
-			done
+			# 	mv /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/
+			# done
 
-			for roi in Thalamus_WTA_LPI Morel_LPI; do
+			# for roi in Thalamus_WTA_LPI Morel_LPI; do
 
-				3dNetCorr \
-				-inset /tmp/${s}/${s}_${pipeline}_${condition}_errts_bp.nii.gz \
-				-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-				-ts_out \
-				-prefix /tmp/${s}/${s}_${pipeline}_${condition}_${roi}
+			# 	3dNetCorr \
+			# 	-inset /tmp/${s}/${s}_${pipeline}_${condition}_errts_bp.nii.gz \
+			# 	-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+			# 	-ts_out \
+			# 	-prefix /tmp/${s}/${s}_${pipeline}_${condition}_${roi}
 
-				mv /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/
+			# 	mv /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/
 				
-				#subject, condition, tharoi = raw_input().split()
-				echo "${s} ${condition} ${roi}" | python /home/despoB/kaihwang/bin/FC_Scripts/cal_pcorr.py
-			done
+			# 	#subject, condition, tharoi = raw_input().split()
+			# 	echo "${s} ${condition} ${roi}" | python /home/despoB/kaihwang/bin/FC_Scripts/cal_pcorr.py
+			# done
 
 			### This is for full correlation
-			# for roi in 
-			# 	#num=$(expr $(wc -l /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc | awk '{print $1}') - 6)
-			# 	#tail -n $num /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc > /home/despoB/kaihwang/TRSE/TDSigEI/Graph/${s}_${pipeline}_${condition}_${roi}_bcorrmat.txt
-			# done
+			for roi in Gordon_plus_Morel_LPI Gordon_plus_thalamus_WTA_LPI; do
+				
+				3dNetCorr \
+				-inset /tmp/${s}/${s}_${pipeline}_${condition}_errts_bp.nii.gz \
+				-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+				-prefix /tmp/${s}/${s}_${pipeline}_${condition}_${roi}
+
+				num=$(expr $(wc -l /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc | awk '{print $1}') - 6)
+				tail -n $num /tmp/${s}/${s}_${pipeline}_${condition}_${roi}_000.netcc > /home/despoB/kaihwang/TRSE/TDSigEI/Graph/${s}_${pipeline}_${condition}_${roi}_corrmat.txt
+			done
 			
 		done
 	done

@@ -38,7 +38,7 @@ for s in Sub0001_Ses1; do
 
 	#Craddock_300_cortical Craddock_900_cortical Gordon_333_cortical
 	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
-		for roi in Gordon_333_cortical Gordon_plus_Thalamus_WTA; do  #
+		for roi in Gordon_333_plus_thalamus_ROIs Gordon_333_cortical; do  #
 
 			3dNetCorr \
 			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
@@ -54,17 +54,16 @@ for s in Sub0001_Ses1; do
 
 	## get TS
 	#Thalamus_indices Cortical_CI Craddock_300_cortical Cortical_ROIs Gordon_333_cortical MGH_Gordon_333_consensus_CI
-	if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
-		for roi in Gordon_333_cortical Thalamus_WTA ; do #Thalamus_WTA 
-			3dNetCorr \
-			-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
-			-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
-			-ts_out \
-			-prefix /tmp/KH_${s}/MGH_${s}_${roi}_TS
+	# if [ -e ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz ]; then
+	# 	for roi in Thalamus_fslana Thalamus_Morel_consolidated_mask; do #TGordon_333_cortical Thalamus_WTA  
+	# 		3dNetCorr \
+	# 		-inset ${WD}/${s}/MNINonLinear/rfMRI_REST_ncsreg.nii.gz \
+	# 		-in_rois /home/despoB/connectome-thalamus/ROIs/${roi}.nii.gz \
+	# 		-prefix /tmp/KH_${s}/MGH_${s}_${roi}_TS
 
-			mv /tmp/KH_${s}/MGH_${s}_${roi}_TS_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/		
-		done
-	fi
+	# 		mv /tmp/KH_${s}/MGH_${s}_${roi}_TS_000.netts /home/despoB/connectome-thalamus/NotBackedUp/TS/		
+	# 	done
+	# fi
 
 	rm -rf /tmp/KH_${s}/
 done
