@@ -22,7 +22,7 @@ done
 WD='/home/despoB/kaihwang/TRSE/TRSEPPI/AllSubjs'
 
 cd ${WD}
-for s in $(cat /home/despoB/kaihwang/bin/TDSigEI/Models/test.subjects); do  #$(cat /home/despoB/kaihwang/bin/TDSigEI/Models/test.subjects)
+for s in 1106; do  #$(cat /home/despoB/kaihwang/bin/ThaGate/TRSE_subject)
 	for data in HF FH CAT BO; do
 		for roi in Morel_Striatum_Yeo400_LPI Morel_Striatum_Gordon_LPI WTA_Striatum_Gordon_LPI; do 
 			3dNetCorr \
