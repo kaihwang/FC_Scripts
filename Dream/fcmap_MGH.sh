@@ -6,7 +6,7 @@ ROIs=$(ls *.nii.gz)
 
 cd /data/backed_up/shared/MGH/MGH
 
-for MGH_sub in Sub0001_Ses1; do #$(ls -d Sub*)
+for MGH_sub in $(ls -d Sub*); do #$(ls -d Sub*)
 
 	if [ -f /data/backed_up/shared/MGH/MGH/${MGH_sub}/MNINonLinear/rfMRI_REST2.nii.gz ]; then
 
@@ -31,6 +31,7 @@ for MGH_sub in Sub0001_Ses1; do #$(ls -d Sub*)
 			3dAFNItoNIFTI -prefix /home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${MGH_sub}.nii.gz \
 			/home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${MGH_sub}_000_INDIV/WB_Z_ROI_001+orig
 
+			rm -rf /home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${MGH_sub}_000_INDIV/
 		done
 	fi
 

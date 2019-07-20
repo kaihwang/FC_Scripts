@@ -6,7 +6,7 @@ ROIs=$(ls *.nii.gz)
 
 cd /data/backed_up/shared/NKI
 
-for sub in 0102826_session_1; do #$(ls -d *)
+for sub in $(ls -d *); do #$(ls -d *)
 
 	3dmerge -1blur_fwhm 4.0 -doall -prefix /data/backed_up/shared/NKI/${sub}/MNINonLinear/rfMRI_REST_s4mm.nii.gz \
 	/data/backed_up/shared/NKI/${sub}/MNINonLinear/rfMRI_REST_mx_645.nii.gz
@@ -25,9 +25,10 @@ for sub in 0102826_session_1; do #$(ls -d *)
 		3dAFNItoNIFTI -prefix /home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${sub}.nii.gz \
 		/home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${sub}_000_INDIV/WB_Z_ROI_001+orig
 
+		rm -rf /home/kahwang/DreamROIs/seedmaps/${seed_ROI}_${sub}_000_INDIV/
 	done
 
-
+	
 done
 
 
